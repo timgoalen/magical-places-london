@@ -1,0 +1,1 @@
+web: gunicorn magical_places_london.wsgi --log-file -
