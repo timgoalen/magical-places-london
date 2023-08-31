@@ -11,10 +11,14 @@
 </head>
 
 <body>
-    <h1>Magical Places - London</h1>
+    <header>
+        <h1>Magical Places - London</h1>
+        <a href="{% url 'home' %}">Map</a>
+        <a href="{% url 'list' %}">List</a>
+    </header>
 
     {% block content %}
-    
+
     {% endblock %}
 </body>
 
