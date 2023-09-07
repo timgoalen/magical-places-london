@@ -1,22 +1,5 @@
 // "use strict";
 
-// Get JSON data from the json_script tag in the home.html template
-let jsonData = JSON.parse(document.getElementById("places-json-data").textContent);
-
-// Create an new array of objects from the JSON data: our main "locations" data
-const locations = jsonData.map(function (place) {
-    const title = place.place_name;
-    const position = {
-        lat: place.latitude,
-        lng: place.longitude,
-    };
-
-    return {
-        title: title,
-        position: position,
-    };
-});
-
 // Initialize and add the map
 let map;
 
@@ -33,6 +16,23 @@ const LONDON = {
     lat: 51.50758960849218,
     lng: -0.12495345904150813
 };
+
+// Get JSON data from the json_script tag in the home.html template
+let jsonData = JSON.parse(document.getElementById("places-json-data").textContent);
+
+// Create an new array of objects from the JSON data: our main "locations" data
+const locations = jsonData.map(function (place) {
+    const title = place.place_name;
+    const position = {
+        lat: place.latitude,
+        lng: place.longitude,
+    };
+
+    return {
+        title: title,
+        position: position,
+    };
+});
 
 // MAIN 'CREATE MAP' FUNCTION:
 async function initMap() {
