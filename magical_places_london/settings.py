@@ -38,6 +38,7 @@ ALLOWED_HOSTS = [
     "magical-places-london-7d2df0d61638.herokuapp.com",
 ]
 
+GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY")
 
 # Application definition
 

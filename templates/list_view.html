@@ -4,6 +4,13 @@
 
 <h2>List View</h2>
 
-{% %}
+{% for place in place_list %}
+<div>
+    <h3>{{ place.place_name }}</h3>
+    <p>Latitude: {{ place.latitude }}</p>
+    <p>Longitude: {{ place.longitude}}</p>
+    <hr>
+</div>
+{% endfor %}
 
 {% endblock %}
