@@ -16,8 +16,8 @@ class Place(models.Model):
 
 class Comment(models.Model):
     # check other 'on_delete' options
-    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    place_name = models.ForeignKey(Place, on_delete=models.CASCADE)
     comment = models.CharField(max_length=2000)
 
     def __str__(self):
-        return self.place_name
+        return self.comment
