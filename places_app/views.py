@@ -7,11 +7,6 @@ from .models import Place
 from django.conf import settings
 
 
-# class HomePageView(TemplateView):
-#     model = Place
-#     template_name = "home.html"
-
-
 def home_page_view(request):
     # Return a list of dictionaries for each row in the database
     # (specifying the 3 values hides the Primary Key number)

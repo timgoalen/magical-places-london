@@ -86,7 +86,12 @@ async function initMap() {
         const marker = new AdvancedMarkerElement({
             position,
             map,
-            title: `${title}`,
+            title: `<h2>${title}</h2>` + `<p>${position.lat}</p>` + `<p>${position.lng}</p>` +
+                `<p>Columbia Rd Flower Market on a Sunday morning. Go early, coffee from one of the independent shops or vans, lovely stalls, little shops.
+
+            Down to Spitalfields, drink in the Golden Heart in Commercial St, a proper ‘local’ featuring artwork by the artists who drank there, wander through Spitalfields or Brick Lane.</p>` + `<p>Comment 2...Dim Sum in Chinatown, wander round the little shops in Soho / bookshops on Charing Cross road, then the British Museum</p>` + `<p>Comment 3...St Pancras old church gardens to see the little stone marking where Mary Wollstonecraft was buried. Be sure to go into the stunningly beautiful tiny little church next to it. Easy walk from St Pancras or King’s Cross stations. Bunhill Fields for a tiny historical graveyard, then a wander through the beautiful Barbican estate.
+
+            There are really lovely little community gardens all over the place in London- even really centrally like in the west end- Phoenix Garden, in Angel, Culpeper Garden. Just tiny little scraps of green space but so beautiful and sustaining.</p>`,
             content: customPin.element,
         });
 
