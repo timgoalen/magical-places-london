@@ -7,6 +7,11 @@
     <h3><a href="{% url 'place_detail' place.pk %}">{{ place.place_name }}</a></h3>
     <p>Latitude: {{ place.latitude }}</p>
     <p>Longitude: {{ place.longitude}}</p>
+    <h4>Comments:</h4>
+    {% for comment in place.comment_set.all %}
+        <p>{{ comment }}</p>
+        <hr>
+    {% endfor %}
     <hr>
 </div>
 {% endfor %}

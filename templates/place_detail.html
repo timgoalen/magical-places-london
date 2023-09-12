@@ -5,5 +5,11 @@
     <h3>{{ place.place_name }}</h3>
     <p>Latitude: {{ place.latitude }}</p>
     <p>Longitude: {{ place.longitude}}</p>
+    <h4>Comments:</h4>
+    {% for comment in place.comment_set.all %}
+        <p>{{ comment }}</p>
+        <hr>
+    {% endfor %}
+    <hr>
 </div>
 {% endblock content %}
