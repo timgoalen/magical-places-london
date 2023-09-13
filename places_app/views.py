@@ -1,5 +1,6 @@
 # remove TemplateView if not using
 from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic.edit import CreateView
 from django.conf import settings
 from django.shortcuts import render
 from .models import Place, Comment
@@ -30,3 +31,9 @@ class ListPageView(ListView):
 class PlaceDetailView(DetailView):
     model = Place
     template_name = "place_detail.html"
+
+
+class PlaceCreateView(CreateView):
+    model = Place
+    template_name = "place_add.html"
+    fields = ["place_name", "latitude", "longitude"]
