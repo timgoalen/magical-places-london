@@ -1,6 +1,6 @@
 # remove TemplateView if not using
 from django.views.generic import TemplateView, ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.conf import settings
 from django.shortcuts import render
 from .models import Place, Comment
@@ -36,4 +36,10 @@ class PlaceDetailView(DetailView):
 class PlaceCreateView(CreateView):
     model = Place
     template_name = "place_add.html"
+    fields = ["place_name", "latitude", "longitude"]
+
+
+class PlaceUpdateView(UpdateView):
+    model = Place
+    template_name = "place_edit.html"
     fields = ["place_name", "latitude", "longitude"]
