@@ -7,11 +7,16 @@ from django.conf import settings
 
 
 def home_page_view(request):
+    # places = Place.objects.all()
+    # comments = Place.comment_set
     # Return a list of dictionaries for each row in the database
     # (specifying the 3 values hides the Primary Key number)
     context = {
-        "places": list(Place.objects.values("place_name", "latitude", "longitude")),
-        "comments": list(Comment.objects.values("place_name", "comment")),
+        # "places": places,
+        # "comments": comments,
+        # "places": list(Place.objects.values("place_name", "latitude", "longitude")),
+        "places": list(Place.objects.values()),
+        # "comments": list(Comment.objects.values("place_name", "comment")),
         "api_key": settings.GOOGLE_MAPS_API_KEY,
     }
     return render(request, "home.html", context)
