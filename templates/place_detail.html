@@ -8,6 +8,12 @@
         <p>{{ comment }}</p>
         <hr>
     {% endfor %}
+
+    <h4>Add Comment</h4>
+    <form action="" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
 </div>
 
 <a href="{% url 'place_edit' place.pk %}">+ Edit Place</a>
