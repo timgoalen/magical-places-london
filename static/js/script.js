@@ -86,7 +86,7 @@ async function initMap() {
             glyphColor: "#6a86d8",
         });
         // ***CHANGE TO HEROKU URL WHEN DEPLOYED****
-        let detail_url = `https://8000-timgoalen-magicalplaces-k8e7oeahoi1.ws-eu104.gitpod.io/place/${id}/`
+        let detail_url = `https://8000-timgoalen-magicalplaces-w9g3ekltz8x.ws-eu104.gitpod.io/place/${id}/`
         const marker = new AdvancedMarkerElement({
             position,
             map,
