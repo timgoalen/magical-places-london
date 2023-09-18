@@ -18,8 +18,8 @@
         <h1><a href="{% url 'home' %}">Magical Places - London</a></h1>
         <a href="{% url 'home' %}">Map •</a>
         <a href="{% url 'list' %}">List •</a>
-        <a href="{% url 'place_add' %}">Add a Place •</a>
         {% if user.is_authenticated %}
+        <a href="{% url 'place_add' %}">Add a Place •</a>
         <a href="{% url 'account_logout' %}">Logout •</a>
         {% else %}
         <a href="{% url 'account_signup' %}">Sign Up •</a>
