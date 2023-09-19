@@ -7,7 +7,8 @@ class Place(models.Model):
     place_name = models.CharField(max_length=100, unique=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
-    contributer = models.ForeignKey(User, on_delete=models.SET("deleted_user"))
+    # check use for 'related_name': (if needed)
+    contributer = models.ForeignKey(User, on_delete=models.SET("deleted_user"), related_name="my_places")
     updated_on = models.DateTimeField(auto_now=True)
     created_on = models.DateTimeField(auto_now=True)
     favourited = models.ManyToManyField(
@@ -28,9 +29,13 @@ class Place(models.Model):
 
 
 class Comment(models.Model):
-    # check other 'on_delete' options
-    place_name = models.ForeignKey(Place, on_delete=models.CASCADE)
-    comment = models.CharField(max_length=2000)
+    place_name = models.ForeignKey(Place, on_delete=models.CASCADE, related_name="comments")
+    comment = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["created_on"]
 
     def __str__(self):
-        return self.comment
+        return f"Comment {self.comment} by {self.author}"
