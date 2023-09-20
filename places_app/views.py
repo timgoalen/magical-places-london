@@ -35,15 +35,19 @@ class ListPageView(ListView):
 # Place views
 
 
-class PlaceDetailView(View):
-    def get(self, request, *args, **kwargs):
-        view = CommentGet.as_view()
-        return view(request, *args, **kwargs)
+# class PlaceDetailView(View):
+#     def get(self, request, *args, **kwargs):
+#         view = CommentGet.as_view()
+#         return view(request, *args, **kwargs)
 
-    def post(self, request, *args, **kwargs):
-        view = CommentPost.as_view()
-        return view(request, *args, **kwargs)
+#     def post(self, request, *args, **kwargs):
+#         view = CommentPost.as_view()
+#         return view(request, *args, **kwargs)
 
+
+class PlaceDetailView(DetailView):
+    model = Place
+    template_name = "place_detail.html"
 
 # class PlaceDetailView(View):
 #     def get(self, request, *args, **kwargs):

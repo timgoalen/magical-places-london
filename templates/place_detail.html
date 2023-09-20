@@ -4,9 +4,10 @@
 <div>
     <h3>{{ place.place_name }}</h3>
     <h4>Comments:</h4>
-    {% for comment in objects.comments.all %}
+    {% for comment in place.comments.all %}
         <p>{{ comment.comment }}</p>
-        <p>{{ comment.created_on }}</p>
+        <p>Author: {{ comment.author }}</p>
+        <p>Posted on: {{ comment.created_on }}</p>
         <hr>
     {% endfor %}
 

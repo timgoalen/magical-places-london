@@ -18,7 +18,7 @@ class PlaceAdmin(admin.ModelAdmin):
         # CommentAdmin,
         CommentInline,
     ]
-    list_display = ("place_name", "contributer", "created_on", "number_of_times_favourited")
+    list_display = ("place_name", "created_on", "number_of_times_favourited")
     search_fields = ("place_name",)
 
 

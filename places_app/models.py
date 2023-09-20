@@ -1,9 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+# from django.conf import settings
+
 
 # Set 'deleted user' for when user creates a Place then deletes account
-deleted_user, _ = User.objects.get_or_create(username="deleted_user")
+# def get_deleted_user():
+#     return User.objects.get_or_create(username="deleted_user")[0]
 
 
 class Place(models.Model):
@@ -11,11 +14,7 @@ class Place(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
     # check use for 'related_name': (if needed)
-    contributer = (
-        models.ForeignKey(
-            User, on_delete=models.SET(deleted_user), related_name="places"
-        ),
-    )
+    # deleted_user = get_deleted_user()
     updated_on = models.DateTimeField(auto_now=True)
     created_on = models.DateTimeField(auto_now_add=True)
     favourited = models.ManyToManyField(
