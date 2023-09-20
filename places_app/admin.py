@@ -8,11 +8,19 @@ class CommentInline(admin.StackedInline):
     extra = 0
 
 
+# class CommentAdmin(admin.StackedInline):
+#     model = Comment
+#     extra = 0
+
+
 class PlaceAdmin(admin.ModelAdmin):
     inlines = [
+        # CommentAdmin,
         CommentInline,
     ]
+    list_display = ("place_name", "contributer", "created_on", "number_of_times_favourited")
+    search_fields = ("place_name",)
 
 
 admin.site.register(Place, PlaceAdmin)
-admin.site.register(Comment)
+admin.site.register(Comment,)

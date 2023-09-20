@@ -16,7 +16,7 @@ class Place(models.Model):
             User, on_delete=models.SET(deleted_user), related_name="places"
         ),
     )
-    updated_on = models.DateTimeField(auto_now=True, blank=True)
+    updated_on = models.DateTimeField(auto_now=True)
     created_on = models.DateTimeField(auto_now_add=True)
     favourited = models.ManyToManyField(
         User, related_name="favourited_places", blank=True
@@ -39,7 +39,7 @@ class Comment(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name="comments")
     comment = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_on = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ["created_on"]
