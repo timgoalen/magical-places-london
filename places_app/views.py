@@ -41,6 +41,12 @@ class PlaceDetailView(DetailView):
     template_name = "place_detail.html"
 
 
+def place_detail_view(request, pk):
+    context = {"place": get_object_or_404(Place, pk=pk)}
+
+    return render(request, "place_detail.html", context)
+
+
 # class ListPageView(ListView):
 #     model = Place
 #     template_name = "list_view.html"
