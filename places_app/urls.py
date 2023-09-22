@@ -3,7 +3,6 @@ from .views import (
     home_page_view,
     place_list_view,
     place_detail_view,
-    PlaceDetailView,  # delete?
     PlaceCreateView,
     PlaceUpdateView,
 )
