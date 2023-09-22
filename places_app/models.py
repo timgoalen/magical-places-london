@@ -49,3 +49,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment {self.comment} by {self.author}"
+
+    def get_absolute_url(self):
+        return reverse("place_detail", kwargs={"pk": self.pk})

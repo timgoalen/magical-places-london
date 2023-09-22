@@ -86,3 +86,17 @@ class PlaceUpdateView(UpdateView):
     def form_valid(self, form):
         form.instance.updated_on = timezone.now()
         return super().form_valid(form)
+
+
+# Comment CRUD views
+
+
+class CommentUpdateView(UpdateView):
+    model = Comment
+    template_name = "comment_edit.html"
+    fields = ["comment",]
+
+    # Assign current time & date to 'updated_on'
+    def form_valid(self, form):
+        form.instance.updated_on = timezone.now()
+        return super().form_valid(form)

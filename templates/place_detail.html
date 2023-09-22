@@ -19,7 +19,13 @@
     {% for comment in place.comments.all %}
     <h5>{{ comment.author }} • {{ comment.created_on|date:"d/m/y H:i" }}</h5>
     <p>{{ comment.comment }}</p>
+
+    {% if user.is_authenticated and user == comment.author %}
+    <p>As the original author, you can</p><a href="{% url 'comment_edit' comment.pk %}">+ Edit This Comment +</a>
+    {% endif %}
+
     <hr>
+
     {% endfor %}
 
     {% if user.is_authenticated %}
