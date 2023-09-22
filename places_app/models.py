@@ -17,7 +17,7 @@ class Place(models.Model):
     updated_on = models.DateTimeField(default=timezone.now)
     created_on = models.DateTimeField(default=timezone.now)
     favourited = models.ManyToManyField(
-        User, related_name="favourited_places", blank=True
+        User, related_name="clear", blank=True
     )
 
     class Meta:

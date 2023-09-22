@@ -5,11 +5,17 @@ from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from django.conf import settings
-from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
+from django.shortcuts import (
+    render,
+    redirect,
+    get_object_or_404,
+    get_list_or_404,
+)  # need reverse?
 from .models import Place, Comment
 from django.conf import settings
 from .forms import CommentForm
 from django.utils import timezone
+from django.http import HttpResponseRedirect
 
 
 # Main page view
@@ -121,3 +127,15 @@ class CommentDeleteView(DeleteView):
     def get_success_url(self):
         place = self.object.place
         return reverse_lazy("place_detail", args=[place.pk])
+
+
+# Favourites
+
+
+def favourite_places_view(request, pk):
+    place = get_object_or_404(Place, id=request.POST.get("place_id"))
+    if request.user in place.favourited.all():
+        place.favourited.remove(request.user)
+    else:
+        place.favourited.add(request.user)
+    return HttpResponseRedirect(reverse("place_detail", args=[place.pk]))
