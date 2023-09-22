@@ -94,9 +94,30 @@ class PlaceUpdateView(UpdateView):
 class CommentUpdateView(UpdateView):
     model = Comment
     template_name = "comment_edit.html"
-    fields = ["comment",]
+    fields = [
+        "comment",
+    ]
+    # Fallback success URL:
+    success_url = reverse_lazy("place_detail")
 
-    # Assign current time & date to 'updated_on'
+    # # Assign current time & date to 'updated_on'
     def form_valid(self, form):
         form.instance.updated_on = timezone.now()
         return super().form_valid(form)
+
+    # Success URL takes user back to the 'place_detail page associated with the comment
+    def get_success_url(self):
+        place = self.object.place
+        return reverse_lazy("place_detail", args=[place.pk])
+
+
+class CommentDeleteView(DeleteView):
+    model = Comment
+    template_name = "comment_delete.html"
+    # Fallback success URL:
+    success_url = reverse_lazy("list")
+
+    # Success URL takes user back to the 'place_detail page associated with the comment
+    def get_success_url(self):
+        place = self.object.place
+        return reverse_lazy("place_detail", args=[place.pk])
