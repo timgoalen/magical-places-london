@@ -3,18 +3,32 @@
 {% block content %}
 <div>
     <h3>{{ place.place_name }}</h3>
-    <h4>Comments:</h4>
-    {% for comment in place.comment_set.all %}
-        <p>{{ comment }}</p>
+    <p>latitude: {{ place.latitude }}</p>
+    <p>longitude: {{ place.longitude }}</p>
+    <p>contributer: {{ place.contributer }}</p>
+    <p>updated_on: {{ place.updated_on }}</p>
+    <p>created_on: {{ place.created_on }}</p>
+    <p>favourited: {{ place.favourited }}</p>
+    <!-- <h4>Comments:</h4>
+    {% for comment in place.comments.all %}
+        <p>{{ comment.comment }}</p>
+        <p>Author: {{ comment.author }}</p>
+        <p>Posted on: {{ comment.created_on }}</p>
         <hr>
-    {% endfor %}
+    {% endfor %} -->
 
-    <h4>Add Comment</h4>
-    <form action="" method="post">{% csrf_token %}
+    <!-- {% if user.is_authenticated %}
+
+    <h4>Add a Comment:</h4>
+    <p>Posting as: {{ user.username }}</p>
+    <form action="" method="post">
+        {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
+
+    {% endif %} -->
 </div>
 
-<a href="{% url 'place_edit' place.pk %}">+ Edit Place</a>
+<!-- <a href="{% url 'place_edit' place.pk %}">+ Edit Place</a> -->
 {% endblock content %}

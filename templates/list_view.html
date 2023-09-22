@@ -2,16 +2,20 @@
 
 {% block content %}
 
-{% for place in place_list %}
+{% for place in places %}
 <div>
     <h3><a href="{% url 'place_detail' place.pk %}">{{ place.place_name }}</a></h3>
-    <p>Latitude: {{ place.latitude }}</p>
-    <p>Longitude: {{ place.longitude}}</p>
-    <h4>Comments:</h4>
-    {% for comment in place.comment_set.all %}
-        <p>{{ comment }}</p>
+    <p>latitude: {{ place.latitude }}</p>
+    <p>longitude: {{ place.longitude }}</p>
+    <p>contributer: {{ place.contributer }}</p>
+    <p>updated_on: {{ place.updated_on }}</p>
+    <p>created_on: {{ place.created_on }}</p>
+    <p>favourited: {{ place.favourited }}</p>
+    <!-- <h4>Comments:</h4> -->
+    <!-- {% for comment in place.comment_set.all %}
+        <p>{{ comment.author }}</p>
         <hr>
-    {% endfor %}
+    {% endfor %} -->
     <hr>
 </div>
 {% endfor %}

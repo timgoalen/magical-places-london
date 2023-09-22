@@ -35,6 +35,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "8000-timgoalen-magicalplaces-k8e7oeahoi1.ws-eu104.gitpod.io",
+    "8000-timgoalen-magicalplaces-w9g3ekltz8x.ws-eu104.gitpod.io",
     "magical-places-london-7d2df0d61638.herokuapp.com",
 ]
 
@@ -48,9 +49,14 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
     "cloudinary_storage",
     "django.contrib.staticfiles",
     "cloudinary",
+    "crispy_forms",
     "places_app",
 ]
 
@@ -60,6 +66,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "allauth.account.middleware.AccountMiddleware",  # new
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -151,5 +158,9 @@ DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+SITE_ID = 1
+
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
+
+ACCOUNT_EMAIL_VERIFICATION = "none"
