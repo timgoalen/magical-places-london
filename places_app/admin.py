@@ -18,8 +18,8 @@ class PlaceAdmin(admin.ModelAdmin):
         # CommentAdmin,
         CommentInline,
     ]
-    list_display = ("place_name", "created_on", "number_of_times_favourited")
-    search_fields = ("place_name",)
+    list_display = ("place_name", "created_on", "user")
+    search_fields = ("place_name", "created_on", "user")
 
 
 admin.site.register(Place, PlaceAdmin)
