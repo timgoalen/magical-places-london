@@ -64,4 +64,4 @@ class Favourite(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.user.username} favorited {self.place.place_name}"
+        return f"{self.user.username} favourited {self.place.place_name}"

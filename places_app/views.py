@@ -37,7 +37,34 @@ def home_page_view(request):
 
 
 def place_list_view(request):
-    context = {"places": Place.objects.all().order_by("-created_on")}
+    places = Place.objects.all()
+    user = request.user
+    favourites = Favourite.objects.all()
+
+    # Establish user 'favourites' list
+    if user.is_authenticated:
+        user_favourites = Place.objects.filter(favourites__user=user)
+    else:
+        user_favourites = []
+
+    # Get sort options from user
+    sort_by = request.GET.get("sort", "default")
+
+    if sort_by == "a-z":
+        places = Place.objects.order_by("place_name")
+    elif sort_by == "newest":
+        places = Place.objects.order_by("-created_on")
+    elif sort_by == "user_favourites":
+        user_favourites = user_favourites.order_by("-created_on")
+        # places = user_favourites
+
+    # Render the template with the sorted places and the selected sort_by value
+    context = {
+        "places": places,
+        "sort_selection": sort_by,
+        "user_favourites": user_favourites,
+        "favourites": favourites
+    }
 
     return render(request, "list_view.html", context)
 
@@ -47,9 +74,15 @@ def place_list_view(request):
 
 def place_detail_view(request, pk):
     place = get_object_or_404(Place, pk=pk)
-
-    # Checks whether the user has favourited this place
     user = request.user
+
+    # Establish user 'favourites' list
+    if user.is_authenticated:
+        user_favourites = Place.objects.filter(favourites__user=user)
+    else:
+        user_favourites = []
+
+    # Check whether the user has favourited this place
     user_has_favourited = False
     if user.is_authenticated:
         user_has_favourited = Favourite.objects.filter(place=place, user=user).exists()
@@ -68,10 +101,15 @@ def place_detail_view(request, pk):
         form = CommentForm()
 
     # Context:
-    context = {"place": place, "form": CommentForm(), "user_has_favourited": user_has_favourited}
+    context = {
+        "place": place,
+        "form": CommentForm(),
+        # refactor into 1 ???...
+        "user_favourites": user_favourites,
+        "user_has_favourited": user_has_favourited,
+    }
 
     return render(request, "place_detail.html", context)
-
 
 
 # Place CRUD views
@@ -145,12 +183,12 @@ class CommentDeleteView(DeleteView):
 def favourite_places_view(request, pk):
     place = get_object_or_404(Place, id=request.POST.get("place_id"))
     user = request.user
-    existing_favorite = Favourite.objects.filter(place=place, user=user).first()
+    existing_favourite = Favourite.objects.filter(place=place, user=user).first()
 
-    if existing_favorite:
-        existing_favorite.delete()
+    if existing_favourite:
+        existing_favourite.delete()
     else:
-        new_favorite = Favourite(place=place, user=user)
-        new_favorite.save()
+        new_favourite = Favourite(place=place, user=user)
+        new_favourite.save()
 
     return HttpResponseRedirect(reverse("place_detail", args=[place.pk]))

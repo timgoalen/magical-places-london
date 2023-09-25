@@ -9,11 +9,6 @@
     <p>contributer: {{ place.contributer }}</p>
     <p>created on: {{ place.created_on|date:"d/m/y H:i" }}</p>
     <p>updated on: {{ place.updated_on|date:"d/m/y H:i" }}</p>
-    <p>Favourited by: </p>
-    {% for user in place.favourited.all %}
-    {{ user.username }}
-    <br>
-    {% endfor %}
     <br>
     {% if user.is_authenticated %}
 
@@ -35,7 +30,14 @@
     <p>As the original contributer, you can</p><a href="{% url 'place_edit' place.pk %}">+ Edit This Place +</a>
     {% endif %}
 
-    <h4>({{ place.comments.count }} Comments)</h4>
+    {% if favourite_place.comments.count == 1 %}
+            <h4>({{ place.comments.count }} Comment)</h4>
+            <hr>
+        <!-- "Comment" (not plural) if only 1 comment -->
+    {% else %}
+            <h4>({{ place.comments.count }} Comments)</h4>
+            <hr>
+    {% endif %}
 
     {% for comment in place.comments.all %}
     <h5>{{ comment.author }} • {{ comment.created_on|date:"d/m/y H:i" }}</h5>
