@@ -5,26 +5,12 @@
 {% for place in places %}
 <div>
     <h3><a href="{% url 'place_detail' place.pk %}">{{ place.place_name }}</a></h3>
-    {% if user.is_authenticated %}
-
-    <form action="{% url 'favourite_a_place' place.pk %}" method="POST">
-        {% csrf_token %}
-        {% if user in place.favourited.all %}
-        <button type="submit" name="place_id" value="{{place.id}}">FAVOURITED</button>
-        {% else %}
-        <button type="submit" name="place_id" value="{{place.id}}">NOT FAVOURITED</button>
-        {% endif %}
-    </form>
-
-    {% else %}
-    <h5>[Favourited Button for not signed in users]</h5>
-    {% endif %}
     
     <p>latitude: {{ place.latitude }}</p>
     <p>longitude: {{ place.longitude }}</p>
     <p>contributer: {{ place.contributer }}</p>
-    <p>updated_on: {{ place.updated_on }}</p>
-    <p>created_on: {{ place.created_on }}</p>
+    <p>created on: {{ place.created_on }}</p>
+    <p>updated on: {{ place.updated_on }}</p>
     <p>Favourited by: </p>
     {% for user in place.favourited.all %}
     {{ user.username }}

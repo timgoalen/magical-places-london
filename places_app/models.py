@@ -11,7 +11,7 @@ class Place(models.Model):
     place_name = models.CharField(max_length=100, unique=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
-    user = models.ForeignKey(
+    contributer = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="places", default=1
     )
     created_on = models.DateTimeField(auto_now_add=True)
@@ -34,7 +34,7 @@ class Place(models.Model):
 class Comment(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name="comments")
     comment = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -62,3 +62,6 @@ class Favourite(models.Model):
         constraints = [
             models.UniqueConstraint(fields=["place", "user"], name="unique_favourite")
         ]
+
+    def __str__(self):
+        return f"{self.user.username} favorited {self.place.place_name}"

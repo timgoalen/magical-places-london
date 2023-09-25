@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Place, Comment
+from .models import Place, Comment, Favourite
 
 
 class CommentInline(admin.StackedInline):
@@ -18,9 +18,17 @@ class PlaceAdmin(admin.ModelAdmin):
         # CommentAdmin,
         CommentInline,
     ]
-    list_display = ("place_name", "created_on", "user")
-    search_fields = ("place_name", "created_on", "user")
+    list_display = ("place_name", "created_on", "contributer")
+    search_fields = ("place_name", "created_on", "contributer")
+
+
+class FavouriteAdmin(admin.ModelAdmin):
+    list_display = ("place", "user", "favourited_on")
+    search_fields = ("place", "user", "favourited_on")
 
 
 admin.site.register(Place, PlaceAdmin)
-admin.site.register(Comment,)
+admin.site.register(
+    Comment,
+)
+admin.site.register(Favourite, FavouriteAdmin)

@@ -7,8 +7,8 @@
     <p>latitude: {{ place.latitude }}</p>
     <p>longitude: {{ place.longitude }}</p>
     <p>contributer: {{ place.contributer }}</p>
-    <p>updated_on: {{ place.updated_on|date:"d/m/y H:i" }}</p>
-    <p>created_on: {{ place.created_on|date:"d/m/y H:i" }}</p>
+    <p>created on: {{ place.created_on|date:"d/m/y H:i" }}</p>
+    <p>updated on: {{ place.updated_on|date:"d/m/y H:i" }}</p>
     <p>Favourited by: </p>
     {% for user in place.favourited.all %}
     {{ user.username }}
@@ -19,7 +19,7 @@
 
     <form action="{% url 'favourite_a_place' place.pk %}" method="POST">
         {% csrf_token %}
-        {% if user in place.favourited.all %}
+        {% if user_has_favourited %}
         <button type="submit" name="place_id" value="{{place.id}}">FAVOURITED</button>
         {% else %}
         <button type="submit" name="place_id" value="{{place.id}}">NOT FAVOURITED</button>

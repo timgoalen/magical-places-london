@@ -11,7 +11,7 @@ from django.shortcuts import (
     get_object_or_404,
     get_list_or_404,
 )  # need reverse?
-from .models import Place, Comment
+from .models import Place, Comment, Favourite
 from django.conf import settings
 from .forms import CommentForm
 from django.utils import timezone
@@ -47,22 +47,31 @@ def place_list_view(request):
 
 def place_detail_view(request, pk):
     place = get_object_or_404(Place, pk=pk)
+
+    # Checks whether the user has favourited this place
+    user = request.user
+    user_has_favourited = False
+    if user.is_authenticated:
+        user_has_favourited = Favourite.objects.filter(place=place, user=user).exists()
+
     # Comment Form functionality:
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.author = request.user
+            comment.author = user
             comment.place = place
             comment.created_on = timezone.now()
             comment.save()
             return redirect("place_detail", pk)
     else:
         form = CommentForm()
+
     # Context:
-    context = {"place": place, "form": CommentForm()}
+    context = {"place": place, "form": CommentForm(), "user_has_favourited": user_has_favourited}
 
     return render(request, "place_detail.html", context)
+
 
 
 # Place CRUD views
@@ -107,6 +116,7 @@ class CommentUpdateView(UpdateView):
     success_url = reverse_lazy("place_detail")
 
     # # Assign current time & date to 'updated_on'
+    # STILL NEED THIS???
     def form_valid(self, form):
         form.instance.updated_on = timezone.now()
         return super().form_valid(form)
@@ -134,8 +144,13 @@ class CommentDeleteView(DeleteView):
 
 def favourite_places_view(request, pk):
     place = get_object_or_404(Place, id=request.POST.get("place_id"))
-    if request.user in place.favourited.all():
-        place.favourited.remove(request.user)
+    user = request.user
+    existing_favorite = Favourite.objects.filter(place=place, user=user).first()
+
+    if existing_favorite:
+        existing_favorite.delete()
     else:
-        place.favourited.add(request.user)
+        new_favorite = Favourite(place=place, user=user)
+        new_favorite.save()
+
     return HttpResponseRedirect(reverse("place_detail", args=[place.pk]))
