@@ -99,7 +99,7 @@ async function initMap() {
         const detailUrl = `/place/${id}/`;
         const htmlH2 = `<h2><a href="${detailUrl}">${title}</a></h2>`;
         const htmlAddress = `<p>${address}</p>`
-        const htmlPhoto = `<img src="${photoUrl}" alt="${title} Photo">`;
+        const htmlPhoto = `<a href="${detailUrl}"><img src="${photoUrl}" alt="${title} Photo"></a>`;
         const htmlCommentsCount = `<a href="${detailUrl}">${commentsCount} Comments</a>`;
         const titleHtml = htmlPhoto + htmlH2 + htmlAddress + htmlCommentsCount;
         const marker = new AdvancedMarkerElement({

@@ -2,7 +2,7 @@
 
 {% block content %}
 <div>
-    <h3>{{ place.place_name }}</h3>
+    <h2>{{ place.place_name }}</h2>
     <p>{{ place.address }}</p>
     <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}">
     <!-- <p>Submitted by {{ place.contributer }} on {{ place.created_on|date:"d/m/y" }}</p> -->
@@ -28,7 +28,7 @@
     <p>As the original contributer, you can</p><a href="{% url 'place_edit' place.pk %}">+ Edit This Place +</a>
     {% endif %}
 
-    {% if favourite_place.comments.count == 1 %}
+    {% if place.comments.count == 1 %}
             <h4>({{ place.comments.count }} Comment)</h4>
             <hr>
         <!-- "Comment" (not plural) if only 1 comment -->

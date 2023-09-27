@@ -14,24 +14,20 @@
 
         {% if user_favourites %}
             {% for favourite_place in user_favourites %}
-            <h2><a href="{% url 'place_detail' favourite_place.pk %}">{{ favourite_place.place_name }}</a></h2>
-            <p>latitude: {{ favourite_place.latitude }}</p>
-            <p>longitude: {{ favourite_place.longitude }}</p>
-            <p>address: {{ favourite_place.address }}</p>
-            <p>contributer: {{ favourite_place.contributer }}</p>
-            <p>created on: {{ favourite_place.created_on }}</p>
-            <p>updated on: {{ favourite_place.updated_on }}</p>
-
+                <h2><a href="{% url 'place_detail' favourite_place.pk %}">{{ favourite_place.place_name }}</a></h2>
+                <p>{{ favourite_place.address }}</p>
+                <a href="{% url 'place_detail' favourite_place.pk %}"><img src="{{ favourite_place.photo_url }}" alt="Photo of {{ favourite_place.place_name }}"></a>
+                <!-- <p>Submitted by {{ favourite_place.contributer }} on {{ favourite_place.created_on|date:"d/m/y" }}</p> -->
+                <br>
                 {% if favourite_place.comments.count == 1 %}
-                <h4>({{ favourite_place.comments.count }} Comment)</h4>
-                <hr>
-                <!-- "Comment" (not plural) if only 1 comment -->
+                    <h4>({{ favourite_place.comments.count }} Comment)</h4>
+                    <hr>
+                    <!-- "Comment" (not plural) if only 1 comment -->
                 {% else %}
-                <h4>({{ favourite_place.comments.count }} Comments)</h4>
-                <hr>
+                    <h4>({{ favourite_place.comments.count }} Comments)</h4>
+                    <hr>
                 {% endif %}
             {% endfor %}
-
         {% else %}
         <p>Favourite some places to see them here!</p>
         {% endif %}
@@ -45,20 +41,18 @@
     {% for place in places %}
     <div>
         <h2><a href="{% url 'place_detail' place.pk %}">{{ place.place_name }}</a></h2>
-        <p>latitude: {{ place.latitude }}</p>
-        <p>longitude: {{ place.longitude }}</p>
-        <p>address: {{ place.address }}</p>
-        <p>photo: {{ place.photo_url }}</p>
-        <p>contributer: {{ place.contributer }}</p>
-        <p>created on: {{ place.created_on }}</p>
-        <p>updated on: {{ place.updated_on }}</p>
-        <p>Favourited by: </p>
-        {% for user in place.favourited.all %}
-        {{ user.username }}
+        <p>{{ place.address }}</p>
+        <a href="{% url 'place_detail' place.pk %}"><img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}"></a>
+        <!-- <p>Submitted by {{ place.contributer }} on {{ place.created_on|date:"d/m/y" }}</p> -->
         <br>
-        {% endfor %}
-        <h4>({{ place.comments.count }} Comments)</h4>
-        <hr>
+        {% if place.comments.count == 1 %}
+            <h4><a href="{% url 'place_detail' place.pk %}">({{ place.comments.count }} Comment)</a></h4>
+            <hr>
+            <!-- "Comment" (not plural) if only 1 comment -->
+        {% else %}
+        <h4><a href="{% url 'place_detail' place.pk %}">({{ place.comments.count }} Comments)</a></h4>
+            <hr>
+        {% endif %}
     </div>
     {% endfor %}
 {% endif %}
