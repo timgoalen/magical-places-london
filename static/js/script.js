@@ -28,8 +28,9 @@ const places = jsonData.map(function (place) {
         lng: place.longitude
     }
     const id = place.id;
-    const address = place.formatted_address;
-    const photoUrl = place.photo_url
+    const address = place.address;
+    const photoUrl = place.photo_url;
+    const commentsCount = place.comments_count;
 
     return {
         title: title,
@@ -37,6 +38,7 @@ const places = jsonData.map(function (place) {
         id: id,
         address: address,
         photoUrl: photoUrl,
+        commentsCount: commentsCount,
     };
 });
 
@@ -78,13 +80,14 @@ async function initMap() {
     // Create info window to be shared between markers
     const infoWindow = new InfoWindow();
 
-    // Create markers from Places array
+    // Create markers from 'places' array
     places.forEach(({
         position,
         title,
         id,
         address,
         photoUrl,
+        commentsCount,
     }, ) => {
         const customPin = new PinElement({
             background: "#6a86d8",
@@ -93,11 +96,16 @@ async function initMap() {
             glyphColor: "#6a86d8",
         });
         // ***CHANGE TO HEROKU URL WHEN DEPLOYED..add the full url?****
-        let detail_url = `/place/${id}/`
+        const detailUrl = `/place/${id}/`;
+        const htmlH2 = `<h2><a href="${detailUrl}">${title}</a></h2>`;
+        const htmlAddress = `<p>${address}</p>`
+        const htmlPhoto = `<img src="${photoUrl}" alt="${title} Photo">`;
+        const htmlCommentsCount = `<a href="${detailUrl}">${commentsCount} Comments</a>`;
+        const titleHtml = htmlPhoto + htmlH2 + htmlAddress + htmlCommentsCount;
         const marker = new AdvancedMarkerElement({
             position,
             map,
-            title: `<h2><a href="${detail_url}">${title}</a></h2><p>${address}</p><img src="${photoUrl}" alt="${title} Photo">`,
+            title: titleHtml,
             content: customPin.element,
         });
 

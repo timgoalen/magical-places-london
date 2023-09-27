@@ -16,18 +16,21 @@ from django.conf import settings
 from .forms import AddPlaceForm, CommentForm
 from django.utils import timezone
 from django.http import HttpResponseRedirect
+from django.db.models import Count
 
 
 # Main page view
 
 
 def home_page_view(request):
+    # Annotate the Place objects with their related field comments count 
+    places_including_comments_count = Place.objects.annotate(comments_count=Count("comments"))
+
     context = {
         # Return a list of dictionaries for each row in the database,
-        # (specifying the 3 values hides the Primary Key number) [not done at the moment]
         "places_list_of_dicts": list(
-            Place.objects.values(
-                "id", "place_name", "latitude", "longitude", "address", "photo_url"
+            places_including_comments_count.values(
+                "id", "place_name", "latitude", "longitude", "address", "photo_url", "comments_count"
             )
         ),
         "api_key": settings.GOOGLE_MAPS_API_KEY,
