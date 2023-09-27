@@ -146,7 +146,7 @@ class PlaceUpdateView(UpdateView):
 
     # Assign current time & date to 'updated_on'
     def form_valid(self, form):
-        form.instance.updated_on = timezone.now()
+        form.instance.updated_on = timezone.now() #change to 'add_now'etc?
         return super().form_valid(form)
 
 

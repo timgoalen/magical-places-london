@@ -3,14 +3,11 @@
 {% block content %}
 <div>
     <h3>{{ place.place_name }}</h3>
-
-    <p>latitude: {{ place.latitude }}</p>
-    <p>longitude: {{ place.longitude }}</p>
-    <p>contributer: {{ place.contributer }}</p>
-    <p>photo url: {{ place.photo_url }}</p>
-    <p>created on: {{ place.created_on|date:"d/m/y H:i" }}</p>
-    <p>updated on: {{ place.updated_on|date:"d/m/y H:i" }}</p>
+    <p>{{ place.address }}</p>
+    <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}">
+    <!-- <p>Submitted by {{ place.contributer }} on {{ place.created_on|date:"d/m/y" }}</p> -->
     <br>
+
     {% if user.is_authenticated %}
 
     <form action="{% url 'favourite_a_place' place.pk %}" method="POST">
@@ -57,6 +54,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Submit</button>
+        <button><a href="{% url 'place_detail' place.pk %}">Cancel</a></button>
     </form>
     {% endif %}
 </div>
