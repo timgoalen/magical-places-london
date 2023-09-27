@@ -41,28 +41,40 @@ function initAutocomplete() {
         longitudeField.value = longitude;
         addressField.value = place.formatted_address;
 
-        // const photosArray = place.photos;
-        // console.log(photosArray[0]);
-        // console.log(photosArray[0].getUrl);
-
+        // Get the photo URL from Google Places
         if (place.photos && place.photos.length > 0) {
             // Access the first photo in the array
             const firstPhoto = place.photos[0];
 
-            // Get the URL of the photo with a maximum width of 400 pixels
-            const photoUrl = firstPhoto.getUrl({ maxHeight: 200 });
+            // Get the URL of the photo
+            const photoUrl = firstPhoto.getUrl({
+                maxHeight: 200
+            });
 
-            // Set the src attribute of an img element to display the photo
+            // Set the src attribute of the img element
             const imgElement = document.getElementById("photo");
             imgElement.src = photoUrl;
 
-            // Set alt title
+            // Set the alt title
             imgElement.alt = place.name + " Photo";
 
-            photoUrlField.value = photoUrl
+            photoUrlField.value = photoUrl;
 
-            // TODO could also set a backup image if there aren't any from google
+            // TODO: could also set a backup image if there aren't any from google
         }
+
+        // Show the form once the user has clicked on a place
+        const placeAddForm = document.getElementById("place-add-form")
+        placeAddForm.style.display = "block";
+
+        // Move focus to the 'Save' button [doesn't work]
+        // const saveBtn = document.getElementById("place-add-save-bt");
+        // saveBtn.focus();
+        
+        // const saveBtn = document.getElementById("place-add-save-bt");
+        // saveBtn.addEventListener("click", function () {
+        //     alert(`Thanks for submitting ${place.name}!`)
+        // })
     })
 }
 

@@ -29,6 +29,10 @@ a {
     color: black;
 }
 
+#place-add-form {
+    display: none;
+}
+
 /* LIST VIEW */
 
 /* .location-card {

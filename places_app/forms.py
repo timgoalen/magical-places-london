@@ -9,11 +9,11 @@ class AddPlaceForm(forms.ModelForm):
         label="Place Name",
     )
     latitude = forms.FloatField(
-        widget=forms.TextInput(attrs={"id": "latitude-field"}),
+        widget=forms.HiddenInput(attrs={"id": "latitude-field"}),
         label="Latitude",
     )
     longitude = forms.FloatField(
-        widget=forms.TextInput(attrs={"id": "longitude-field"}),
+        widget=forms.HiddenInput(attrs={"id": "longitude-field"}),
         label="Longitude",
     )
     address = forms.CharField(
@@ -21,7 +21,7 @@ class AddPlaceForm(forms.ModelForm):
         label="Address",
     )
     photo_url = forms.URLField(
-        widget=forms.TextInput(attrs={"id": "photoUrl-field"}),
+        widget=forms.HiddenInput(attrs={"id": "photoUrl-field"}),
         label="Photo URL",
     )
 

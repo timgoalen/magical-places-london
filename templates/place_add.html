@@ -9,21 +9,24 @@
 
 {% block content %}
 
+<h2>Add a Place</h2>
+
 <!-- TEST PLACES AUTOCOMPLETE -->
 <br>
 <input type="text" id="search-input" placeholder="Enter a place name">
 <br>
-<img src="" alt="" id="photo">
-
-<h2>Add a Place</h2>
-
-<!-- FORM -->
-
-<form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
-    <button><a href="{% url 'place_add' %}">Cancel</a></button>
-</form>
+<br>
+<div id="place-add-form">
+    <img src="" alt="" id="photo" height="200">
+    
+    <!-- FORM -->
+    
+    <form action="" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save" id="place-add-save-btn">
+        <button><a href="{% url 'place_add' %}">Cancel</a></button>
+    </form>
+</div>
 
 <script async
     src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=places">
