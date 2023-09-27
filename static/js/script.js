@@ -21,22 +21,27 @@ const LONDON = {
 let jsonData = JSON.parse(document.getElementById("places-json-data").textContent);
 
 // Create an new array of objects from the JSON data: our main "locations" data
-const locations = jsonData.map(function (place) {
+const places = jsonData.map(function (place) {
     const title = place.place_name;
     const position = {
         lat: place.latitude,
-        lng: place.longitude,
-    };
+        lng: place.longitude
+    }
     const id = place.id;
+    const address = place.formatted_address;
+    const photoUrl = place.photo_url
 
     return {
         title: title,
         position: position,
         id: id,
+        address: address,
+        photoUrl: photoUrl,
     };
 });
 
 // MAIN 'CREATE MAP' FUNCTION:
+
 async function initMap() {
     // Request needed libraries.
     const {
@@ -58,9 +63,9 @@ async function initMap() {
             strictBounds: false,
         },
         zoom: 12,
-        // TG: links to google cloud map preferences
+        // Link to Google Cloud custom map preferences
         mapId: "3d039a2500323a92",
-        // TG: to disable unwanted controls
+        // Disable unwanted controls
         disableDefaultUI: true,
         zoomControl: true,
         mapTypeControl: false,
@@ -70,14 +75,16 @@ async function initMap() {
         fullscreenControl: false
     });
 
-    // create info window to be shared between markers
+    // Create info window to be shared between markers
     const infoWindow = new InfoWindow();
 
-    // create markers with custom pin appearance
-    locations.forEach(({
+    // Create markers from Places array
+    places.forEach(({
         position,
         title,
         id,
+        address,
+        photoUrl,
     }, ) => {
         const customPin = new PinElement({
             background: "#6a86d8",
@@ -90,8 +97,7 @@ async function initMap() {
         const marker = new AdvancedMarkerElement({
             position,
             map,
-            // title: `<a href="https://8000-timgoalen-magicalplaces-k8e7oeahoi1.ws-eu104.gitpod.io/place/4/"><h2>${title}</h2></a>`,
-            title: `<h2><a href="${detail_url}">${title}</a></h2>`,
+            title: `<h2><a href="${detail_url}">${title}</a></h2><p>${address}</p><img src="${photoUrl}" alt="${title} Photo">`,
             content: customPin.element,
         });
 

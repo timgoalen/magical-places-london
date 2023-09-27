@@ -36,6 +36,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "8000-timgoalen-magicalplaces-xikc2aho5al.ws-eu104.gitpod.io",
     "8000-timgoalen-magicalplaces-w9g3ekltz8x.ws-eu104.gitpod.io",
+    "8000-timgoalen-magicalplaces-xikc2aho5al.ws-eu105.gitpod.io",
     "magical-places-london-7d2df0d61638.herokuapp.com",
 ]
 

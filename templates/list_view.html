@@ -17,6 +17,7 @@
             <h2><a href="{% url 'place_detail' favourite_place.pk %}">{{ favourite_place.place_name }}</a></h2>
             <p>latitude: {{ favourite_place.latitude }}</p>
             <p>longitude: {{ favourite_place.longitude }}</p>
+            <p>address: {{ favourite_place.address }}</p>
             <p>contributer: {{ favourite_place.contributer }}</p>
             <p>created on: {{ favourite_place.created_on }}</p>
             <p>updated on: {{ favourite_place.updated_on }}</p>
@@ -46,6 +47,8 @@
         <h2><a href="{% url 'place_detail' place.pk %}">{{ place.place_name }}</a></h2>
         <p>latitude: {{ place.latitude }}</p>
         <p>longitude: {{ place.longitude }}</p>
+        <p>address: {{ place.address }}</p>
+        <p>photo: {{ place.photo_url }}</p>
         <p>contributer: {{ place.contributer }}</p>
         <p>created on: {{ place.created_on }}</p>
         <p>updated on: {{ place.updated_on }}</p>

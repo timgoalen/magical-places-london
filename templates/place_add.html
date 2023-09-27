@@ -1,10 +1,31 @@
 {% extends "base.html" %}
+{% load static  %}
+
+{% block head %}
+
+<script type="module" src="{% static 'js/place-add-form.js' %}"></script>
+
+{% endblock head %}
 
 {% block content %}
+
+<!-- TEST PLACES AUTOCOMPLETE -->
+<br>
+<input type="text" id="search-input" placeholder="Enter a place name">
+<br>
+<img src="" alt="" id="photo">
+
 <h2>Add a Place</h2>
+
+<!-- FORM -->
 
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Save">
 </form>
+
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=places">
+</script>
+    
 {% endblock content %}

@@ -13,7 +13,7 @@ from django.shortcuts import (
 )  # need reverse?
 from .models import Place, Comment, Favourite
 from django.conf import settings
-from .forms import CommentForm
+from .forms import AddPlaceForm, CommentForm
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 
@@ -26,7 +26,9 @@ def home_page_view(request):
         # Return a list of dictionaries for each row in the database,
         # (specifying the 3 values hides the Primary Key number) [not done at the moment]
         "places_list_of_dicts": list(
-            Place.objects.values("id", "place_name", "latitude", "longitude")
+            Place.objects.values(
+                "id", "place_name", "latitude", "longitude", "address", "photo_url"
+            )
         ),
         "api_key": settings.GOOGLE_MAPS_API_KEY,
     }
@@ -63,7 +65,7 @@ def place_list_view(request):
         "places": places,
         "sort_selection": sort_by,
         "user_favourites": user_favourites,
-        "favourites": favourites
+        "favourites": favourites,
     }
 
     return render(request, "list_view.html", context)
@@ -118,16 +120,20 @@ def place_detail_view(request, pk):
 class PlaceCreateView(CreateView):
     model = Place
     template_name = "place_add.html"
-    fields = [
-        "place_name",
-        "latitude",
-        "longitude",
-    ]
+    form_class = AddPlaceForm
 
     # Assign logged-in user to 'contributer'
     def form_valid(self, form):
         form.instance.contributer = self.request.user
         return super().form_valid(form)
+
+    # Override get_context_data
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add additional context data for Google Places autocomplete
+        context["api_key"] = settings.GOOGLE_MAPS_API_KEY
+
+        return context
 
 
 class PlaceUpdateView(UpdateView):
