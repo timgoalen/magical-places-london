@@ -17,6 +17,11 @@
     <div id="map"></div>
 </section>
 
+<footer>
+    <div class="footer-item active"><a href="{% url 'home' %}">Map</a></div>
+    <div class="footer-item inactive"><a href="{% url 'list' %}">List</a></div>
+</footer>
+
 <!-- prettier-ignore **FIND WAY TO DO THIS WITH FORMATTER-->
 <script>
     const GOOGLE_MAPS_API_KEY = "{{ api_key }}";

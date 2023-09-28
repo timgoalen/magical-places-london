@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<ul>
-    <li><a href="?sort=a-z">A-Z</a></li>
-    <li><a href="?sort=newest">Newest</a></li>
-    <li><a href="?sort=my-favourites">My Favourites</a></li>
-</ul>
+<div class="list-view-sort">
+    <a href="?sort=a-z">A-Z</a>
+    <a href="?sort=newest">Newest</a>
+    <a href="?sort=my-favourites">My Favourites</a>
+</div>
 
 {% if sort_selection == "my-favourites" %}
 
