@@ -27,6 +27,14 @@
     {% if user.is_authenticated and user == place.contributer %}
     <p>As the original contributer, you can</p><a href="{% url 'place_edit' place.pk %}">+ Edit This Place +</a>
     {% endif %}
+<!-- 
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div> -->
 
     {% if place.comments.count == 1 %}
             <h4>({{ place.comments.count }} Comment)</h4>

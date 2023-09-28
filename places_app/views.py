@@ -12,25 +12,33 @@ from django.shortcuts import (
     get_list_or_404,
 )  # need reverse?
 from .models import Place, Comment, Favourite
-from django.conf import settings
 from .forms import AddPlaceForm, CommentForm
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.db.models import Count
+from django.contrib import messages
 
 
 # Main page view
 
 
 def home_page_view(request):
-    # Annotate the Place objects with their related field comments count 
-    places_including_comments_count = Place.objects.annotate(comments_count=Count("comments"))
+    # Annotate the Place objects with their related field comments count
+    places_including_comments_count = Place.objects.annotate(
+        comments_count=Count("comments")
+    )
 
     context = {
         # Return a list of dictionaries for each row in the database,
         "places_list_of_dicts": list(
             places_including_comments_count.values(
-                "id", "place_name", "latitude", "longitude", "address", "photo_url", "comments_count"
+                "id",
+                "place_name",
+                "latitude",
+                "longitude",
+                "address",
+                "photo_url",
+                "comments_count",
             )
         ),
         "api_key": settings.GOOGLE_MAPS_API_KEY,
@@ -52,7 +60,7 @@ def place_list_view(request):
     else:
         user_favourites = []
 
-    # Get sort options from user
+    # Get 'sort' options from user
     sort_by = request.GET.get("sort", "default")
 
     if sort_by == "a-z":
@@ -101,6 +109,7 @@ def place_detail_view(request, pk):
             comment.place = place
             comment.created_on = timezone.now()
             comment.save()
+            messages.success(request, "Thanks for your comment!")
             return redirect("place_detail", pk)
     else:
         form = CommentForm()
@@ -128,7 +137,10 @@ class PlaceCreateView(CreateView):
     # Assign logged-in user to 'contributer'
     def form_valid(self, form):
         form.instance.contributer = self.request.user
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        messages.success(self.request, "Thanks for creating a new Place!")
+
+        return response
 
     # Override get_context_data
     def get_context_data(self, **kwargs):
@@ -146,7 +158,7 @@ class PlaceUpdateView(UpdateView):
 
     # Assign current time & date to 'updated_on'
     def form_valid(self, form):
-        form.instance.updated_on = timezone.now() #change to 'add_now'etc?
+        form.instance.updated_on = timezone.now()  # change to 'add_now'etc?
         return super().form_valid(form)
 
 
@@ -166,7 +178,10 @@ class CommentUpdateView(UpdateView):
     # STILL NEED THIS???
     def form_valid(self, form):
         form.instance.updated_on = timezone.now()
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        messages.success(self.request, "Your comment was succesfully updated")
+
+        return response
 
     # Success URL takes user back to the 'place_detail page associated with the comment
     def get_success_url(self):
@@ -183,6 +198,8 @@ class CommentDeleteView(DeleteView):
     # Success URL takes user back to the 'place_detail page associated with the comment
     def get_success_url(self):
         place = self.object.place
+        messages.success(self.request, "Your comment was succesfully deleted")
+
         return reverse_lazy("place_detail", args=[place.pk])
 
 

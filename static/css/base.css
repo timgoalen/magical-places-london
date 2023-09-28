@@ -54,3 +54,20 @@ a {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0 0;
 } */
+
+/* .alert-success {
+    color: green;
+} */
+
+.messages {
+    height: 5%;
+    display: grid;
+    place-items: center;
+}
+
+.messages .success {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    margin: 5%;
+    padding: 20px;
+}
