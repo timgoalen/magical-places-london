@@ -1,33 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
-    <h2>{{ place.place_name }}</h2>
-    <p>{{ place.address }}</p>
-    <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}">
-    <!-- <p>Submitted by {{ place.contributer }} on {{ place.created_on|date:"d/m/y" }}</p> -->
-    <br>
+<div class="detail-container">
+    <div class="detail-image-container">
+        <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}" class="place-detail-photo">
+        {% if user.is_authenticated %}
 
-    {% if user.is_authenticated %}
+        <form action="{% url 'favourite_a_place' place.pk %}" method="POST">
+            {% csrf_token %}
+            {% if user_has_favourited %}
+            <button type="submit" name="place_id" value="{{place.id}}">FAVOURITED</button>
+            {% else %}
+            <button type="submit" name="place_id" value="{{place.id}}">NOT FAVOURITED</button>
+            {% endif %}
+        </form>
 
-    <form action="{% url 'favourite_a_place' place.pk %}" method="POST">
-        {% csrf_token %}
-        {% if user_has_favourited %}
-        <button type="submit" name="place_id" value="{{place.id}}">FAVOURITED</button>
         {% else %}
-        <button type="submit" name="place_id" value="{{place.id}}">NOT FAVOURITED</button>
+        <a href="" class="detail-view-favourite-btn">
+            <i class="fa-regular fa-star detail-favourite-icon"></i>
+        </a>
+        <!-- [Favourited Button for not signed in users] -->
         {% endif %}
-    </form>
+    </div>
+    <h2 class="detail-view-place-title">{{ place.place_name }}</h2>
+    <p class="place-address">{{ place.address }}</p>
+    <!-- <p>Submitted by {{ place.contributer }} on {{ place.created_on|date:"d/m/y" }}</p> -->
 
-    {% else %}
-    <h5>[Favourited Button for not signed in users]</h5>
-    {% endif %}
+    <hr class="detail-view-hr">
 
 
     {% if user.is_authenticated and user == place.contributer %}
     <p>As the original contributer, you can</p><a href="{% url 'place_edit' place.pk %}">+ Edit This Place +</a>
     {% endif %}
-<!-- 
+    <!-- 
     <div class="messages">
         {% for message in messages %}
             <div class="alert alert-success">
@@ -37,22 +42,21 @@
     </div> -->
 
     {% if place.comments.count == 1 %}
-            <h4>({{ place.comments.count }} Comment)</h4>
-            <hr>
-        <!-- "Comment" (not plural) if only 1 comment -->
+    <p class="comments-count-text">{{ place.comments.count }} Comment</p>
+    <!-- "Comment" (not plural) if only 1 comment -->
     {% else %}
-            <h4>({{ place.comments.count }} Comments)</h4>
-            <hr>
+    <p class="comments-count-text">{{ place.comments.count }} Comments</p>
     {% endif %}
 
     {% for comment in place.comments.all %}
-    <h5>{{ comment.author }} • {{ comment.created_on|date:"d/m/y H:i" }}</h5>
-    <p>{{ comment.comment }}</p>
-    {% if user.is_authenticated and user == comment.author %}
-    <p>As the original author, you can</p><a href="{% url 'comment_edit' comment.pk %}">+ Edit This Comment +</a>
-    <p>As the original author, you can</p><a href="{% url 'comment_delete' comment.pk %}">+ Delete This Comment +</a>
-    {% endif %}
-    <hr>
+    <div class="comment-container">
+        <h5>{{ comment.author }} • {{ comment.created_on|date:"d/m/y H:i" }}</h5>
+        <p class="comments-text">{{ comment.comment }}</p>
+        {% if user.is_authenticated and user == comment.author %}
+        <p>As the original author, you can</p><a href="{% url 'comment_edit' comment.pk %}">+ Edit This Comment +</a>
+        <p>As the original author, you can</p><a href="{% url 'comment_delete' comment.pk %}">+ Delete This Comment +</a>
+        {% endif %}
+    </div>
     {% endfor %}
 
     {% if user.is_authenticated %}

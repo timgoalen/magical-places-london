@@ -153,6 +153,70 @@ footer {
     color: #494949;
 }
 
+/* PLACE DETAIL PAGE */
+
+.detail-image-container {
+    position: relative;
+}
+
+.place-detail-photo {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.detail-view-favourite-btn {
+    position: absolute;
+    /* bottom: 0; */
+    right: 0;
+    top: 0;
+    /* padding: 3%; */
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+}
+
+.detail-view-hr {
+    margin: 3% 10%;
+}
+
+.detail-favourite-icon {
+    font-size: 1.1rem;
+}
+
+.detail-container > .comments-count-text {
+    text-align: center;
+}
+
+.place-address {
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: #494949;
+}
+
+.detail-view-place-title {
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+.comment-container {
+    border: 1px solid #6ac9885c;
+    border-radius: 4px;
+    background-color: whitesmoke;
+    padding: 2%;
+    margin: 2% 0;
+}
+
+.comments-text {
+    font-weight: 300;
+    padding: 2% 0;
+}
+
+
+
 /* FOOTER */
 
 footer {
