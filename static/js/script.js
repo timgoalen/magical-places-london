@@ -78,7 +78,7 @@ async function initMap() {
     });
 
     // Create info window to be shared between markers
-    const infoWindow = new InfoWindow();
+    const infoWindow = new InfoWindow({maxWidth: 175});
 
     // Create markers from 'places' array
     places.forEach(({
@@ -97,11 +97,15 @@ async function initMap() {
         });
         // ***CHANGE TO HEROKU URL WHEN DEPLOYED..add the full url?****
         const detailUrl = `/place/${id}/`;
-        const htmlH2 = `<h2><a href="${detailUrl}">${title}</a></h2>`;
-        const htmlAddress = `<p>${address}</p>`
-        const htmlPhoto = `<a href="${detailUrl}"><img src="${photoUrl}" alt="${title} Photo"></a>`;
-        const htmlCommentsCount = `<a href="${detailUrl}">${commentsCount} Comments</a>`;
-        const titleHtml = htmlPhoto + htmlH2 + htmlAddress + htmlCommentsCount;
+        const htmlH2 = `<h2 class="map-view-place-title"><a href="${detailUrl}">${title}</a></h2>`;
+        const htmlAddress = `<p>${address}</p>` // remove unused variables
+        const htmlPhoto = `<a href="${detailUrl}"><img src="${photoUrl}" alt="${title} Photo" class="map-place-photo"></a>`;
+        let commentsMessage = "Comments";
+        if (commentsCount == 1) {
+            commentsMessage = "Comment";
+        }
+        const htmlCommentsCount = `<a href="${detailUrl}">${commentsCount} ${commentsMessage}</a>`;
+        const titleHtml = htmlPhoto + htmlH2 + htmlCommentsCount;
         const marker = new AdvancedMarkerElement({
             position,
             map,

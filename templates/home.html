@@ -18,8 +18,21 @@
 </section>
 
 <footer>
-    <div class="footer-item active"><a href="{% url 'home' %}">Map</a></div>
-    <div class="footer-item inactive"><a href="{% url 'list' %}">List</a></div>
+        <a href="{% url 'home' %}" class="map-page-link">
+            <div><i class="fa-regular fa-map"></i></div>
+            <div class="footer-nav-text">Map</div>
+        </a>
+        <a href="{% url 'list' %}" class="list-page-link">
+            <div><i class="fa-solid fa-list-ul"></i></div>
+            <div class="footer-nav-text">List</div>
+        </a>
+        <a href="{% url 'place_add' %}" class="add-place-link">
+            <div class="add-place-centring-grid">
+                <div><i class="fa-solid fa-location-dot"></i></div>
+                <div class="footer-nav-text">Add</div>
+            </div>
+        </a>
+
 </footer>
 
 <!-- prettier-ignore **FIND WAY TO DO THIS WITH FORMATTER-->

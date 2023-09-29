@@ -2,11 +2,14 @@
 
 {% block content %}
 
-<div class="list-view-sort">
-    <a href="?sort=a-z">A-Z</a>
-    <a href="?sort=newest">Newest</a>
-    <a href="?sort=my-favourites">My Favourites</a>
-</div>
+<!-- List 'sort' options -->
+<!-- <div class="list-sort-container"> -->
+    <div class="list-sort-options">
+        <div class="list-sort-item"><a href="?sort=a-z">A-Z</a></div>
+        <div class="list-sort-item"><a href="?sort=newest">Newest</a></div>
+        <div class="list-sort-item"><a href="?sort=my-favourites">My Favourites</a></div>
+    </div>
+<!-- </div> -->
 
 {% if sort_selection == "my-favourites" %}
 
@@ -14,18 +17,15 @@
 
         {% if user_favourites %}
             {% for favourite_place in user_favourites %}
-                <h2><a href="{% url 'place_detail' favourite_place.pk %}">{{ favourite_place.place_name }}</a></h2>
-                <p>{{ favourite_place.address }}</p>
-                <a href="{% url 'place_detail' favourite_place.pk %}"><img src="{{ favourite_place.photo_url }}" alt="Photo of {{ favourite_place.place_name }}"></a>
+                <h2 class="place-title"><a href="{% url 'place_detail' favourite_place.pk %}">{{ favourite_place.place_name }}</a></h2>
+                <p class="place-address">{{ favourite_place.address }}</p>
+                <a href="{% url 'place_detail' favourite_place.pk %}"><img src="{{ favourite_place.photo_url }}" alt="Photo of {{ favourite_place.place_name }}" class="place-photo"></a>
                 <!-- <p>Submitted by {{ favourite_place.contributer }} on {{ favourite_place.created_on|date:"d/m/y" }}</p> -->
-                <br>
                 {% if favourite_place.comments.count == 1 %}
                     <h4>({{ favourite_place.comments.count }} Comment)</h4>
-                    <hr>
                     <!-- "Comment" (not plural) if only 1 comment -->
                 {% else %}
                     <h4>({{ favourite_place.comments.count }} Comments)</h4>
-                    <hr>
                 {% endif %}
             {% endfor %}
         {% else %}
@@ -39,19 +39,16 @@
 
 {% else %}
     {% for place in places %}
-    <div>
-        <h2><a href="{% url 'place_detail' place.pk %}">{{ place.place_name }}</a></h2>
-        <p>{{ place.address }}</p>
-        <a href="{% url 'place_detail' place.pk %}"><img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}"></a>
+    <div class="place-container">
+        <a href="{% url 'place_detail' place.pk %}"><img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}" class="place-photo"></a>
+        <h2 class="place-title"><a href="{% url 'place_detail' place.pk %}">{{ place.place_name }}</a></h2>
+        <!-- <p class="place-address">{{ place.address }}</p> -->
         <!-- <p>Submitted by {{ place.contributer }} on {{ place.created_on|date:"d/m/y" }}</p> -->
-        <br>
         {% if place.comments.count == 1 %}
             <h4><a href="{% url 'place_detail' place.pk %}">({{ place.comments.count }} Comment)</a></h4>
-            <hr>
             <!-- "Comment" (not plural) if only 1 comment -->
         {% else %}
         <h4><a href="{% url 'place_detail' place.pk %}">({{ place.comments.count }} Comments)</a></h4>
-            <hr>
         {% endif %}
     </div>
     {% endfor %}
