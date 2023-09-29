@@ -90,10 +90,10 @@ async function initMap() {
         commentsCount,
     }, ) => {
         const customPin = new PinElement({
-            background: "#6a86d8",
+            background: "#cf5c36",
             scale: 0.8,
-            borderColor: "#000",
-            glyphColor: "#6a86d8",
+            borderColor: "#fff",
+            glyphColor: "#fff",
         });
         // ***CHANGE TO HEROKU URL WHEN DEPLOYED..add the full url?****
         const detailUrl = `/place/${id}/`;
@@ -104,7 +104,7 @@ async function initMap() {
         if (commentsCount == 1) {
             commentsMessage = "Comment";
         }
-        const htmlCommentsCount = `<a href="${detailUrl}">${commentsCount} ${commentsMessage}</a>`;
+        const htmlCommentsCount = `<a href="${detailUrl}" class="comments-count-text">${commentsCount} ${commentsMessage}</a>`;
         const titleHtml = htmlPhoto + htmlH2 + htmlCommentsCount;
         const marker = new AdvancedMarkerElement({
             position,

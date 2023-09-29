@@ -5,9 +5,18 @@
 <!-- List 'sort' options -->
 <!-- <div class="list-sort-container"> -->
     <div class="list-sort-options">
-        <div class="list-sort-item"><a href="?sort=a-z">A-Z</a></div>
-        <div class="list-sort-item"><a href="?sort=newest">Newest</a></div>
-        <div class="list-sort-item"><a href="?sort=my-favourites">My Favourites</a></div>
+        <a href="?sort=a-z" class="list-sort-item">
+            <i class="fa-solid fa-arrow-down-a-z"></i>
+            <div>A-Z</div>
+        </a>
+        <a href="?sort=newest" class="list-sort-item">
+            <i class="fa-solid fa-list-ol"></i>
+            <div>Newest</div>
+        </a>
+        <a href="?sort=my-favourites" class="list-sort-item">
+            <i class="fa-solid fa-star"></i>
+            <div>My Favourites</div>
+        </a>
     </div>
 <!-- </div> -->
 
@@ -40,16 +49,17 @@
 {% else %}
     {% for place in places %}
     <div class="place-container">
-        <a href="{% url 'place_detail' place.pk %}"><img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}" class="place-photo"></a>
-        <h2 class="place-title"><a href="{% url 'place_detail' place.pk %}">{{ place.place_name }}</a></h2>
-        <!-- <p class="place-address">{{ place.address }}</p> -->
-        <!-- <p>Submitted by {{ place.contributer }} on {{ place.created_on|date:"d/m/y" }}</p> -->
-        {% if place.comments.count == 1 %}
-            <h4><a href="{% url 'place_detail' place.pk %}">({{ place.comments.count }} Comment)</a></h4>
-            <!-- "Comment" (not plural) if only 1 comment -->
-        {% else %}
-        <h4><a href="{% url 'place_detail' place.pk %}">({{ place.comments.count }} Comments)</a></h4>
-        {% endif %}
+        <a href="{% url 'place_detail' place.pk %}">
+                <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}" class="place-photo">
+                <h2 class="place-title">{{ place.place_name }}</h2>
+                {% if place.comments.count == 1 %}
+                    <p class="comments-count-text">{{ place.comments.count }} Comment</p>
+                    <!-- "Comment" (not plural) if only 1 comment -->
+                {% else %}
+                    <p class="comments-count-text">{{ place.comments.count }} Comments</p>
+                {% endif %}
+        </a>
+        <a href="" class="favourite-btn"><i class="fa-regular fa-star"></i></a>
     </div>
     {% endfor %}
 {% endif %}
