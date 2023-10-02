@@ -20,7 +20,7 @@ body {
 
 header {
     display: grid;
-    grid-template-columns: 90% 10%;
+    grid-template-columns: 85% 15%;
 }
 
 /* Section sizing */
@@ -46,16 +46,27 @@ footer {
     justify-items: start; */
 }
 
-.user-icon {
-    display: grid;
-    place-items: center;
-    font-size: 1.1rem;
-}
-
 #site-title {
     font-size: 2rem;
     /* font-family: 'Major Mono Display', monospace; */
     font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+}
+
+.user-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-nav-text {
+    font-size: 0.6rem;
+}
+
+/* TYPOGRAPHY */
+
+h1 {
+    font-size: 2rem;
     font-weight: 300;
 }
 
@@ -215,7 +226,17 @@ footer {
     padding: 2% 0;
 }
 
+/* LOG OUT CONFIRMATION PAGE */
 
+.log-out-confirmation-page {
+    height: 100%;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+}
 
 /* FOOTER */
 
@@ -258,7 +279,6 @@ footer {
 
 .footer-nav-text {
     font-size: 0.8rem;
-    ;
 }
 
 /* footer button active classes */
@@ -284,4 +304,19 @@ footer {
     color: white;
     margin: 5%;
     padding: 20px;
+}
+
+/* COMPONENTS */
+
+.btn {
+    width: auto;
+    font-size: 1rem;
+    padding: 1rem;
+    border-radius: 8px;   
+    border: none;
+}
+
+.btn--alert {
+    background-color: #cf5c36;
+    color: white;
 }
