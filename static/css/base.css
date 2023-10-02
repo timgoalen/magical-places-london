@@ -228,14 +228,22 @@ h1 {
 
 /* LOG OUT CONFIRMATION PAGE */
 
-.log-out-confirmation-page {
+.log-out-confirmation-page,
+.login-page {
     height: 100%;
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 2%;
+}
+
+.login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 /* FOOTER */
@@ -319,4 +327,9 @@ footer {
 .btn--alert {
     background-color: #cf5c36;
     color: white;
+}
+
+.btn--success {
+    background-color: #9da040;
+    color: black;
 }
