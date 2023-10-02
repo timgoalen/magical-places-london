@@ -8,7 +8,7 @@
 {% block content %}
 
 <section class="login-page">
-  <h1>{% trans "Sign In" %}</h1>
+  <h1>{% trans "Log In" %}</h1>
   
   <!-- {% get_providers as socialaccount_providers %}
   
@@ -30,8 +30,8 @@
   {% include "socialaccount/snippets/login_extra.html" %} -->
   
   <!-- {% else %} -->
-  <p>{% blocktrans %}If you have not created an account yet, then please
-    <a href="{{ signup_url }}"><strong>sign up</strong></a> first.{% endblocktrans %}</p>
+  <p>{% blocktrans %}Don't have an account? Then please
+    <a href="{{ signup_url }}"><strong>sign up</strong>.</a>{% endblocktrans %}</p>
   <!-- {% endif %} -->
   
   <form class="login login-form" method="POST" action="{% url 'account_login' %}">
@@ -41,7 +41,7 @@
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
     <!-- <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a> -->
-    <button class="primaryAction btn btn--success" type="submit">{% trans "Sign In" %}</button>
+    <button class="primaryAction btn btn--success" type="submit">{% trans "Log In" %} &raquo</button>
   </form>
 </section>
 
