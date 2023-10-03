@@ -1,74 +1,113 @@
-{% extends "base.html" %}
+{% load static  %}
 
-{% block content %}
-<div class="detail-container">
-    <div class="detail-image-container">
-        <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}" class="place-detail-photo">
-        {% if user.is_authenticated %}
+<!DOCTYPE html>
+<html lang="en">
 
-        <form action="{% url 'favourite_a_place' place.pk %}" method="POST">
-            {% csrf_token %}
-            {% if user_has_favourited %}
-            <button type="submit" name="place_id" value="{{place.id}}">FAVOURITED</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/1898f2e833.js" crossorigin="anonymous"></script>
+    <title>Magical Places - London</title>
+</head>
+
+<body>
+    <div class="detail-container">
+        <div class="detail-image-container">
+            <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}" class="place-detail-photo">
+
+            <!-- {% if user.is_authenticated %}
+            <form action="{% url 'favourite_a_place' place.pk %}" method="POST">
+                {% csrf_token %}
+                {% if user_has_favourited %}
+                <button type="submit" name="place_id" value="{{place.id}}">FAVOURITED</button>
+                {% else %}
+                <button type="submit" name="place_id" value="{{place.id}}">NOT FAVOURITED</button>
+                {% endif %}
+            </form>
+    
             {% else %}
-            <button type="submit" name="place_id" value="{{place.id}}">NOT FAVOURITED</button>
-            {% endif %}
-        </form>
-
+            <a href="" class="detail-view-favourite-btn">
+                <i class="fa-regular fa-star detail-favourite-icon"></i>
+            </a> -->
+            <!-- [Favourited Button for not signed in users] -->
+            <!-- {% endif %} -->
+        </div>
+        <a href="{% url 'home' %}" class="detail-view-btn detail-view-btn--back"><i class="fa-solid fa-chevron-left"></i></a>
+        <a href="" class="detail-view-btn detail-view-btn--favourite"><i class="fa-regular fa-star"></i></a>
+        <h2 class="detail-view-place-title">{{ place.place_name }}</h2>
+        <p class="place-address">{{ place.address }}</p>
+        <!-- <p>Submitted by {{ place.contributer }} on {{ place.created_on|date:"d/m/y" }}</p> -->
+    
+        <hr class="detail-view-hr">
+    
+    
+        <!-- {% if user.is_authenticated and user == place.contributer %}
+        <p>As the original contributer, you can</p><a href="{% url 'place_edit' place.pk %}">+ Edit This Place +</a>
+        {% endif %} -->
+        <!-- 
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div> -->
+    
+        {% if place.comments.count == 1 %}
+        <p class="comments-count-text">{{ place.comments.count }} Comment</p>
+        <!-- "Comment" (not plural) if only 1 comment -->
         {% else %}
-        <a href="" class="detail-view-favourite-btn">
-            <i class="fa-regular fa-star detail-favourite-icon"></i>
-        </a>
-        <!-- [Favourited Button for not signed in users] -->
+        <p class="comments-count-text">{{ place.comments.count }} Comments</p>
         {% endif %}
-    </div>
-    <h2 class="detail-view-place-title">{{ place.place_name }}</h2>
-    <p class="place-address">{{ place.address }}</p>
-    <!-- <p>Submitted by {{ place.contributer }} on {{ place.created_on|date:"d/m/y" }}</p> -->
-
-    <hr class="detail-view-hr">
-
-
-    {% if user.is_authenticated and user == place.contributer %}
-    <p>As the original contributer, you can</p><a href="{% url 'place_edit' place.pk %}">+ Edit This Place +</a>
-    {% endif %}
-    <!-- 
-    <div class="messages">
-        {% for message in messages %}
-            <div class="alert alert-success">
-                {{ message }}
+    
+        {% for comment in place.comments.all %}
+        <div class="comment-container">
+            <div class="comments-title-container">
+                <i class="fa-regular fa-circle-user comment-user-icon"></i>
+                <div>
+                    <h3>{{ comment.author }}</h3>
+                    <p>{{ comment.created_on|date:"d/m/y H:i" }}</p>
+                </div>
             </div>
+            <p class="comments-text">{{ comment.comment }}</p>
+            {% if user.is_authenticated and user == comment.author %}
+            <div class="comment-tools-container">
+                <a href="{% url 'comment_edit' comment.pk %}" class="comment-tools">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                    <div>Edit</div>
+                </a>
+                <a href="{% url 'comment_delete' comment.pk %}" class="comment-tools">
+                    <i class="fa-regular fa-trash-can"></i>
+                    <div>Delete</div>
+                </a>
+            </div>
+            {% endif %}
+        </div>
         {% endfor %}
-    </div> -->
+    
+        <hr class="detail-view-hr">
 
-    {% if place.comments.count == 1 %}
-    <p class="comments-count-text">{{ place.comments.count }} Comment</p>
-    <!-- "Comment" (not plural) if only 1 comment -->
-    {% else %}
-    <p class="comments-count-text">{{ place.comments.count }} Comments</p>
-    {% endif %}
-
-    {% for comment in place.comments.all %}
-    <div class="comment-container">
-        <h5>{{ comment.author }} • {{ comment.created_on|date:"d/m/y H:i" }}</h5>
-        <p class="comments-text">{{ comment.comment }}</p>
-        {% if user.is_authenticated and user == comment.author %}
-        <p>As the original author, you can</p><a href="{% url 'comment_edit' comment.pk %}">+ Edit This Comment +</a>
-        <p>As the original author, you can</p><a href="{% url 'comment_delete' comment.pk %}">+ Delete This Comment +</a>
+        {% if user.is_authenticated %}
+        <!-- <h3>Add a Comment:</h3> -->
+    
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+            <button><a href="{% url 'place_detail' place.pk %}">Cancel</a></button>
+        </form>
         {% endif %}
     </div>
-    {% endfor %}
+</body>
 
-    {% if user.is_authenticated %}
-    <h4>Add a Comment:</h4>
-
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-        <button><a href="{% url 'place_detail' place.pk %}">Cancel</a></button>
-    </form>
-    {% endif %}
-</div>
-
-{% endblock content %}
+</html>
