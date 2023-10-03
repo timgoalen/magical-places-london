@@ -167,6 +167,10 @@ h1 {
 
 /* PLACE DETAIL PAGE */
 
+.detail-container {
+    margin-bottom: 2%;
+}
+
 .detail-image-container {
     position: relative;
     margin-top: 2%;
@@ -264,7 +268,7 @@ h1 {
 .comment-tools-container {
     display: flex;
     justify-content: flex-start;
-    gap: 4%;
+    gap: 5%;
 }
 
 .comment-tools {
@@ -273,6 +277,36 @@ h1 {
     font-size: 0.8rem;
     color: #959595;
 }
+
+.detail-container form {
+    margin: 5% 0;
+}
+
+#id_comment {
+    width: 100%;
+    margin: 2% 0;
+}
+
+.detail-container button {
+    font-size: 1rem;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: none;
+    margin-right: 2%;
+}
+
+.detail-container button:nth-of-type(1) {
+    background-color: #9da040;
+}
+
+.detail-container button:nth-of-type(2) {
+    background-color: #cf5c36;
+
+}
+
+/* .end-spacer {
+    height: 2%;
+} */
 
 /* ADD PLACE PAGE */
 
