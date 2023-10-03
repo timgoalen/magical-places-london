@@ -50,7 +50,9 @@
     {% for place in places %}
     <div class="place-container">
         <a href="{% url 'place_detail' place.pk %}">
-                <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}" class="place-photo">
+                <div class="img-container">
+                    <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}" class="place-photo">
+                </div>
                 <h2 class="place-title">{{ place.place_name }}</h2>
                 {% if place.comments.count == 1 %}
                     <p class="comments-count-text">{{ place.comments.count }} Comment</p>

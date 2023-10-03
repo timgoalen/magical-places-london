@@ -48,7 +48,7 @@ function initAutocomplete() {
 
             // Get the URL of the photo
             const photoUrl = firstPhoto.getUrl({
-                maxHeight: 200
+                maxHeight: 800
             });
 
             // Set the src attribute of the img element
