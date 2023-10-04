@@ -108,6 +108,9 @@
             <button type="submit" class="submit-btn">Submit</button>
             <button class="cancel-btn"><a href="{% url 'place_detail' place.pk %}">Cancel</a></button>
         </form>
+
+        {% else %}
+        <p>Please <a href="{% url 'account_login' %}"><strong>Sign In</strong></a> to leave a comment.</p>
         {% endif %}
         <!-- <div class="end-spacer"></div> -->
     </div>
