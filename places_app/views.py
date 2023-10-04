@@ -151,6 +151,7 @@ class PlaceCreateView(CreateView):
         return context
 
 
+# ** NOT USED AT THE MOMENT
 class PlaceUpdateView(UpdateView):
     model = Place
     template_name = "place_edit.html"
