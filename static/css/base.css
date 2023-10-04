@@ -352,6 +352,14 @@ footer {
     padding: 2%;
 }
 
+#list-view-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+}
+
 .map-page-link {
     grid-column: 2;
 }
