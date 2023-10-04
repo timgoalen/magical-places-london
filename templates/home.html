@@ -18,16 +18,16 @@
 </section>
 
 <footer>
-        <a href="{% url 'home' %}" class="map-page-link">
+        <a href="{% url 'home' %}" class="map-page-link footer-active">
             <div><i class="fa-regular fa-map"></i></div>
             <div class="footer-nav-text">Map</div>
         </a>
-        <a href="{% url 'list' %}" class="list-page-link">
+        <a href="{% url 'list' %}" class="list-page-link footer-inactive">
             <div><i class="fa-solid fa-list-ul"></i></div>
             <div class="footer-nav-text">List</div>
         </a>
         {% if user.is_authenticated %}
-        <a href="{% url 'place_add' %}" class="add-place-link">
+        <a href="{% url 'place_add' %}" class="add-place-link footer-inactive">
             <div class="add-place-centring-grid">
                 <div><i class="fa-solid fa-location-dot"></i></div>
                 <div class="footer-nav-text">Add</div>

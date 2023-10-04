@@ -373,7 +373,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid #bfbfbf;
+    /* border: 1px solid #bfbfbf; */
     border-radius: 4px;
     /* box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 12px 0 rgba(0, 0, 0, 0.1); */
 }
@@ -394,13 +394,12 @@ footer {
     font-size: 0.8rem;
 }
 
-/* footer button active classes */
-.active {
-    /* box-shadow: inset 0 2px 7px 1px rgba(0, 0, 0, .3); */
+.footer-active {
+    color: black;
 }
 
-.inactive {
-    /* box-shadow: 0 2px 7px 1px rgba(0, 0, 0, .3); */
+.footer-inactive {
+    color: grey;
 }
 
 /* DJANGO MESSAGES */
