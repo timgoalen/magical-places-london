@@ -57,6 +57,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .header-nav-text {
@@ -117,7 +118,7 @@ h1 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     border: 1px solid #bfbfbf;
-    border-radius: 4px;
+    border-radius: 3px;
     justify-items: center;
 }
 
@@ -130,7 +131,7 @@ h1 {
 .place-container {
     /* outline: 1px solid #bfbfbf; */
     /* width: 90%; */
-    /* border-radius: 4px; */
+    border-radius: 3px;
     margin: 4% auto;
     padding: 2%;
     /* display: grid; */
@@ -204,10 +205,6 @@ h1 {
     left: 0;
 }
 
-/* .detail-view-favourite-btn {
-    
-} */
-
 .detail-view-hr {
     margin: 4% 20%;
 }
@@ -278,7 +275,7 @@ h1 {
     color: #959595;
 }
 
-.detail-container form {
+.detail-container form:nth-of-type(n+2) {
     margin: 5% 0;
 }
 
@@ -287,21 +284,22 @@ h1 {
     margin: 2% 0;
 }
 
-.detail-container button {
+.detail-container .submit-btn,
+.detail-container .cancel-btn {
     font-size: 1rem;
     padding: 0.8rem;
     border-radius: 8px;
     border: none;
     margin-right: 2%;
+    color: white;
 }
 
-.detail-container button:nth-of-type(1) {
+.detail-container .submit-btn {
     background-color: #9da040;
 }
 
-.detail-container button:nth-of-type(2) {
+.detail-container .cancel-btn {
     background-color: #cf5c36;
-
 }
 
 /* .end-spacer {

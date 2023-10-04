@@ -3,7 +3,6 @@
 {% block content %}
 
 <!-- List 'sort' options -->
-<!-- <div class="list-sort-container"> -->
     <div class="list-sort-options">
         <a href="?sort=a-z" class="list-sort-item">
             <i class="fa-solid fa-arrow-down-a-z"></i>
@@ -18,7 +17,6 @@
             <div>My Favourites</div>
         </a>
     </div>
-<!-- </div> -->
 
 {% if sort_selection == "my-favourites" %}
 
@@ -26,23 +24,31 @@
 
         {% if user_favourites %}
             {% for favourite_place in user_favourites %}
-                <h2 class="place-title"><a href="{% url 'place_detail' favourite_place.pk %}">{{ favourite_place.place_name }}</a></h2>
-                <p class="place-address">{{ favourite_place.address }}</p>
-                <a href="{% url 'place_detail' favourite_place.pk %}"><img src="{{ favourite_place.photo_url }}" alt="Photo of {{ favourite_place.place_name }}" class="place-photo"></a>
-                <!-- <p>Submitted by {{ favourite_place.contributer }} on {{ favourite_place.created_on|date:"d/m/y" }}</p> -->
-                {% if favourite_place.comments.count == 1 %}
-                    <h4>({{ favourite_place.comments.count }} Comment)</h4>
-                    <!-- "Comment" (not plural) if only 1 comment -->
-                {% else %}
-                    <h4>({{ favourite_place.comments.count }} Comments)</h4>
-                {% endif %}
+                <div class="place-container">
+                    <a href="{% url 'place_detail' favourite_place.pk %}">
+                            <div class="img-container">
+                                <img src="{{ favourite_place.photo_url }}" alt="Photo of {{ favourite_place.place_name }}" class="place-photo">
+                            </div>
+                            <h2 class="place-title">{{ favourite_place.place_name }}</h2>
+                            {% if favourite_place.comments.count == 1 %}
+                                <p class="comments-count-text">{{ favourite_place.comments.count }} Comment</p>
+                                <!-- "Comment" (not plural) if only 1 comment -->
+                            {% else %}
+                                <p class="comments-count-text">{{ favourite_place.comments.count }} Comments</p>
+                            {% endif %}
+                    </a>
+                    <!-- temp 'favourite' button -->
+                    <a href="" class="favourite-btn">
+                        <i class="fa-regular fa-star"></i>
+                    </a>
+                </div>
             {% endfor %}
         {% else %}
         <p>Favourite some places to see them here!</p>
         {% endif %}
 
     {% else %}
-
+    
         <p><a href="{% url 'account_signup' %}">Sign Up </a>or <a href="{% url 'account_login' %}">Log In </a>to see favourite places here!</p>
     {% endif %}
 
@@ -61,7 +67,10 @@
                     <p class="comments-count-text">{{ place.comments.count }} Comments</p>
                 {% endif %}
         </a>
-        <a href="" class="favourite-btn"><i class="fa-regular fa-star"></i></a>
+        <!-- temp 'favourite' button -->
+        <a href="" class="favourite-btn">
+            <i class="fa-regular fa-star"></i>
+        </a>
     </div>
     {% endfor %}
 {% endif %}
