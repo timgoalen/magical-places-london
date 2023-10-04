@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Delete Comment</h2>
-
-<form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Delete">
-</form>
+<div class="comment-crud-pages-container">
+    <div class="comment-crud-container">
+        <h2>Delete Comment</h2>
+    
+        <form action="" method="post" class="comment-delete-form">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Delete" class="cancel-btn">
+        </form>
+    </div>
+</div>
 {% endblock content %}

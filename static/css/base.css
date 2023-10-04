@@ -289,8 +289,10 @@ h1 {
     margin: 2% 0;
 }
 
-.detail-container .submit-btn,
-.detail-container .cancel-btn {
+/* .detail-container .submit-btn,
+.detail-container .cancel-btn */
+.submit-btn,
+.cancel-btn {
     font-size: 1rem;
     padding: 0.8rem;
     border-radius: 8px;
@@ -299,17 +301,44 @@ h1 {
     color: white;
 }
 
-.detail-container .submit-btn {
+/* .detail-container .submit-btn */
+.submit-btn {
     background-color: #9da040;
 }
 
-.detail-container .cancel-btn {
+/* .detail-container .cancel-btn */
+.cancel-btn {
     background-color: #cf5c36;
 }
 
 /* .end-spacer {
     height: 2%;
 } */
+
+/* COMMENT CRUD PAGES */
+
+.comment-crud-pages-container {
+    height: 83vh;
+    display: grid;
+    place-items: center;
+}
+
+.comment-crud-container {
+    display: grid;
+    gap: 4%;
+}
+
+.comment-crud-container h2 {
+    font-weight: 400;
+}
+
+.comment-delete-form {
+    text-align: center;
+    margin-top: 4%;
+}
+
+
+
 
 /* ADD PLACE PAGE */
 
