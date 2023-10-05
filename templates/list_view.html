@@ -65,7 +65,7 @@
 
 {% else %}
     {% for place in places %}
-    <div class="place-container">
+    <div class="place-container" id="{{ place.pk }}">
         <a href="{% url 'place_detail' place.pk %}">
                 <div class="img-container">
                     <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}" class="place-photo">

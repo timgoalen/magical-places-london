@@ -219,8 +219,13 @@ def favourite_places_view(request, pk):
         new_favourite.save()
 
     referring_url = request.META.get('HTTP_REFERER', None)
+    sectionId = "#" + str(pk)
 
+    # ** explain logic...so you can favourite places in the list view and it takes you back rthere istead of detail view
     if referring_url:
-        return HttpResponseRedirect(referring_url)
+        if "list_view" in referring_url:
+            return HttpResponseRedirect(referring_url + sectionId)
+        else:
+            return HttpResponseRedirect(referring_url)
     else:
         return HttpResponseRedirect(reverse("home"))
