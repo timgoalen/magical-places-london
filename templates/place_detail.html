@@ -30,7 +30,7 @@
         </div>
 
         <!-- 'Back' button -->
-        <a href="{% url 'home' %}" class="detail-view-btn detail-view-btn--back"><i class="fa-solid fa-chevron-left"></i></a>
+        <a href="#" class="detail-view-btn detail-view-btn--back" id="back-btn"><i class="fa-solid fa-chevron-left"></i></a>
 
 <!-- 'Favourite' button functionality -->
 
@@ -51,7 +51,7 @@
 
         {% else %}
         <!-- Favourite Button for not signed in users -->
-        <a href="{% url 'account_login' %}" class="list-favourite-btn">
+        <a href="{% url 'account_login' %}" class="detail-view-btn detail-view-btn--favourite">
             <i class="fa-regular fa-star detail-favourite-icon"></i>
         </a>
         {% endif %}
@@ -114,6 +114,8 @@
         {% endif %}
         <!-- <div class="end-spacer"></div> -->
     </div>
+
+    <script src="{% static 'js/place-detail.js' %}"></script>
 </body>
 
 </html>
