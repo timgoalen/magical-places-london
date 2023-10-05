@@ -50,9 +50,8 @@
         </form>
 
         {% else %}
-        <!-- [Favourited Button for not signed in users] -->
-        <!-- **TODO** this should take user to sign in/up message -->
-        <a href="" class="detail-view-btn detail-view-btn--favourite">
+        <!-- Favourite Button for not signed in users -->
+        <a href="{% url 'account_login' %}" class="list-favourite-btn">
             <i class="fa-regular fa-star detail-favourite-icon"></i>
         </a>
         {% endif %}
