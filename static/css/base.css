@@ -106,6 +106,14 @@ h1 {
 
 #place-add-form {
     display: none;
+    border-radius: 3px;
+    margin: 4% auto;
+    padding: 2%;
+    /* display: grid; */
+    /* place-items: center; */
+    position: relative;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 12px 0 rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 /* LIST VIEW */
@@ -342,7 +350,7 @@ h1 {
 /* ADD PLACE PAGE */
 
 .add-place-page {
-    margin-top: 10%;
+    margin-top: 5%;
     display: grid;
     place-items: center;
     gap: 5%;
@@ -359,8 +367,8 @@ h1 {
 }
 
 .add-form-img-container {
-    width: 65vw;
-    height: 65vw;
+    width: 83vw;
+    height: 83vw;
     align-self: center;
 }
 
@@ -371,7 +379,7 @@ h1 {
 }
 
 #place-add-form p {
-    text-align: center;
+    /* text-align: center; */
     margin: 2% 0;
 }
 
@@ -390,8 +398,12 @@ h1 {
 #place-add-save-btn,
 .add-place-btns-container button {
     min-width: 25%;
-    margin-top: 2%;
+    margin: 2%;
 }
+
+/* #add-form-address {
+    text-align: left;
+} */
 
 /* LOG OUT CONFIRMATION PAGE */
 

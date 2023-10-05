@@ -5,7 +5,7 @@ from .models import Place, Comment
 class AddPlaceForm(forms.ModelForm):
     place_name = forms.CharField(
         # Add HTML element ID values
-        widget=forms.TextInput(attrs={"id": "name-field"}),
+        widget=forms.HiddenInput(attrs={"id": "name-field"}),
         label="Place Name",
     )
     latitude = forms.FloatField(
@@ -17,7 +17,7 @@ class AddPlaceForm(forms.ModelForm):
         label="Longitude",
     )
     address = forms.CharField(
-        widget=forms.TextInput(attrs={"id": "address-field"}),
+        widget=forms.HiddenInput(attrs={"id": "address-field"}),
         label="Address",
     )
     photo_url = forms.URLField(
