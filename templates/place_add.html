@@ -11,24 +11,27 @@
 
 <section class="add-place-page">
     <h1>Add a Place</h1>
-    
+
     <!-- TEST PLACES AUTOCOMPLETE -->
     <input type="text" id="search-input" placeholder="Enter a place name">
     <div id="place-add-form">
-        <img src="" alt="" id="photo" height="200">
-    
+        <!-- PHOTO -->
+        <!-- <img src="" alt="" id="photo" height="200"> -->
+        <div class="add-form-img-container">
+            <img src="" alt="" id="photo">
+        </div>
         <!-- FORM -->
-    
         <form action="" method="post">{% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Save" id="place-add-save-btn">
-            <button><a href="{% url 'place_add' %}">Cancel</a></button>
+            <div class="add-place-btns-container">
+                <input type="submit" value="Save" id="place-add-save-btn" class="submit-btn">
+                <button class="cancel-btn"><a href="{% url 'place_add' %}">Cancel</a></button>
+            </div>
         </form>
     </div>
 </section>
 
-<script async
-    src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=places">
+<script async src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=places">
 </script>
-    
+
 {% endblock content %}

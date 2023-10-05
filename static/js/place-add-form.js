@@ -65,7 +65,7 @@ function initAutocomplete() {
 
         // Show the form once the user has clicked on a place
         const placeAddForm = document.getElementById("place-add-form")
-        placeAddForm.style.display = "block";
+        placeAddForm.style.display = "flex";
 
         // Move focus to the 'Save' button [doesn't work]
         // const saveBtn = document.getElementById("place-add-save-bt");
