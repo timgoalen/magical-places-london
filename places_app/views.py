@@ -214,11 +214,9 @@ def favourite_places_view(request, pk):
 
     if existing_favourite:
         existing_favourite.delete()
-        messages.success(request, "Removed from favorites.")
     else:
         new_favourite = Favourite(place=place, user=user)
         new_favourite.save()
-        messages.success(request, "Added to favorites.")
 
     referring_url = request.META.get('HTTP_REFERER', None)
 
