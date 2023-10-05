@@ -14,7 +14,7 @@ function goBack() {
             if (referredUrl.includes(comment)) {
                 window.location.href = listViewUrl;
             // send user back 2 steps if they've pressed the 'favourite' button
-            // (if they press it twice there's a bug where they;ll have to press back twice)
+            // (if they press it twice there's a bug where they'll have to press back twice)
             } else if (currentUrl === referredUrl){
                 window.history.go(-2);
             } else {
