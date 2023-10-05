@@ -3,6 +3,7 @@
 {% block content %}
 
 <!-- List 'sort' options -->
+
     <div class="list-sort-options">
         <a href="?sort=a-z" class="list-sort-item">
             <i class="fa-solid fa-arrow-down-a-z"></i>
@@ -37,10 +38,21 @@
                                 <p class="comments-count-text">{{ favourite_place.comments.count }} Comments</p>
                             {% endif %}
                     </a>
-                    <!-- temp 'favourite' button -->
-                    <a href="" class="favourite-btn">
-                        <i class="fa-regular fa-star"></i>
-                    </a>
+                    
+                    <!-- 'Favourite' button functionality (within 'My Favourites' sorting)-->
+
+                    <form action="{% url 'favourite_a_place' favourite_place.pk %}" method="POST">
+                        {% csrf_token %}
+                        {% if favourite_place in user_favourites %}
+                        <button type="submit" name="place_id" value="{{favourite_place.id}}" class="list-favourite-btn">
+                            <i class="fa-solid fa-star detail-favourite-icon"></i>
+                        </button>
+                        {% else %}
+                        <button type="submit" name="place_id" value="{{favourite_place.id}}" class="list-favourite-btn">
+                            <i class="fa-regular fa-star detail-favourite-icon"></i>
+                        </button>
+                        {% endif %}
+                    </form>
                 </div>
             {% endfor %}
         {% else %}
@@ -48,7 +60,6 @@
         {% endif %}
 
     {% else %}
-    
         <p><a href="{% url 'account_signup' %}">Sign Up </a>or <a href="{% url 'account_login' %}">Log In </a>to see favourite places here!</p>
     {% endif %}
 
@@ -67,10 +78,30 @@
                     <p class="comments-count-text">{{ place.comments.count }} Comments</p>
                 {% endif %}
         </a>
-        <!-- temp 'favourite' button -->
-        <a href="" class="favourite-btn">
-            <i class="fa-regular fa-star"></i>
+
+        <!-- 'Favourite' button functionality -->
+
+        {% if user.is_authenticated %}
+
+        <form action="{% url 'favourite_a_place' place.pk %}" method="POST">
+            {% csrf_token %}
+            {% if place in user_favourites %}
+            <button type="submit" name="place_id" value="{{place.id}}" class="list-favourite-btn">
+                <i class="fa-solid fa-star detail-favourite-icon"></i>
+            </button>
+            {% else %}
+            <button type="submit" name="place_id" value="{{place.id}}" class="list-favourite-btn">
+                <i class="fa-regular fa-star detail-favourite-icon"></i>
+            </button>
+            {% endif %}
+        </form>
+
+        {% else %}
+        <!-- Favourite Button for not signed in users -->
+        <a href="{% url 'account_login' %}" class="list-favourite-btn">
+            <i class="fa-regular fa-star detail-favourite-icon"></i>
         </a>
+        {% endif %}
     </div>
     {% endfor %}
 {% endif %}

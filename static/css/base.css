@@ -163,12 +163,14 @@ h1 {
     object-fit: cover;
 }
 
-.favourite-btn {
+.list-favourite-btn {
     position: absolute;
     bottom: 0;
     right: 0;
     padding: 3%;
     color: #494949;
+    background-color: white;
+    border: none;
 }
 
 /* PLACE DETAIL PAGE */

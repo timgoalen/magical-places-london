@@ -76,7 +76,7 @@ def place_list_view(request):
         "places": places,
         "sort_selection": sort_by,
         "user_favourites": user_favourites,
-        "favourites": favourites,
+        "favourites": favourites,  # need this one?(does it send favourites form all users?)
     }
 
     return render(request, "list_view.html", context)
@@ -214,8 +214,15 @@ def favourite_places_view(request, pk):
 
     if existing_favourite:
         existing_favourite.delete()
+        messages.success(request, "Removed from favorites.")
     else:
         new_favourite = Favourite(place=place, user=user)
         new_favourite.save()
+        messages.success(request, "Added to favorites.")
 
-    return HttpResponseRedirect(reverse("place_detail", args=[place.pk]))
+    referring_url = request.META.get('HTTP_REFERER', None)
+
+    if referring_url:
+        return HttpResponseRedirect(referring_url)
+    else:
+        return HttpResponseRedirect(reverse("home"))
