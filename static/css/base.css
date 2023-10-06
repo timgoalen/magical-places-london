@@ -141,6 +141,10 @@ h1 {
     border-right: 1px solid #bfbfbf;
 }
 
+.detail-view-container {
+    margin-bottom: 7%;
+}
+
 .place-container {
     /* outline: 1px solid #bfbfbf; */
     /* width: 90%; */
@@ -184,7 +188,7 @@ h1 {
 /* PLACE DETAIL PAGE */
 
 .detail-container {
-    margin-bottom: 2%;
+    /* margin-bottom: 2%; */
 }
 
 .detail-image-container {
@@ -435,6 +439,7 @@ footer {
     gap: 6%;
     align-items: center;
     padding: 2%;
+    transition: transform .2s linear;
 }
 
 #list-view-footer {
