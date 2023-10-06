@@ -141,6 +141,15 @@ h1 {
     border-right: 1px solid #bfbfbf;
 }
 
+.active-option {
+    color: black;
+    /* text-decoration: underline; */
+}
+
+.inactive-option {
+    color: #808080;
+}
+
 .detail-view-container {
     margin-bottom: 7%;
 }
@@ -357,12 +366,13 @@ h1 {
     margin-top: 5%;
     display: grid;
     place-items: center;
-    gap: 5%;
+    /* gap: 5%; */
 }
 
 #search-input {
     width: 90%;
     height: 1.3rem;
+    margin-top: 2%;
 }
 
 #place-add-form {
@@ -542,8 +552,8 @@ footer {
 
 #close-btn {
     position: absolute;
-    top: 10%;
+    top: 11%;
     left: 5%;
-    font-size: 2rem;
+    font-size: 1.3rem;
     color: #494949;
 }

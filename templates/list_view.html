@@ -10,15 +10,15 @@
 <!-- List 'sort' options -->
 
     <div class="list-sort-options">
-        <a href="?sort=a-z" class="list-sort-item">
+        <a href="?sort=a-z" class="list-sort-item inactive-option">
             <i class="fa-solid fa-arrow-down-a-z"></i>
             <div>A-Z</div>
         </a>
-        <a href="?sort=newest" class="list-sort-item">
+        <a href="?sort=newest" class="list-sort-item active-option">
             <i class="fa-solid fa-list-ol"></i>
             <div>Newest</div>
         </a>
-        <a href="?sort=my-favourites" class="list-sort-item">
+        <a href="?sort=my-favourites" class="list-sort-item inactive-option">
             <i class="fa-solid fa-star"></i>
             <div>My Favourites</div>
         </a>
@@ -61,6 +61,7 @@
                 </div>
             {% endfor %}
         {% else %}
+        <br>
         <p>Favourite some places to see them here!</p>
         {% endif %}
 
