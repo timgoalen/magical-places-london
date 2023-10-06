@@ -50,6 +50,7 @@ footer {
     /* font-family: 'Major Mono Display', monospace; */
     font-family: 'Oswald', sans-serif;
     font-weight: 300;
+    color: #cf5c36
 }
 
 .user-icon {
@@ -82,6 +83,7 @@ h1 {
     height: 100%;
     border-radius: 8px;
     /* box-shadow: 0 1px 4px 0px rgba(0, 0, 0, .3); */
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 12px 0 rgba(0, 0, 0, 0.1);
 }
 
 .map-place-photo {
@@ -207,8 +209,9 @@ h1 {
 }
 
 .place-detail-photo {
-    width: 100%;
-    /* border-radius: 4px; */
+        width: 96vw;
+        height: 96vw;
+        object-fit: cover;
 }
 
 .detail-view-btn {
@@ -577,6 +580,29 @@ footer {
     .img-container {
         width: 45vw;
         height: 45vw;
+    }
+
+    .detail-container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    .place-detail-photo {
+        width: 48vw;
+        height: 48vw;
+    }
+
+    .detail-image-container {
+        margin-top: 4%;
+    }
+
+    .detail-text {
+        grid-area: 1 / 2;
+        padding: 2%;
+    }
+
+    .detail-view-hr {
+        display: none;
     }
 }
 

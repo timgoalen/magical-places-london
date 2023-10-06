@@ -29,6 +29,7 @@
     {% if user.is_authenticated %}
 
         {% if user_favourites %}
+            <div class="detail-view-container">
             {% for favourite_place in user_favourites %}
                 <div class="place-container">
                     <a href="{% url 'place_detail' favourite_place.pk %}">
@@ -60,6 +61,7 @@
                     </form>
                 </div>
             {% endfor %}
+            </div>
         {% else %}
         <br>
         <p>Favourite some places to see them here!</p>

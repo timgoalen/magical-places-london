@@ -32,7 +32,7 @@
         <!-- 'Back' button -->
         <a href="#" class="detail-view-btn detail-view-btn--back" id="back-btn"><i class="fa-solid fa-chevron-left"></i></a>
 
-<!-- 'Favourite' button functionality -->
+    <!-- 'Favourite' button functionality -->
 
         {% if user.is_authenticated %}
 
@@ -56,8 +56,10 @@
         </a>
         {% endif %}
         
-        <h2 class="detail-view-place-title">{{ place.place_name }}</h2>
-        <p class="place-address">{{ place.address }}</p>
+        <div class="detail-text">
+            <h2 class="detail-view-place-title">{{ place.place_name }}</h2>
+            <p class="place-address">{{ place.address }}</p>
+        </div>
     
         <hr class="detail-view-hr">
     
