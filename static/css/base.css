@@ -585,20 +585,18 @@ footer {
     .detail-container {
         display: flex;
         flex-direction: column;
-        /* align-items: center; */
     }
 
     .place-detail-info-card {
-        /* background-color: cadetblue; */
         background-color: #7bb7ae;
         display: flex;
         flex-direction: column;
-        margin-top: 4%;
+        margin-top: 2%;
     }
 
     .place-detail-photo {
-        width: 46vw;
-        height: 46vw;
+        width: 48vw;
+        height: 48vw;
     }
 
     .detail-image-container {
@@ -609,7 +607,7 @@ footer {
     }
 
     .detail-view-btn {
-        margin: 5% 5%;
+        margin: 4% 4%;
     }
 
     .detail-text {
@@ -644,6 +642,19 @@ footer {
     #list-view-footer {
         padding: 0 4%;
     }
+
+    .place-detail-info-card {
+        margin-top: 4%;
+    }
+
+    .detail-view-btn {
+        margin: 5% 5%;
+    }
+
+    .place-detail-photo {
+        width: 46vw;
+        height: 46vw;
+    }
 }
 
 @media screen and (min-width: 1000px) {
@@ -667,6 +678,19 @@ footer {
     #list-view-footer {
         padding: 0 8%;
     }
+
+    .detail-container {
+        margin: 0 16%;
+    }
+
+    .place-detail-photo {
+        width: 28.5vw;
+        height: 28.5vw;
+    }
+
+    .detail-view-btn {
+        margin: 3% 22%;
+    }
 }
 
 @media screen and (min-width: 1400px) {
@@ -689,5 +713,18 @@ footer {
 
     #list-view-footer {
         padding: 0 12%;
+    }
+
+    .detail-container {
+        margin: 0 18%;
+    }
+
+    .place-detail-photo {
+        width: 24.5vw;
+        height: 24.5vw;
+    }
+
+    .detail-view-btn {
+        margin: 3% 27%;
     }
 }
