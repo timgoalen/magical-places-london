@@ -78,7 +78,7 @@ async function initMap() {
     });
 
     // Create info window to be shared between markers
-    const infoWindow = new InfoWindow({maxWidth: 175});
+    const infoWindow = new InfoWindow({maxWidth: 180});
 
     // Create markers from 'places' array
     places.forEach(({
