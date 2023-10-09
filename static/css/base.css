@@ -38,6 +38,29 @@ footer {
     height: 9dvh;
 }
 
+footer a:hover,
+.list-sort-options a:hover,
+.list-favourite-btn:hover,
+.detail-view-btn:hover,
+#close-btn:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    cursor: pointer;
+    outline: 2px solid #9da040;
+    background-color: white;
+    color: #9da040;
+}
+
+.cancel-btn:hover {
+    cursor: pointer;
+    outline: 2px solid #cf5c36;
+    background-color: white;
+    color: #cf5c36;
+}
+
 /*  */
 
 .title-container {
