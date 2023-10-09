@@ -338,10 +338,6 @@ h1 {
     background-color: #cf5c36;
 }
 
-/* .end-spacer {
-    height: 2%;
-} */
-
 /* COMMENT CRUD PAGES */
 
 .comment-crud-pages-container {
@@ -597,6 +593,7 @@ footer {
     .place-detail-photo {
         width: 48vw;
         height: 48vw;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 12px 0 rgba(0, 0, 0, 0.1);
     }
 
     .detail-image-container {
@@ -611,8 +608,7 @@ footer {
     }
 
     .detail-text {
-        /* grid-area: 1 / 2; */
-        padding: 2%;
+        padding: 0 0 2% 0;
         text-align: center;
     }
 
@@ -655,6 +651,16 @@ footer {
         width: 46vw;
         height: 46vw;
     }
+
+    .add-place-page {
+        padding: 0 11%;
+        margin-top: 0;
+    }
+
+    .add-form-img-container {
+        width: 62vw;
+        height: 62vw;
+    }
 }
 
 @media screen and (min-width: 1000px) {
@@ -691,6 +697,15 @@ footer {
     .detail-view-btn {
         margin: 3% 22%;
     }
+
+    .add-place-page {
+        padding: 0 24%;
+    }
+
+    .add-form-img-container {
+        width: 38vw;
+        height: 38vw;
+    }
 }
 
 @media screen and (min-width: 1400px) {
@@ -726,5 +741,10 @@ footer {
 
     .detail-view-btn {
         margin: 3% 27%;
+    }
+
+    .add-form-img-container {
+        width: 34vw;
+        height: 34vw;
     }
 }
