@@ -464,7 +464,8 @@ h1 {
     gap: 0.5rem;
 }
 
-.login-page {
+.login-page,
+.signup-page {
     max-width: 400px;
     margin: 0 auto;
     text-align: center;
