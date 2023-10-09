@@ -441,6 +441,17 @@ h1 {
     gap: 0.5rem;
 }
 
+.login-page {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.login-page strong {
+    text-decoration: underline;
+    text-decoration-color: #9da040;
+}
+
 /* FOOTER */
 
 footer {
@@ -623,6 +634,10 @@ footer {
     .comments-text {
         padding: 2% 0;
     }
+
+    /* .login-page {
+        max-width: 550px;
+    } */
 }
 
 @media screen and (min-width: 750px) {
