@@ -209,9 +209,9 @@ h1 {
 }
 
 .place-detail-photo {
-        width: 96vw;
-        height: 96vw;
-        object-fit: cover;
+    width: 96vw;
+    height: 96vw;
+    object-fit: cover;
 }
 
 .detail-view-btn {
@@ -583,26 +583,51 @@ footer {
     }
 
     .detail-container {
-        display: grid;
-        grid-template-columns: 50% 50%;
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+    }
+
+    .place-detail-info-card {
+        /* background-color: cadetblue; */
+        background-color: #7bb7ae;
+        display: flex;
+        flex-direction: column;
+        margin-top: 4%;
     }
 
     .place-detail-photo {
-        width: 48vw;
-        height: 48vw;
+        width: 46vw;
+        height: 46vw;
     }
 
     .detail-image-container {
         margin-top: 4%;
+        position: relative;
+        width: 50%;
+        align-self: center;
+    }
+
+    .detail-view-btn {
+        margin: 5% 5%;
     }
 
     .detail-text {
-        grid-area: 1 / 2;
+        /* grid-area: 1 / 2; */
         padding: 2%;
+        text-align: center;
     }
 
     .detail-view-hr {
-        display: none;
+        /* display: none; */
+    }
+
+    .comment-container {
+        margin: 2% 0 0% 0;
+    }
+
+    .comments-text {
+        padding: 2% 0;
     }
 }
 
