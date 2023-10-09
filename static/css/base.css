@@ -721,6 +721,10 @@ footer {
         width: 38vw;
         height: 38vw;
     }
+
+    #close-btn {
+        left: 8%;
+    }
 }
 
 @media screen and (min-width: 1400px) {
@@ -761,5 +765,9 @@ footer {
     .add-form-img-container {
         width: 34vw;
         height: 34vw;
+    }
+
+    #close-btn {
+        left: 12%;
     }
 }
