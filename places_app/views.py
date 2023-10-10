@@ -16,7 +16,7 @@ from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.db.models import Count
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 
 
@@ -161,7 +161,7 @@ class PlaceCreateView(LoginRequiredMixin, CreateView):
 # Comment CRUD views
 
 
-class CommentUpdateView(LoginRequiredMixin, UpdateView):
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Comment
     template_name = "comment_edit.html"
     fields = [
@@ -184,8 +184,15 @@ class CommentUpdateView(LoginRequiredMixin, UpdateView):
         place = self.object.place
         return reverse_lazy("place_detail", args=[place.pk])
 
+    def test_func(self):
+        """Test that logged in user is comment author"""
+        comment = self.get_object()
+        if self.request.user == comment.author:
+            return True
+        return False
 
-class CommentDeleteView(LoginRequiredMixin, DeleteView):
+
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Comment
     template_name = "comment_delete.html"
     # Fallback success URL:
@@ -198,8 +205,16 @@ class CommentDeleteView(LoginRequiredMixin, DeleteView):
 
         return reverse_lazy("place_detail", args=[place.pk])
 
+    def test_func(self):
+        """Test that logged in user is comment author"""
+        comment = self.get_object()
+        if self.request.user == comment.author:
+            return True
+        return False
+
 
 # Favourites
+
 
 @login_required
 def favourite_places_view(request, pk):
