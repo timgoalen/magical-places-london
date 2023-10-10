@@ -3,6 +3,10 @@
 
 {% block head %}
 <script src="{% static 'js/list-view.js' %}" defer></script>
+
+<script defer>
+    const USER_SORT_SELECTION = "{{ sort_selection }}";
+</script>
 {% endblock head %}
 
 {% block content %}
@@ -14,7 +18,7 @@
             <i class="fa-solid fa-arrow-down-a-z"></i>
             <div>A-Z</div>
         </a>
-        <a href="?sort=newest" class="list-sort-item active-option">
+        <a href="?sort=newest" class="list-sort-item inactive-option">
             <i class="fa-solid fa-list-ol"></i>
             <div>Newest</div>
         </a>
@@ -23,8 +27,6 @@
             <div>My Favourites</div>
         </a>
     </div>
-
-    {{ sort_selection }}
 
 {% if sort_selection == "my-favourites" %}
 
@@ -113,12 +115,6 @@
     {% endfor %}
     </div>
 {% endif %}
-
-<script>
-    const USER_SORT_SELECTION = "{{ sort_selection }}";
-    console.log(USER_SORT_SELECTION);
-
-</script>
 
 <!-- FOOTER -->
 

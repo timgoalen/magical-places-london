@@ -21,22 +21,17 @@ window.addEventListener("scroll", collapseFooter);
 
 // Show list-sort chosen option in UI
 
-// let userSortSelection = {{ sort_selection }};
-// console.log(userSortSelection);
+function updateSortOptionUi(element) {
+    element.classList.remove("inactive-option");
+    element.classList.add("active-option");
+}
 
-// function updateSortOptionUi() {
-//     if {{ sort_selection }}
-// }
-
-// function updateSortOptionUi(event) {
-//     window.onload = function() {
-//         listSortOptions.forEach(option => {
-//             option.classList.remove("active-option");
-//             option.classList.add("inactive-option");
-//         });
-//         event.target.classList.remove("inactive-option");
-//         event.target.classList.add("active-option");
-//     }
-// }
-
-// listSortOptions.forEach(option => option.addEventListener("click", updateSortOptionUi));
+if (USER_SORT_SELECTION === "default") {
+    updateSortOptionUi(listSortOptions[1]);
+} else if (USER_SORT_SELECTION === "a-z") {
+    updateSortOptionUi(listSortOptions[0]);
+} else if (USER_SORT_SELECTION === "newest") {
+    updateSortOptionUi(listSortOptions[1]);
+} else if (USER_SORT_SELECTION === "my-favourites") {
+    updateSortOptionUi(listSortOptions[2]);
+}
