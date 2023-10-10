@@ -134,13 +134,19 @@ class PlaceCreateView(CreateView):
     template_name = "place_add.html"
     form_class = AddPlaceForm
 
-    # Assign logged-in user to 'contributer'
+    # Override form_valid to assign logged-in user to 'contributer'
     def form_valid(self, form):
         form.instance.contributer = self.request.user
         response = super().form_valid(form)
         messages.success(self.request, "Thanks for creating a new Place!")
 
         return response
+
+    # Override form_invalid to handle duplicate place submissions
+    def form_invalid(self, form):
+        if "place_name" in form.errors:
+            messages.error(self.request, "A place with this name already exists.")
+        return super().form_invalid(form)
 
     # Override get_context_data
     def get_context_data(self, **kwargs):
@@ -218,7 +224,7 @@ def favourite_places_view(request, pk):
         new_favourite = Favourite(place=place, user=user)
         new_favourite.save()
 
-    referring_url = request.META.get('HTTP_REFERER', None)
+    referring_url = request.META.get("HTTP_REFERER", None)
     sectionId = "#" + str(pk)
 
     # ** explain logic...so you can favourite places in the list view and it takes you back rthere istead of detail view
