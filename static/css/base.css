@@ -55,14 +55,16 @@ footer a:hover,
     cursor: pointer;
 }
 
-.submit-btn:hover {
+.submit-btn:hover,
+.btn--success:hover {
     cursor: pointer;
     outline: 2px solid var(--green);
     background-color: white;
     color: var(--green);
 }
 
-.cancel-btn:hover {
+.cancel-btn:hover,
+.btn--alert:hover {
     cursor: pointer;
     outline: 2px solid var(--red);
     background-color: white;
@@ -133,6 +135,8 @@ h1 {
 
 .comments-count-text {
     color: var(--light-grey);
+    font-weight: 300;
+    font-size: 0.9rem;
 }
 
 /* ADD PLACE PAGE */
@@ -283,7 +287,6 @@ h1 {
 .place-address {
     font-weight: 300;
     font-size: 0.9rem;
-    color: var(--light-grey);
 }
 
 .detail-view-place-title {
@@ -479,7 +482,8 @@ h1 {
     text-align: center;
 }
 
-.login-page strong {
+.login-page strong,
+.signup-page strong {
     text-decoration: underline;
     text-decoration-color: var(--green);
 }
@@ -663,10 +667,6 @@ footer {
     .detail-text {
         padding: 0 0 2% 0;
         text-align: center;
-    }
-
-    .detail-view-hr {
-        /* display: none; */
     }
 
     .comment-container {
