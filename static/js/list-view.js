@@ -21,6 +21,13 @@ window.addEventListener("scroll", collapseFooter);
 
 // Show list-sort chosen option in UI
 
+// let userSortSelection = {{ sort_selection }};
+// console.log(userSortSelection);
+
+// function updateSortOptionUi() {
+//     if {{ sort_selection }}
+// }
+
 // function updateSortOptionUi(event) {
 //     window.onload = function() {
 //         listSortOptions.forEach(option => {

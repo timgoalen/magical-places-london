@@ -1,5 +1,4 @@
 const messageContainers = document.getElementsByClassName("messages");
-const closeBtn = document.getElementById("close-btn");
 
 function closeMessage(event) {
     event.target.style.display = "none";
@@ -13,6 +12,14 @@ for (let container of messageContainers) {
     container.addEventListener("click", closeMessage);
 }
 
-closeBtn.addEventListener("click", () => {
-    window.history.back();
-})
+function checkForCloseBtn() {
+    const closeBtn = document.getElementById("close-btn");
+
+    if (!closeBtn) {
+        return
+    }
+
+    closeBtn.addEventListener("click", () => {
+        window.history.back();
+    })
+}

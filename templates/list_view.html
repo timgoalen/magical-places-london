@@ -24,6 +24,8 @@
         </a>
     </div>
 
+    {{ sort_selection }}
+
 {% if sort_selection == "my-favourites" %}
 
     {% if user.is_authenticated %}
@@ -111,6 +113,12 @@
     {% endfor %}
     </div>
 {% endif %}
+
+<script>
+    const USER_SORT_SELECTION = "{{ sort_selection }}";
+    console.log(USER_SORT_SELECTION);
+
+</script>
 
 <!-- FOOTER -->
 
