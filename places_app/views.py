@@ -1,7 +1,6 @@
 # **remove unused ones...
 from django.views import View
 from django.views.generic import ListView, DetailView, FormView
-from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from django.conf import settings
@@ -17,9 +16,11 @@ from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.db.models import Count
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
-# Main page view
+# Main map page view
 
 
 def home_page_view(request):
@@ -126,10 +127,10 @@ def place_detail_view(request, pk):
     return render(request, "place_detail.html", context)
 
 
-# Place CRUD views
+# Place CRUD view
 
 
-class PlaceCreateView(CreateView):
+class PlaceCreateView(LoginRequiredMixin, CreateView):
     model = Place
     template_name = "place_add.html"
     form_class = AddPlaceForm
@@ -157,22 +158,10 @@ class PlaceCreateView(CreateView):
         return context
 
 
-# ** NOT USED AT THE MOMENT
-class PlaceUpdateView(UpdateView):
-    model = Place
-    template_name = "place_edit.html"
-    fields = ["place_name", "latitude", "longitude"]
-
-    # Assign current time & date to 'updated_on'
-    def form_valid(self, form):
-        form.instance.updated_on = timezone.now()  # change to 'add_now'etc?
-        return super().form_valid(form)
-
-
 # Comment CRUD views
 
 
-class CommentUpdateView(UpdateView):
+class CommentUpdateView(LoginRequiredMixin, UpdateView):
     model = Comment
     template_name = "comment_edit.html"
     fields = [
@@ -196,7 +185,7 @@ class CommentUpdateView(UpdateView):
         return reverse_lazy("place_detail", args=[place.pk])
 
 
-class CommentDeleteView(DeleteView):
+class CommentDeleteView(LoginRequiredMixin, DeleteView):
     model = Comment
     template_name = "comment_delete.html"
     # Fallback success URL:
@@ -212,7 +201,7 @@ class CommentDeleteView(DeleteView):
 
 # Favourites
 
-
+@login_required
 def favourite_places_view(request, pk):
     place = get_object_or_404(Place, id=request.POST.get("place_id"))
     user = request.user
