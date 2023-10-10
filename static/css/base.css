@@ -1,3 +1,11 @@
+:root {
+    --red: #BF553B;
+    --green: #97aa44;
+    --blue: #7bb7ae;
+    --yellow: #edd34d;
+    --light-grey: #757575;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -49,16 +57,16 @@ footer a:hover,
 
 .submit-btn:hover {
     cursor: pointer;
-    outline: 2px solid #9da040;
+    outline: 2px solid var(--green);
     background-color: white;
-    color: #9da040;
+    color: var(--green);
 }
 
 .cancel-btn:hover {
     cursor: pointer;
-    outline: 2px solid #cf5c36;
+    outline: 2px solid var(--red);
     background-color: white;
-    color: #cf5c36;
+    color: var(--red);
 }
 
 /*  */
@@ -70,10 +78,11 @@ footer a:hover,
 
 #site-title {
     font-size: 1.6rem;
+    /* DELETE THIS UNUSED FONT */
     /* font-family: 'Major Mono Display', monospace; */
     font-family: 'Oswald', sans-serif;
     font-weight: 300;
-    color: #cf5c36
+    color: var(--red);
 }
 
 .user-icon {
@@ -89,7 +98,7 @@ footer a:hover,
 }
 
 .header-nav-text {
-    font-size: 0.6rem;
+    font-size: 0.8rem;
 }
 
 /* TYPOGRAPHY */
@@ -123,7 +132,7 @@ h1 {
 }
 
 .comments-count-text {
-    color: #494949;
+    color: var(--light-grey);
 }
 
 /* ADD PLACE PAGE */
@@ -168,11 +177,10 @@ h1 {
 
 .active-option {
     color: black;
-    /* text-decoration: underline; */
 }
 
 .inactive-option {
-    color: #808080;
+    color: var(--light-grey);
 }
 
 .detail-view-container {
@@ -215,7 +223,7 @@ h1 {
     bottom: 0;
     right: 0;
     padding: 3%;
-    color: #494949;
+    color: var(--light-grey);
     background-color: white;
     border: none;
 }
@@ -240,7 +248,7 @@ h1 {
 .detail-view-btn {
     position: absolute;
     top: 0;
-    color: #494949;
+    color: var(--light-grey);
     background-color: rgb(255 255 255 / 100%);
     border-radius: 50%;
     width: 30px;
@@ -275,7 +283,7 @@ h1 {
 .place-address {
     font-weight: 300;
     font-size: 0.9rem;
-    color: #494949;
+    color: var(--light-grey);
 }
 
 .detail-view-place-title {
@@ -300,7 +308,7 @@ h1 {
 
 .comment-user-icon {
     font-size: 2rem;
-    color: #959595;
+    color: var(--blue);
 }
 
 .detail-container h3 {
@@ -308,7 +316,7 @@ h1 {
 }
 
 .comments-title-container p {
-    color: #959595;
+    color: var(--light-grey);
     font-size: 0.8rem;
 }
 
@@ -327,7 +335,7 @@ h1 {
     display: grid;
     place-items: center;
     font-size: 0.8rem;
-    color: #959595;
+    color: var(--light-grey);
 }
 
 .detail-container form:nth-of-type(n+2) {
@@ -353,12 +361,12 @@ h1 {
 
 /* .detail-container .submit-btn */
 .submit-btn {
-    background-color: #9da040;
+    background-color: var(--green);
 }
 
 /* .detail-container .cancel-btn */
 .cancel-btn {
-    background-color: #cf5c36;
+    background-color: var(--red);
 }
 
 /* COMMENT CRUD PAGES */
@@ -473,7 +481,7 @@ h1 {
 
 .login-page strong {
     text-decoration: underline;
-    text-decoration-color: #9da040;
+    text-decoration-color: var(--green);
 }
 
 /* FOOTER */
@@ -536,7 +544,7 @@ footer {
 }
 
 .footer-inactive {
-    color: grey;
+    color: var(--light-grey);
 }
 
 /* DJANGO MESSAGES */
@@ -554,7 +562,7 @@ footer {
 }
 
 .messages .success {
-    background-color: #9da040;
+    background-color: var(--green);
     color: white;
     text-shadow: 0px 0px 0px black;
     /* margin: 5%; */
@@ -564,7 +572,7 @@ footer {
 }
 
 .messages .error {
-    background-color: #cf5c36;
+    background-color: var(--red);
     color: black;
     /* text-shadow: 0px 0px 0px white; */
     /* margin: 5%; */
@@ -584,13 +592,13 @@ footer {
 }
 
 .btn--alert {
-    background-color: #cf5c36;
+    background-color: var(--red);
     color: white;
 }
 
 .btn--success {
     /* background-color: #9da040; */
-    background-color: #9da040;
+    background-color: var(--green);
     color: white;
     /* margin: 5%; */
     padding: 20px;
@@ -602,7 +610,7 @@ footer {
     top: 11%;
     left: 5%;
     font-size: 1.3rem;
-    color: #494949;
+    color: var(--light-grey);
 }
 
 /* MEDIA QUERIES */
@@ -629,7 +637,7 @@ footer {
     }
 
     .place-detail-info-card {
-        background-color: #7bb7ae;
+        background-color: var(--blue);
         display: flex;
         flex-direction: column;
         margin-top: 2%;

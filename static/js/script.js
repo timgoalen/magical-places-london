@@ -90,7 +90,7 @@ async function initMap() {
         commentsCount,
     }, ) => {
         const customPin = new PinElement({
-            background: "#cf5c36",
+            background: "#BF553B",
             scale: 0.9,
             borderColor: "#fff",
             glyphColor: "#fff",
