@@ -1,9 +1,9 @@
 const footer = document.getElementById("list-view-footer");
 const listSortOptions = Array.from(document.getElementsByClassName("list-sort-item"));
 
-let prevScrollPosition = 0;
-
 // Hide footer on down-scroll
+
+let prevScrollPosition = 0;
 
 function collapseFooter() {
     const scrollPosition = window.scrollY;

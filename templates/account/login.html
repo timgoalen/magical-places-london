@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static  %}
+
 {% load i18n %}
 {% load account socialaccount %}
 
@@ -46,5 +48,7 @@
 
   <span id="close-btn"><i class="fa-solid fa-chevron-left"></i></span>
 </section>
+
+<script src="{% static 'js/back-btn.js' %}"></script>
 
 {% endblock %}

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static  %}
+
 {% load i18n %}
 
 {% block head_title %}{% trans "Log Out" %}{% endblock %}
@@ -21,5 +23,6 @@
   <span id="close-btn"><i class="fa-solid fa-chevron-left"></i></span>
 </section>
 
+<script src="{% static 'js/back-btn.js' %}"></script>
 
 {% endblock %}

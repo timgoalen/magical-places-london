@@ -46,6 +46,7 @@ footer {
     height: 9dvh;
 }
 
+.user-links:hover,
 footer a:hover,
 .list-sort-options a:hover,
 .list-favourite-btn:hover,
@@ -97,6 +98,7 @@ footer a:hover,
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: var(--light-grey)
 }
 
 .header-nav-text {
@@ -277,7 +279,7 @@ h1 {
 }
 
 .detail-favourite-icon {
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .detail-container>.comments-count-text {
@@ -403,10 +405,25 @@ h1 {
     /* gap: 5%; */
 }
 
+#add-place-input-container {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    margin-top: 2%;
+}
+
+#add-place-input-container label {
+    margin-right: 2%;
+    color: var(--blue);
+}
+
 #search-input {
     width: 90%;
     height: 1.3rem;
-    margin-top: 2%;
+    /* margin-top: 2%; */
+    padding: 5px;
+    border: 1px solid var(--blue);
+    border-radius: 4px;
 }
 
 #place-add-form {

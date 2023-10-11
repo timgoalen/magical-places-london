@@ -37,18 +37,18 @@
                 {% csrf_token %}
                 {% if user_has_favourited %}
                 <button type="submit" name="place_id" value="{{place.id}}" class="detail-view-btn detail-view-btn--favourite">
-                    <i class="fa-solid fa-star detail-favourite-icon"></i>
+                    <i class="fa-solid fa-heart detail-favourite-icon"></i>
                 </button>
                 {% else %}
                 <button type="submit" name="place_id" value="{{place.id}}" class="detail-view-btn detail-view-btn--favourite">
-                    <i class="fa-regular fa-star detail-favourite-icon"></i>
+                    <i class="fa-regular fa-heart detail-favourite-icon"></i>
                 </button>
                 {% endif %}
             </form>
             {% else %}
             <!-- Favourite Button for not signed in users -->
             <a href="{% url 'account_login' %}" class="detail-view-btn detail-view-btn--favourite">
-                <i class="fa-regular fa-star detail-favourite-icon"></i>
+                <i class="fa-regular fa-heart detail-favourite-icon"></i>
             </a>
             {% endif %}
             
@@ -115,7 +115,7 @@
         <br>
     </div>
 
-    <!-- JS script -->
+    <!-- JS script **for back button?? -->
     <script src="{% static 'js/place-detail.js' %}"></script>
     <!-- Modal script for Django Messages -->
     <script src="{% static 'js/messages.js' %}"></script>

@@ -23,7 +23,7 @@
             <div>Newest</div>
         </a>
         <a href="?sort=my-favourites" class="list-sort-item inactive-option">
-            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-heart"></i>
             <div>My Favourites</div>
         </a>
     </div>
@@ -55,11 +55,11 @@
                         {% csrf_token %}
                         {% if favourite_place in user_favourites %}
                         <button type="submit" name="place_id" value="{{favourite_place.id}}" class="list-favourite-btn">
-                            <i class="fa-solid fa-star detail-favourite-icon"></i>
+                            <i class="fa-solid fa-heart detail-favourite-icon"></i>
                         </button>
                         {% else %}
                         <button type="submit" name="place_id" value="{{favourite_place.id}}" class="list-favourite-btn">
-                            <i class="fa-regular fa-star detail-favourite-icon"></i>
+                            <i class="fa-regular fa-heart detail-favourite-icon"></i>
                         </button>
                         {% endif %}
                     </form>
@@ -97,18 +97,18 @@
                 {% csrf_token %}
                 {% if place in user_favourites %}
                 <button type="submit" name="place_id" value="{{place.id}}" class="list-favourite-btn">
-                    <i class="fa-solid fa-star detail-favourite-icon"></i>
+                    <i class="fa-solid fa-heart detail-favourite-icon"></i>
                 </button>
                 {% else %}
                 <button type="submit" name="place_id" value="{{place.id}}" class="list-favourite-btn">
-                    <i class="fa-regular fa-star detail-favourite-icon"></i>
+                    <i class="fa-regular fa-heart detail-favourite-icon"></i>
                 </button>
                 {% endif %}
             </form>
             {% else %}
             <!-- Favourite Button for not signed in users -->
             <a href="{% url 'account_login' %}" class="list-favourite-btn">
-                <i class="fa-regular fa-star detail-favourite-icon"></i>
+                <i class="fa-regular fa-heart detail-favourite-icon"></i>
             </a>
             {% endif %}
         </div>

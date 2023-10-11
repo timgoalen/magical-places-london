@@ -1,5 +1,7 @@
 const backBtn = document.getElementById("back-btn");
 
+// Back button functionalty in detail view (**explain the logic)
+
 function goBack() {
     if (window.history.length > 1) {
         const currentUrl = window.location.href;

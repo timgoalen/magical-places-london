@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% load static  %}
 
 {% block head %}
@@ -13,14 +14,16 @@
     <h1>Add a Place</h1>
 
     <!-- TEST PLACES AUTOCOMPLETE -->
-    <input type="text" id="search-input" placeholder="Enter a place name">
+    <div id="add-place-input-container">
+        <label for="search-input"><i class="fa-solid fa-magnifying-glass"></i></label>
+        <input type="text" id="search-input" placeholder="Start typing a place name">
+    </div>
     <div id="place-add-form">
         <!-- PHOTO -->
-        <!-- <img src="" alt="" id="photo" height="200"> -->
         <div class="add-form-img-container">
             <img src="" alt="" id="photo">
         </div>
-        <!-- FORM -->
+        <!-- FORM (hidden) -->
         <form action="" method="post">{% csrf_token %}
             {{ form.as_p }}
             <h2 class="detail-view-place-title" id="add-form-title"></h2>
@@ -36,5 +39,7 @@
 
 <script async src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=places">
 </script>
+
+<script src="{% static 'js/back-btn.js' %}"></script>
 
 {% endblock content %}
