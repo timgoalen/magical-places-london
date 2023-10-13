@@ -84,7 +84,7 @@ async function initMap() {
     places.forEach(({
         position,
         title,
-        id,cl
+        id,
         address,
         photoUrl,
         commentsCount,

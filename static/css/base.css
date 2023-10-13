@@ -21,7 +21,7 @@ a {
 
 body {
     height: 100dvh;
-    margin: 0 2%;
+    /* margin: 0 2%; */
     /* font-family: Arial, Helvetica, sans-serif; */
     font-family: 'Oswald', sans-serif;
 }
@@ -138,7 +138,7 @@ h1 {
 .comments-count-text {
     color: var(--light-grey);
     font-weight: 300;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 /* ADD PLACE PAGE */
@@ -476,7 +476,8 @@ h1 {
 .login-page,
 .signup-page {
     height: 90%;
-    width: 100%;
+    width: 96%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -484,18 +485,44 @@ h1 {
     gap: 2%;
 }
 
+.login-form-container {
+    width: 100%;
+    border: 1px solid var(--green);
+    border-radius: 8px;
+    /* padding: 1rem; */
+}
+
+.login-form-title {
+    text-align: center;
+}
+
+.login-form-container h1 {
+    border-bottom: 1px solid var(--green);
+    padding: 8px;
+}
+
+.login-form-content {
+    padding: 1rem;
+}
+
 .login-form,
 .signup-form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.if-no-account {
+    color: var(--light-grey);
+    text-align: center;
 }
 
 .login-page,
 .signup-page {
-    max-width: 400px;
-    margin: 0 auto;
+    max-width: 410px;
+    /* margin: 0 auto; */
     /* text-align: center; */
 }
 
@@ -517,6 +544,11 @@ h1 {
 .signup-page strong {
     text-decoration: underline;
     text-decoration-color: var(--green);
+}
+
+.login-page strong:hover,
+.signup-page strong:hover {
+    color: black;
 }
 
 #id_remember {
@@ -642,6 +674,7 @@ footer {
     /* margin: 5%; */
     /* padding: 10px; */
     /* border-radius: 8px; */
+    margin: 8px 0;
 }
 
 #close-btn {
@@ -676,7 +709,8 @@ footer {
     }
 
     .place-detail-info-card {
-        background-color: var(--blue);
+        /* background-color: var(--blue); */
+        background: radial-gradient(circle, rgb(186 228 220) 0%, rgba(123,183,174,1) 100%);
         display: flex;
         flex-direction: column;
         margin-top: 2%;
