@@ -485,23 +485,27 @@ h1 {
     gap: 2%;
 }
 
-.login-form-container {
+.login-form-container,
+.signup-form-container {
     width: 100%;
     border: 1px solid var(--green);
     border-radius: 8px;
     /* padding: 1rem; */
 }
 
-.login-form-title {
+.login-form-title,
+.signup-form-title {
     text-align: center;
 }
 
-.login-form-container h1 {
+.login-form-container h1,
+.signup-form-container h1 {
     border-bottom: 1px solid var(--green);
     padding: 8px;
 }
 
-.login-form-content {
+.login-form-content,
+.signup-form-content {
     padding: 1rem;
 }
 
@@ -514,7 +518,8 @@ h1 {
     margin-bottom: 8px;
 }
 
-.if-no-account {
+.if-no-account,
+.if-already-account {
     color: var(--light-grey);
     text-align: center;
 }
@@ -553,6 +558,11 @@ h1 {
 
 #id_remember {
     margin-left: 1%;
+}
+
+.errorlist {
+    color: var(--red);
+    list-style: none;
 }
 
 /* FOOTER */
