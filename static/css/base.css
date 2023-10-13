@@ -1,6 +1,7 @@
 :root {
     --red: #BF553B;
-    --green: #97aa44;
+    /* --green: #97aa44; */
+    --green: #6F7B32;
     --blue: #7bb7ae;
     --yellow: #edd34d;
     --light-grey: #757575;
@@ -539,8 +540,11 @@ h1 {
 .login-page,
 .signup-page {
     max-width: 410px;
-    /* margin: 0 auto; */
-    /* text-align: center; */
+}
+
+.login-page label,
+.signup-page label {
+    color: var(--green);
 }
 
 .login-page input[type=text],
