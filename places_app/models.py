@@ -4,10 +4,11 @@ from django.urls import reverse
 from django.utils import timezone
 
 
-# 'PLACE' MODEL
-
-
 class Place(models.Model):
+    """
+    MODEL: database for Place objects.
+    """
+
     place_name = models.CharField(max_length=100, unique=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -20,7 +21,6 @@ class Place(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
-        # need this, if also doing in the view?..
         ordering = ["-created_on"]
 
     def __str__(self):
@@ -30,13 +30,16 @@ class Place(models.Model):
         return reverse("place_detail", kwargs={"pk": self.pk})
 
 
-# 'COMMENT' MODEL
-
-
 class Comment(models.Model):
-    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name="comments")
+    """
+    MODEL: database for Comments.
+    """
+
+    place = models.ForeignKey(Place, on_delete=models.CASCADE,
+                              related_name="comments")
     comment = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
+    author = models.ForeignKey(User, on_delete=models.CASCADE,
+                               related_name="comments")
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -50,19 +53,22 @@ class Comment(models.Model):
         return reverse("place_detail", kwargs={"pk": self.pk})
 
 
-# 'FAVOURITE' MODEL
-
-
 class Favourite(models.Model):
+    """
+    MODEL: database for Favourites.
+    """
+
     place = models.ForeignKey(
         Place, on_delete=models.CASCADE, related_name="favourites"
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="favourites")
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                             related_name="favourites")
     favourited_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=["place", "user"], name="unique_favourite")
+            models.UniqueConstraint(fields=["place", "user"],
+                                    name="unique_favourite")
         ]
 
     def __str__(self):

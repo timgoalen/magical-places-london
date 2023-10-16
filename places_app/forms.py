@@ -3,8 +3,11 @@ from .models import Place, Comment
 
 
 class AddPlaceForm(forms.ModelForm):
+    """
+    FORM: Add Place.
+    """
+    # Add HTML element ID values.
     place_name = forms.CharField(
-        # Add HTML element ID values
         widget=forms.HiddenInput(attrs={"id": "name-field"}),
         label="Place Name",
     )
@@ -27,10 +30,14 @@ class AddPlaceForm(forms.ModelForm):
 
     class Meta:
         model = Place
-        fields = ["place_name", "latitude", "longitude", "address", "photo_url"]
+        fields = [
+            "place_name", "latitude", "longitude", "address", "photo_url"]
 
 
 class CommentForm(forms.ModelForm):
+    """
+    FORM: Add Comment.
+    """
     class Meta:
         model = Comment
         fields = ("comment",)
