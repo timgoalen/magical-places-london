@@ -12,7 +12,7 @@
 <section class="login-page">
   <div class="login-form-container">
     <div class="login-form-title">
-      <h1>{% trans "Log In" %}</h1>
+      <h2>{% trans "Log In" %}</h2>
     </div>
     <div class="login-form-content">
       <form class="login login-form" method="POST" action="{% url 'account_login' %}">
@@ -22,7 +22,7 @@
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
         <!-- <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a> -->
-        <button class="primaryAction btn btn--success" type="submit">{% trans "Log In" %} &raquo</button>
+        <button class="primaryAction btn btn--success" type="submit">{% trans "Log In" %}</button>
       </form>
       <p class="if-no-account">{% blocktrans %}Don't have an account? Then please
         <a href="{{ signup_url }}"><strong>sign up</strong>.</a>{% endblocktrans %}</p>

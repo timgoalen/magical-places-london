@@ -3,40 +3,45 @@
 {% load static  %}
 
 {% block head %}
-
 <script type="module" src="{% static 'js/place-add-form.js' %}"></script>
-
 {% endblock head %}
 
 {% block content %}
 
-<section class="add-place-page">
+<main class="add-place-page">
     <h1>Add a Place</h1>
 
-    <!-- TEST PLACES AUTOCOMPLETE -->
+    <!-- GOOGLE PLACE SEARCH FIELD -->
+
     <div id="add-place-input-container">
         <label for="search-input"><i class="fa-solid fa-magnifying-glass"></i></label>
         <input type="text" id="search-input" placeholder="Start typing a place name">
     </div>
+
+    <!-- PLACE CARD -->
+
     <div id="place-add-form">
-        <!-- PHOTO -->
+        <!-- Photo -->
         <div class="add-form-img-container">
-            <img src="" alt="" id="photo">
+            <img src="#" alt="" id="photo">
         </div>
-        <!-- FORM (hidden) -->
-        <form action="" method="post">{% csrf_token %}
+        <!-- Form (hidden) -->
+        <form method="post">{% csrf_token %}
             {{ form.as_p }}
-            <h2 class="detail-view-place-title" id="add-form-title"></h2>
+            <h2 class="detail-view-place-title" id="add-form-title">Place Name</h2>
             <p class="place-address" id="add-form-address"></p>
             <div class="add-place-btns-container">
                 <input type="submit" value="Save" id="place-add-save-btn" class="submit-btn">
-                <button class="cancel-btn"><a href="{% url 'place_add' %}">Cancel</a></button>
+                <a href="{% url 'place_add' %}" class="cancel-btn">Cancel</a>
             </div>
         </form>
     </div>
-    <span id="close-btn"><i class="fa-solid fa-chevron-left"></i></span>
-</section>
 
+    <!-- Back button -->
+    <span id="close-btn"><i class="fa-solid fa-chevron-left"></i></span>
+</main>
+
+<!-- Google Maps API script -->
 <script async src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=places">
 </script>
 

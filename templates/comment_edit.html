@@ -5,7 +5,7 @@
     <div class="comment-crud-container">
         <h2>Edit Comment</h2>
 
-        <form action="" method="post">{% csrf_token %}
+        <form method="post">{% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Update" class="submit-btn">
         </form>

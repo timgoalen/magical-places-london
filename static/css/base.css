@@ -282,7 +282,8 @@ h1 {
     color: var(--blue);
 }
 
-.detail-container h3 {
+.author-name {
+    font-size: 1.1rem;
     font-weight: 400;
 }
 
@@ -342,6 +343,8 @@ h1 {
 
 .cancel-btn {
     background-color: var(--red);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
 }
 
 /* COMMENT CRUD PAGES */
@@ -428,7 +431,7 @@ h1 {
 }
 
 #place-add-save-btn,
-.add-place-btns-container button {
+.add-place-btns-container a {
     min-width: 25%;
     margin: 2%;
 }
@@ -460,8 +463,15 @@ h1 {
     text-align: center;
 }
 
-.login-form-container h1,
-.signup-form-container h1 {
+.login-form-container h2,
+.signup-form-container h2,
+.log-out-confirmation-page h2 {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.login-form-container h2,
+.signup-form-container h2 {
     border-bottom: 1px solid var(--green);
     padding: 8px;
 }

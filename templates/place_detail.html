@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <!-- Google Fonts -->
@@ -20,100 +20,114 @@
 </head>
 
 <body>
-    <div class="detail-container">
-        <div class="place-detail-info-card">
-            <div class="detail-image-container">
-                <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}" class="place-detail-photo">
-            </div>
-            <!-- 'Back' button -->
-            <a href="#" class="detail-view-btn detail-view-btn--back" id="back-btn"><i class="fa-solid fa-chevron-left"></i></a>
-            
-                <!-- 'Favourite' button functionality -->
-            {% if user.is_authenticated %}
-            <form action="{% url 'favourite_a_place' place.pk %}" method="POST">
-                {% csrf_token %}
-                {% if user_has_favourited %}
-                <button type="submit" name="place_id" value="{{place.id}}" class="detail-view-btn detail-view-btn--favourite">
-                    <i class="fa-solid fa-heart detail-favourite-icon"></i>
-                </button>
-                {% else %}
-                <button type="submit" name="place_id" value="{{place.id}}" class="detail-view-btn detail-view-btn--favourite">
-                    <i class="fa-regular fa-heart detail-favourite-icon"></i>
-                </button>
-                {% endif %}
-            </form>
-            {% else %}
-            <!-- Favourite Button for not signed in users -->
-            <a href="{% url 'account_login' %}" class="detail-view-btn detail-view-btn--favourite">
-                <i class="fa-regular fa-heart detail-favourite-icon"></i>
-            </a>
-            {% endif %}
-            
-            <div class="detail-text">
-                <h2 class="detail-view-place-title">{{ place.place_name }}</h2>
-                <p class="place-address">{{ place.address }}</p>
-            </div>
-        </div>
-    
-        <hr class="detail-view-hr">
-    
-        <!-- COMMENTS -->
+    <main>
+        <div class="detail-container">
+            <div class="place-detail-info-card">
 
-        {% if place.comments.count == 1 %}
-        <p class="comments-count-text">{{ place.comments.count }} Comment</p>
-        <!-- "Comment" (not plural) if only 1 comment -->
-        {% else %}
-        <p class="comments-count-text">{{ place.comments.count }} Comments</p>
-        {% endif %}
-    
-        {% for comment in place.comments.all %}
-        <div class="comment-container">
-            <div class="comments-title-container">
-                <i class="fa-regular fa-circle-user comment-user-icon"></i>
-                <div>
-                    <h3>{{ comment.author }}</h3>
-                    <p>{{ comment.created_on|date:"d/m/y H:i" }}</p>
+                <!-- IMAGE -->
+
+                <div class="detail-image-container">
+                    <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}" class="place-detail-photo">
+                </div>
+
+                <!-- 'BACK' BUTTON -->
+
+                <a href="#" class="detail-view-btn detail-view-btn--back" id="back-btn" aria-label="Back button">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+
+                <!-- 'FAVOURITE' BUTTON FUNCTIONALITY -->
+
+                {% if user.is_authenticated %}
+                <form action="{% url 'favourite_a_place' place.pk %}" method="POST">
+                    {% csrf_token %}
+                    {% if user_has_favourited %}
+                    <button type="submit" name="place_id" value="{{place.id}}"
+                        class="detail-view-btn detail-view-btn--favourite">
+                        <i class="fa-solid fa-heart detail-favourite-icon"></i>
+                    </button>
+                    {% else %}
+                    <button type="submit" name="place_id" value="{{place.id}}"
+                        class="detail-view-btn detail-view-btn--favourite">
+                        <i class="fa-regular fa-heart detail-favourite-icon"></i>
+                    </button>
+                    {% endif %}
+                </form>
+                {% else %}
+                <!-- Favourite Button for not signed in users -->
+                <a href="{% url 'account_login' %}" class="detail-view-btn detail-view-btn--favourite"
+                    aria-label="Button to favourite a place">
+                    <i class="fa-regular fa-heart detail-favourite-icon"></i>
+                </a>
+                {% endif %}
+
+                <!-- TEXT -->
+
+                <div class="detail-text">
+                    <h1 class="detail-view-place-title">{{ place.place_name }}</h1>
+                    <p class="place-address">{{ place.address }}</p>
                 </div>
             </div>
-            <p class="comments-text">{{ comment.comment }}</p>
-            {% if user.is_authenticated and user == comment.author %}
-            <div class="comment-tools-container">
-                <a href="{% url 'comment_edit' comment.pk %}" class="comment-tools">
-                    <i class="fa-regular fa-pen-to-square"></i>
-                    <div>Edit</div>
-                </a>
-                <a href="{% url 'comment_delete' comment.pk %}" class="comment-tools">
-                    <i class="fa-regular fa-trash-can"></i>
-                    <div>Delete</div>
-                </a>
-            </div>
+
+            <hr class="detail-view-hr">
+
+            <!-- COMMENTS -->
+
+            {% if place.comments.count == 1 %}
+            <p class="comments-count-text">{{ place.comments.count }} Comment</p>
+            <!-- "Comment" (not plural) if only 1 comment -->
+            {% else %}
+            <p class="comments-count-text">{{ place.comments.count }} Comments</p>
             {% endif %}
-        </div>
-        {% endfor %}
-    
-        <hr class="detail-view-hr">
 
-        <!-- 'ADD COMMENT' -->
+            {% for comment in place.comments.all %}
+            <div class="comment-container">
+                <div class="comments-title-container">
+                    <i class="fa-regular fa-circle-user comment-user-icon"></i>
+                    <div>
+                        <h2 class="author-name">{{ comment.author }}</h2>
+                        <p>{{ comment.created_on|date:"d/m/y H:i" }}</p>
+                    </div>
+                </div>
+                <p class="comments-text">{{ comment.comment }}</p>
+                {% if user.is_authenticated and user == comment.author %}
+                <!-- Comment Edit/Delete Tools -->
+                <div class="comment-tools-container">
+                    <a href="{% url 'comment_edit' comment.pk %}" class="comment-tools">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                        <div>Edit</div>
+                    </a>
+                    <a href="{% url 'comment_delete' comment.pk %}" class="comment-tools">
+                        <i class="fa-regular fa-trash-can"></i>
+                        <div>Delete</div>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
 
-        {% if user.is_authenticated %}
-        <!-- <h3>Add a Comment:</h3> -->
-    
-        <div class="comment-form">
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="submit-btn">Submit</button>
-                <button class="cancel-btn"><a href="{% url 'place_detail' place.pk %}">Cancel</a></button>
-            </form>
+            <hr class="detail-view-hr">
+
+            <!-- 'ADD COMMENT' -->
+
+            {% if user.is_authenticated %}
+            <div class="comment-form">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="submit-btn">Submit</button>
+                    <a href="{% url 'place_detail' place.pk %}" class="cancel-btn">Cancel</a>
+                </form>
+            </div>
             {% else %}
             <p>Please <a href="{% url 'account_login' %}"><strong>Sign In</strong></a> to leave a comment.</p>
             <br>
+            {% endif %}
+            <br>
         </div>
-        {% endif %}
-        <br>
-    </div>
+    </main>
 
-    <!-- JS script **for back button?? -->
+    <!-- Script for back button -->
     <script src="{% static 'js/place-detail.js' %}"></script>
     <!-- Modal script for Django Messages -->
     <script src="{% static 'js/messages.js' %}"></script>

@@ -7,7 +7,7 @@
     <!-- Note: changes to here must also be manually made in "place_detail.html" -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <!-- Google Fonts -->
@@ -29,30 +29,29 @@
         <div class="title-container">
             <h1 id="site-title"><a href="{% url 'home' %}">Magical Places - London</a></h1>
         </div>
-
-            {% if user.is_authenticated %}
-            <div class="user-icon">
-                <a href="{% url 'account_logout' %}" class="user-links">
-                    <div>
-                        <i class="fa-regular fa-lg fa-circle-user"></i>
-                    </div>
-                    <div>
-                        <div class="header-nav-text">Log Out</div>
-                    </div>  
-                </a>
-            </div>
-            {% else %}
-            <div class="user-icon">
-                <a href="{% url 'account_login' %}" class="user-links">
-                    <div>
-                        <i class="fa-regular fa-lg fa-circle-user"></i>
-                    </div>
-                    <div>
-                        <div class="header-nav-text">Log In</div>
-                    </div>  
-                </a>
-            </div>
-            {% endif %}
+        {% if user.is_authenticated %}
+        <div class="user-icon">
+            <a href="{% url 'account_logout' %}" class="user-links">
+                <div>
+                    <i class="fa-regular fa-lg fa-circle-user"></i>
+                </div>
+                <div>
+                    <div class="header-nav-text">Log Out</div>
+                </div>
+            </a>
+        </div>
+        {% else %}
+        <div class="user-icon">
+            <a href="{% url 'account_login' %}" class="user-links">
+                <div>
+                    <i class="fa-regular fa-lg fa-circle-user"></i>
+                </div>
+                <div>
+                    <div class="header-nav-text">Log In</div>
+                </div>
+            </a>
+        </div>
+        {% endif %}
     </header>
 
     {% include 'includes/messages.html' %}
@@ -60,7 +59,7 @@
     {% block content %}
 
     {% endblock content %}
-    
+
     <!-- Modal script for Django Messages -->
     <script src="{% static 'js/messages.js' %}"></script>
 </body>

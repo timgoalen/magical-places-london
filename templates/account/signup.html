@@ -10,7 +10,7 @@
 <section class="signup-page">
   <div class="signup-form-container">
     <div class="signup-form-title">
-      <h1>{% trans "Sign Up" %}</h1>
+      <h2>{% trans "Sign Up" %}</h2>
     </div>
 
     <div class="signup-form-content">
@@ -20,7 +20,7 @@
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
-        <button type="submit" class="btn btn--success">{% trans "Sign Up" %} &raquo;</button>
+        <button type="submit" class="btn btn--success">{% trans "Sign Up" %}</button>
       </form>
 
       <p class="if-already-account">{% blocktrans %}Already have an account? Then please <a

@@ -1,47 +1,49 @@
 {% extends "base.html" %}
-{% load static  %}
+
+{% load static %}
 
 {% block head %}
-
 <script type="module" src="{% static 'js/script.js' %}"></script>
-
+<script>
+    const GOOGLE_MAPS_API_KEY = "{{ api_key }}";
+</script>
 {% endblock head %}
 
 {% block content %}
 
-<!-- import the json list of dictionaries (created in the view) -->
+<!-- Import the JSON list of dictionaries from the View -->
 {{ places_list_of_dicts|json_script:"places-json-data" }}
-<!-- {{ comments|json_script:"comments-json-data" }} -->
 
-<section class="map-container">
+<!-- MAP VIEW -->
+
+<main class="map-container">
     <div id="map"></div>
-</section>
+</main>
+
+<!-- FOOTER -->
 
 <footer>
-        <a href="{% url 'home' %}" class="map-page-link footer-active">
-            <div><i class="fa-regular fa-map"></i></div>
-            <div class="footer-nav-text">Map</div>
-        </a>
-        <a href="{% url 'list' %}" class="list-page-link footer-inactive">
-            <div><i class="fa-solid fa-list-ul"></i></div>
-            <div class="footer-nav-text">List</div>
-        </a>
-        {% if user.is_authenticated %}
-        <a href="{% url 'place_add' %}" class="add-place-link footer-inactive">
-            <div class="add-place-centring-grid">
-                <div><i class="fa-solid fa-location-dot"></i></div>
-                <div class="footer-nav-text">Add</div>
-            </div>
-        </a>
-        {% endif %}
+    <a href="{% url 'home' %}" class="map-page-link footer-active">
+        <div><i class="fa-regular fa-map"></i></div>
+        <div class="footer-nav-text">Map</div>
+    </a>
+    <a href="{% url 'list' %}" class="list-page-link footer-inactive">
+        <div><i class="fa-solid fa-list-ul"></i></div>
+        <div class="footer-nav-text">List</div>
+    </a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'place_add' %}" class="add-place-link footer-inactive">
+        <div class="add-place-centring-grid">
+            <div><i class="fa-solid fa-location-dot"></i></div>
+            <div class="footer-nav-text">Add</div>
+        </div>
+    </a>
+    {% endif %}
 </footer>
 
-<!-- prettier-ignore **FIND WAY TO DO THIS WITH FORMATTER-->
-<script>
-    const GOOGLE_MAPS_API_KEY = "{{ api_key }}";
-</script>
-
+<!-- Google Maps Javascript API -->
+<!-- (Don't format)-->
 <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
-        ({key: GOOGLE_MAPS_API_KEY, v: "beta"});</script>
+    ({key: GOOGLE_MAPS_API_KEY, v: "beta"});</script>
 
 {% endblock content %}
