@@ -4,16 +4,11 @@ from .models import Place, Comment, Favourite
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
-    inlines = [
-        CommentInline,
-    ]
+    # inlines = [
+    #     CommentInline,
+    # ]
     list_display = ("place_name", "created_on", "contributer")
     search_fields = ("place_name", "created_on", "contributer")
-
-
-class CommentInline(admin.StackedInline):
-    model = Comment
-    extra = 0
 
 
 # @admin.register(Comment)

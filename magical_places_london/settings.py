@@ -30,6 +30,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = [
     "8000-timgoalen-magicalplaces-xikc2aho5al.ws-eu104.gitpod.io",
