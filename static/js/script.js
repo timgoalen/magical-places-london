@@ -1,9 +1,9 @@
-// "use strict";
+/* jshint esversion: 8 */
 
-// Initialize and add the map
+// Initialize and add the map.
 let map;
 
-// set london bounds to restrict map size
+// Set london bounds to restrict map size.
 const LONDON_BOUNDS = {
     north: 51.709761,
     south: 51.300915,
@@ -11,22 +11,22 @@ const LONDON_BOUNDS = {
     east: 0.270798,
 };
 
-// set london center coordinates
+// Set london center coordinates.
 const LONDON = {
     lat: 51.50758960849218,
     lng: -0.12495345904150813
 };
 
-// Get JSON data from the json_script tag in the home.html template
+// Get JSON data from the json_script tag in the home.html template.
 let jsonData = JSON.parse(document.getElementById("places-json-data").textContent);
 
-// Create an new array of objects from the JSON data: our main "locations" data
+// Create an new array of objects from the JSON data: our main "locations" data.
 const places = jsonData.map(function (place) {
     const title = place.place_name;
     const position = {
         lat: place.latitude,
         lng: place.longitude
-    }
+    };
     const id = place.id;
     const address = place.address;
     const photoUrl = place.photo_url;
@@ -57,7 +57,7 @@ async function initMap() {
         "marker",
     );
 
-    // The map, centered and restricted to London
+    // The map, centered and restricted to London.
     map = new Map(document.getElementById("map"), {
         center: LONDON,
         restriction: {
@@ -65,9 +65,9 @@ async function initMap() {
             strictBounds: false,
         },
         zoom: 12,
-        // Link to Google Cloud custom map preferences
+        // Link to Google Cloud custom map preferences.
         mapId: "3d039a2500323a92",
-        // Disable unwanted controls
+        // Disable unwanted controls.
         disableDefaultUI: true,
         zoomControl: true,
         mapTypeControl: false,
@@ -77,12 +77,12 @@ async function initMap() {
         fullscreenControl: false
     });
 
-    // Create info window to be shared between markers
+    // Create info window to be shared between markers.
     const infoWindow = new InfoWindow({
         maxWidth: 180
     });
 
-    // Create markers from 'places' array
+    // Create markers from 'places' array.
     places.forEach(({
         position,
         title,
@@ -100,7 +100,6 @@ async function initMap() {
         // ***CHANGE TO HEROKU URL WHEN DEPLOYED..add the full url?****
         const detailUrl = `/place/${id}/`;
         const htmlH2 = `<h2 class="map-view-place-title"><a href="${detailUrl}">${title}</a></h2>`;
-        const htmlAddress = `<p>${address}</p>` // remove unused variables
         const htmlPhoto = `<a href="${detailUrl}"><img src="${photoUrl}" alt="${title} Photo" class="map-place-photo"></a>`;
         let commentsMessage = "Comments";
         if (commentsCount == 1) {
@@ -135,4 +134,5 @@ async function initMap() {
     });
 }
 
-initMap();
+// Call function on window load.
+window.addEventListener("load", initMap);

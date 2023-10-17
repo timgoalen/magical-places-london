@@ -1,25 +1,14 @@
-const messageContainers = document.getElementsByClassName("messages");
+const messageContainers = Array.from(document.getElementsByClassName("messages"));
 
 function closeMessage(event) {
     event.target.style.display = "none";
 }
 
-for (let container of messageContainers) {
-    setTimeout(function () {
+// Automatically close Django messages after 1.5 seconds.
+messageContainers.forEach(container => {
+    setTimeout(() => {
         container.style.display = "none";
     }, 1500);
-    // Option for user to dismiss modal by clicking
+    // Allow the user to dismiss the modal by clicking anywhere on the screen.
     container.addEventListener("click", closeMessage);
-}
-
-function checkForCloseBtn() {
-    const closeBtn = document.getElementById("close-btn");
-
-    if (!closeBtn) {
-        return
-    }
-
-    closeBtn.addEventListener("click", () => {
-        window.history.back();
-    })
-}
+});

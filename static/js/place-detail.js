@@ -1,23 +1,25 @@
 const backBtn = document.getElementById("back-btn");
+// *** CHANGE WHEN DEPLOYED
+const magicalPlacesUrl = "https://8000-timgoalen-magicalplaces-xikc2aho5al.ws-eu105.gitpod.io/";
 
-// Back button functionalty in detail view (**explain the logic)
-
+/**
+ * Create back-button functionality for detail_view.html.
+ * - if a user's previous window.history is an external site, send them back to the home page.
+ * - if a user's referrer page is a 'comment' CRUD page, send them back to 'list_view.html'.
+ * - els send them back to the previous visited page.
+ */
 function goBack() {
     if (window.history.length > 1) {
         const currentUrl = window.location.href;
         const referredUrl = document.referrer;
-        // ***CHANGE WHEN DEPLOYED
-        const magicalPlacesUrl = "https://8000-timgoalen-magicalplaces-xikc2aho5al.ws-eu105.gitpod.io/";
         const comment = "comment";
-        const listViewUrl = magicalPlacesUrl + "list_view/"
+        const listViewUrl = magicalPlacesUrl + "list_view/";
 
-        // TODO: explain logic in comments
         if (referredUrl.startsWith(magicalPlacesUrl)) {
             if (referredUrl.includes(comment)) {
                 window.location.href = listViewUrl;
-            // send user back 2 steps if they've pressed the 'favourite' button
-            // (if they press it twice there's a bug where they'll have to press back twice)
-            } else if (currentUrl === referredUrl){
+                // Send user back 2 steps if they've pressed the 'favourite' button.
+            } else if (currentUrl === referredUrl) {
                 window.history.go(-2);
             } else {
                 window.history.back();

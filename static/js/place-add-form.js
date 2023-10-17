@@ -1,13 +1,11 @@
 const searchInput = document.getElementById("search-input");
-
-const photoField = document.getElementById("photo");
-
 const nameField = document.getElementById("name-field");
 const latitudeField = document.getElementById("latitude-field");
 const longitudeField = document.getElementById("longitude-field");
 const addressField = document.getElementById("address-field");
 const photoUrlField = document.getElementById("photoUrl-field");
 
+// Create Google Places autocomplete functionality for place searches. 
 function initAutocomplete() {
 
     const LONDON_BOUNDS = {
@@ -24,12 +22,11 @@ function initAutocomplete() {
         },
         fields: ["formatted_address", "geometry", "name", "photos"],
         strictBounds: true,
-        // types: ??
     };
 
     const autocomplete = new google.maps.places.Autocomplete(searchInput, options);
 
-    // note, "addListener" rather than "addEventListener":
+    // When a place is chosen, automatically fill in the hidden form fields.
     autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         const coordinates = place.geometry.location;
@@ -41,47 +38,39 @@ function initAutocomplete() {
         longitudeField.value = longitude;
         addressField.value = place.formatted_address;
 
-        // Get the photo URL from Google Places
+        // Get a single photo URL from Google Places.
         if (place.photos && place.photos.length > 0) {
-            // Access the first photo in the array
+            // Access the first photo in the array.
             const firstPhoto = place.photos[0];
 
-            // Get the URL of the photo
+            // Get the URL of the photo.
             const photoUrl = firstPhoto.getUrl({
                 maxHeight: 800
             });
 
-            // Set the src attribute of the img element
+            // Set the src attribute of the img element in the place card.
             const imgElement = document.getElementById("photo");
             imgElement.src = photoUrl;
 
-            // Set the alt title
+            // Set the alt title.
             imgElement.alt = place.name + " Photo";
 
+            // Automatically fill out the photo field of the hidden form.
             photoUrlField.value = photoUrl;
 
-            // TODO: could also set a backup image if there aren't any from google
+            // TODO: set a backup image if there aren't any from google.
         }
 
-        // Show the form once the user has clicked on a place
-        const placeAddForm = document.getElementById("place-add-form")
+        // Show the place card once the user has clicked on a place.
+        const placeAddForm = document.getElementById("place-add-form");
         const placeTitle = document.getElementById("add-form-title");
         const placeAddress = document.getElementById("add-form-address");
 
         placeAddForm.style.display = "flex";
         placeTitle.textContent = place.name;
         placeAddress.textContent = place.formatted_address;
-
-        // Move focus to the 'Save' button [doesn't work]
-        // const saveBtn = document.getElementById("place-add-save-bt");
-        // saveBtn.focus();
-        
-        // const saveBtn = document.getElementById("place-add-save-bt");
-        // saveBtn.addEventListener("click", function () {
-        //     alert(`Thanks for submitting ${place.name}!`)
-        // })
-    })
+    });
 }
 
-// or DOM on load??..
-window.onload = initAutocomplete;
+// Call function on window load.
+window.addEventListener("load", initAutocomplete);
