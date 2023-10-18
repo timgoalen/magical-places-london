@@ -94,7 +94,6 @@ async function initMap() {
             borderColor: "#fff",
             glyphColor: "#fff",
         });
-        // ***CHANGE TO HEROKU URL WHEN DEPLOYED..add the full url?****
         const detailUrl = `/place/${id}/`;
         const htmlH2 = `<h2 class="map-view-place-title"><a href="${detailUrl}">${title}</a></h2>`;
         const htmlPhoto = `<a href="${detailUrl}"><img src="${photoUrl}" alt="${title} Photo" class="map-place-photo"></a>`;

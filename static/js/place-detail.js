@@ -1,6 +1,5 @@
 const backBtn = document.getElementById("back-btn");
-// *** CHANGE WHEN DEPLOYED
-const magicalPlacesUrl = "https://8000-timgoalen-magicalplaces-xikc2aho5al.ws-eu105.gitpod.io/";
+const magicalPlacesUrl = "https://magical-places-london-7d2df0d61638.herokuapp.com/";
 
 /**
  * Create back-button functionality for detail_view.html.
