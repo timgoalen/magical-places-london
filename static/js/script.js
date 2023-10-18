@@ -28,7 +28,6 @@ const places = jsonData.map(function (place) {
         lng: place.longitude
     };
     const id = place.id;
-    const address = place.address;
     const photoUrl = place.photo_url;
     const commentsCount = place.comments_count;
 
@@ -36,7 +35,6 @@ const places = jsonData.map(function (place) {
         title: title,
         position: position,
         id: id,
-        address: address,
         photoUrl: photoUrl,
         commentsCount: commentsCount,
     };
@@ -87,7 +85,6 @@ async function initMap() {
         position,
         title,
         id,
-        address,
         photoUrl,
         commentsCount,
     }, ) => {
@@ -128,7 +125,7 @@ async function initMap() {
             infoWindow.open(marker.map, marker);
         });
 
-        map.addListener('click', function () {
+        map.addListener("click", function () {
             if (infoWindow) infoWindow.close();
         });
     });
