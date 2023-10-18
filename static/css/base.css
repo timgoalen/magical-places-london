@@ -436,11 +436,13 @@ h1 {
     margin: 2%;
 }
 
-/* LOGIN/LOGOUT/SIGNUP PAGES */
+/* LOGIN/LOGOUT/SIGNUP/ERROR PAGES */
 
 .log-out-confirmation-page,
 .login-page,
-.signup-page {
+.signup-page,
+.error-404-page,
+.error-500-page {
     height: 90%;
     width: 96%;
     margin: 0 auto;
@@ -465,7 +467,9 @@ h1 {
 
 .login-form-container h2,
 .signup-form-container h2,
-.log-out-confirmation-page h2 {
+.log-out-confirmation-page h2,
+.error-404-page h2,
+.error-500-page h2 {
     font-size: 2rem;
     font-weight: 300;
 }
