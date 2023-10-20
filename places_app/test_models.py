@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Place, Comment
+from django.urls import reverse
+from .models import Place, Comment, Favourite
 
 
 class TestModels(TestCase):
@@ -27,6 +28,11 @@ class TestModels(TestCase):
             author=self.user,
         )
 
+        self.favourite = Favourite.objects.create(
+            place=self.place,
+            user=self.user
+        )
+
     def test_place_string_method_returns_name(self):
         self.assertEqual(self.place.__str__(), self.place.place_name)
 
@@ -34,10 +40,9 @@ class TestModels(TestCase):
         expected_string = f"Comment {self.comment.comment} by {self.comment.author}"
         self.assertEqual(self.comment.__str__(), expected_string)
 
-# DO THIS AGAIN WHEN A 'FAVOURITE' HAS BEEN SET UP IN THE TESTING DATA:
-    # def test_favourite_string_method_returns_correct_string(self):
-    #     expected_string = f"{self.user.username} favourited {self.place.place_name}"
-    #     self.assertEqual(self.favourite.__str__(), expected_string)
+    def test_favourite_string_method_returns_correct_string(self):
+        expected_string = f"{self.user.username} favourited {self.place.place_name}"
+        self.assertEqual(self.favourite.__str__(), expected_string)
 
     def test_get_place_absolute_url(self):
         expected_url = f"/place/{self.place.pk}/"

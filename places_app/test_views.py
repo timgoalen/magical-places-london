@@ -1,8 +1,8 @@
-# from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.urls import reverse, reverse_lazy
-from .models import Place, Comment
+from django.http import HttpResponseRedirect
+from .models import Place, Comment, Favourite
 
 
 class TestViews(TestCase):
@@ -14,17 +14,26 @@ class TestViews(TestCase):
         self.user.set_password("secret")
         self.user.save()
 
-        self.place = Place.objects.create(
-            place_name="Test Place",
+        self.place1 = Place.objects.create(
+            place_name="Test Place 1",
             latitude=51.50195171806682,
             longitude=-0.1417183386330674,
-            address="Test Address",
-            photo_url="www.test-photo.com",
+            address="Test Address 1",
+            photo_url="www.test-photo1.com",
+            contributer=self.user,
+        )
+
+        self.place2 = Place.objects.create(
+            place_name="Test Place 2",
+            latitude=51.50295171806682,
+            longitude=-0.1427183386330674,
+            address="Test Address 2",
+            photo_url="www.test-photo2.com",
             contributer=self.user,
         )
 
         self.comment = Comment.objects.create(
-            place=self.place,
+            place=self.place1,
             comment="Test comment",
             author=self.user,
         )
@@ -40,7 +49,7 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, "list_view.html", "base.html")
 
     def test_get_detail_page(self):
-        response = self.client.get(f"/place/{self.place.id}/")
+        response = self.client.get(f"/place/{self.place1.id}/")
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "place_detail.html", "base.html")
 
@@ -65,30 +74,54 @@ class TestViews(TestCase):
     def test_can_create_comment(self):
         self.client.login(username="test-user", password="secret")
         response = self.client.post(
-            reverse("place_detail", args=[self.place.pk]),
+            reverse("place_detail", args=[self.place1.pk]),
             data={
-                "place": self.place,
+                "place": self.place1,
                 "comment": "Test comment",
             },
         )
-        self.assertRedirects(response, reverse("place_detail", args=[self.place.pk]))
+        self.assertRedirects(response, reverse("place_detail", args=[self.place1.pk]))
 
     def test_can_delete_comment(self):
         self.client.login(username="test-user", password="secret")
-        response = self.client.get(f"/comment/{self.comment.pk}/delete/")
-        # FIX: THIS NOT WORKING:
-        # self.assertRedirects(response, reverse_lazy("comment_delete", args=[self.comment.pk]))
-        # self.assertRedirects(response, f"/place/{self.place.pk}")
+        comment_count_before = Comment.objects.count()
+        response = self.client.post(f"/comment/{self.comment.pk}/delete/")
+        comment_count_after = Comment.objects.count()
+        self.assertEqual(comment_count_after, comment_count_before - 1)
+        self.assertEqual(response.status_code, 302)
 
-    # def test_can_favourite_a_place(self):
+    def test_get_404_page(self):
+        response = self.client.get("/a-page-that-doesn't-exist/")
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response, "404.html")
 
-    # def test_can_unfavourite_a_place(self):
+    def test_can_favourite_a_place_logged_in(self):
+        self.client.login(username="test-user", password="secret")
+        response = self.client.post(reverse("favourite_a_place", args=[self.place1.pk]), data={"place_id": self.place1.id})
+        self.assertIsInstance(response, HttpResponseRedirect)
+        self.assertTrue(Favourite.objects.filter(place=self.place1, user=self.user).exists())
 
+    def test_can_unfavourite_a_place_logged_in(self):
+        self.client.login(username="test-user", password="secret")
+        Favourite.objects.create(place=self.place1, user=self.user)
+        response = self.client.post(reverse("favourite_a_place", args=[self.place1.pk]), data={"place_id": self.place1.id})
+        self.assertIsInstance(response, HttpResponseRedirect)
+        self.assertFalse(Favourite.objects.filter(place=self.place1, user=self.user).exists())
 
-# MAYBE DON'T NEED THESE?..
+    def test_attempting_favouriting_a_place_not_logged_in(self):
+        response = self.client.post(reverse("favourite_a_place", args=[self.place1.pk]), data={"place_id": self.place1.id})
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, "/accounts/login/?next=/favourites/1")
 
-# def test_get_login_page(self):
+    def test_user_favourites_list_logged_in(self):
+        self.client.login(username="test-user", password="secret")
+        Favourite.objects.create(place=self.place1, user=self.user)
+        response = self.client.get('/list_view/')
+        user_favourites = response.context['user_favourites']
+        self.assertIn(self.place1, user_favourites)
+        self.assertNotIn(self.place2, user_favourites)
 
-# def test_get_logout_page(self):
-
-# def test_get_signup_page(self):
+    def test_user_favourites_list_logged_out(self):
+        response = self.client.get('/list_view/')
+        user_favourites = response.context['user_favourites']
+        self.assertEqual(list(user_favourites), [])
