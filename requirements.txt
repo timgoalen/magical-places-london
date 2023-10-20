@@ -1,5 +1,5 @@
 asgiref==3.7.2
-backports.zoneinfo==0.2.1
+backports.zoneinfo==0.2.1;python_version<"3.8.11"
 black==23.9.1
 click==8.1.7
 cloudinary==1.34.0
