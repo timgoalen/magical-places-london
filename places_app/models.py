@@ -13,7 +13,7 @@ class Place(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
     address = models.TextField()
-    photo_url = models.TextField()
+    google_place_id = models.CharField(max_length=100)
     contributer = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="places", default=1
     )

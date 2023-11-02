@@ -3,7 +3,7 @@ const nameField = document.getElementById("name-field");
 const latitudeField = document.getElementById("latitude-field");
 const longitudeField = document.getElementById("longitude-field");
 const addressField = document.getElementById("address-field");
-const photoUrlField = document.getElementById("photoUrl-field");
+const googlePlaceIdField = document.getElementById("google-place-id-field");
 
 // Create Google Places autocomplete functionality for place searches. 
 function initAutocomplete() {
@@ -20,7 +20,7 @@ function initAutocomplete() {
         componentRestrictions: {
             country: ["uk"]
         },
-        fields: ["formatted_address", "geometry", "name", "photos"],
+        fields: ["formatted_address", "geometry", "name", "photos", "place_id"],
         strictBounds: true,
     };
 
@@ -37,14 +37,12 @@ function initAutocomplete() {
         latitudeField.value = latitude;
         longitudeField.value = longitude;
         addressField.value = place.formatted_address;
+        googlePlaceIdField.value = place.place_id;
 
         // Get a single photo URL from Google Places.
         if (place.photos && place.photos.length > 0) {
-            // Access the first photo in the array.
-            const firstPhoto = place.photos[0];
-
-            // Get the URL of the photo.
-            const photoUrl = firstPhoto.getUrl({
+            // Get the URL of the first photo in the array.
+            const photoUrl = place.photos[0].getUrl({
                 maxHeight: 800
             });
 
@@ -56,7 +54,7 @@ function initAutocomplete() {
             imgElement.alt = place.name + " Photo";
 
             // Automatically fill out the photo field of the hidden form.
-            photoUrlField.value = photoUrl;
+            // photoUrlField.value = photoUrl;
 
             // TODO: set a backup image if there aren't any from google.
         }

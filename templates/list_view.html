@@ -2,10 +2,17 @@
 {% load static %}
 
 {% block head %}
+<!-- Google Maps API script -->
+<!-- used to have 'defer' here.. -->
+<script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=places&callback=Function.prototype">
+</script>
 <script src="{% static 'js/list-view.js' %}" defer></script>
 {% endblock head %}
 
 {% block content %}
+
+<!-- Import the JSON list of dictionaries from the View -->
+{{ places_list_of_dicts|json_script:"places-json-data" }}
 
 <!-- LIST 'SORT' OPTIONS -->
 
@@ -37,8 +44,8 @@
         <div class="place-container">
             <a href="{% url 'place_detail' favourite_place.pk %}">
                 <div class="img-container">
-                    <img src="{{ favourite_place.photo_url }}" alt="Photo of {{ favourite_place.place_name }}"
-                        class="place-photo">
+                    <img src="{% static 'images/placeholder-image.jpg' %}" alt="Photo of {{ favourite_place.place_name }}"
+                        class="place-photo" id="img-for-place-{{ favourite_place.pk }}">
                 </div>
                 <h2 class="place-title">{{ favourite_place.place_name }}</h2>
                 {% if favourite_place.comments.count == 1 %}
@@ -82,10 +89,13 @@
     {% else %}
     <article class="detail-view-container">
         {% for place in places %}
-        <div class="place-container" id="{{ place.pk }}">
+        <!-- <div class="place-container" id="{{ place.pk }}"> -->
+        <div class="place-container">
             <a href="{% url 'place_detail' place.pk %}">
                 <div class="img-container">
-                    <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}" class="place-photo">
+                    <!-- <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}" class="place-photo" style="width: 100%; height: 100%;"> -->
+                    <img src="{% static 'images/placeholder-image.jpg' %}"
+                        alt="Photo of {{ place.place_name }}" class="place-photo" id="img-for-place-{{ place.pk }}">
                 </div>
                 <h2 class="place-title">{{ place.place_name }}</h2>
                 {% if place.comments.count == 1 %}
@@ -123,6 +133,9 @@
     </article>
     <br>
     {% endif %}
+
+    <!-- USED FOR API _ DO I NEED??**** -->
+    <div id="map"></div>
 </main>
 
 <!-- FOOTER -->
@@ -147,6 +160,7 @@
 </footer>
 
 <script>
+    const PLACES = "{{ places }}";
     const USER_SORT_SELECTION = "{{ sort_selection }}";
 </script>
 

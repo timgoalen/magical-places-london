@@ -15,6 +15,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Google Maps API script -->
+    <!-- ***CHANGE API KEY TO VARIABLE LIKE OTHER PLAES -->
+    <!-- used to have 'defer' here.. -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=places&callback=Function.prototype">
+    </script>
+    <script>
+        const GOOGLE_PLACE_ID = "{{ place.google_place_id }}";
+    </script>
+
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/1898f2e833.js" crossorigin="anonymous"></script>
     <title>Magical Places - London</title>
@@ -28,7 +39,7 @@
                 <!-- IMAGE -->
 
                 <div class="detail-image-container">
-                    <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}" class="place-detail-photo">
+                    <img src="#" alt="Photo of {{ place.place_name }}" class="place-detail-photo" id="place-detail-photo">
                 </div>
 
                 <!-- 'BACK' BUTTON -->
@@ -126,12 +137,19 @@
             {% endif %}
             <br>
         </div>
+
+        <!-- USED FOR API _ DO I NEED??**** -->
+        <div id="map"></div>
     </main>
+
 
     <!-- Script for back button -->
     <script src="{% static 'js/place-detail.js' %}"></script>
+    <!-- Script to get Google Photo -->
+    <script src="{% static 'js/get-google-place-photo.js' %}"></script>
     <!-- Modal script for Django Messages -->
     <script src="{% static 'js/messages.js' %}"></script>
+
 </body>
 
 </html>

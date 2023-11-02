@@ -23,23 +23,27 @@ class AddPlaceForm(forms.ModelForm):
         widget=forms.HiddenInput(attrs={"id": "address-field"}),
         label="Address",
     )
-    photo_url = forms.URLField(
-        widget=forms.HiddenInput(attrs={"id": "photoUrl-field"}),
-        label="Photo URL",
+    google_place_id = forms.CharField(
+        widget=forms.HiddenInput(attrs={"id": "google-place-id-field"}),
+        label="Google Place ID",
     )
 
     class Meta:
         model = Place
         fields = [
-            "place_name", "latitude", "longitude", "address", "photo_url"]
+            "place_name", "latitude", "longitude", "address", "google_place_id"
+            ]
 
 
 class CommentForm(forms.ModelForm):
     """
     FORM: Add Comment.
     """
+
     class Meta:
         model = Comment
-        fields = ["comment",]
+        fields = [
+            "comment",
+        ]
 
     comment = forms.CharField(widget=forms.Textarea, label="Add a Comment")

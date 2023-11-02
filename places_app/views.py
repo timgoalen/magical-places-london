@@ -39,7 +39,7 @@ def home_page_view(request):
                 "latitude",
                 "longitude",
                 "address",
-                "photo_url",
+                "google_place_id",
                 "comments_count",
             )
         ),
@@ -79,6 +79,15 @@ def place_list_view(request):
         "sort_selection": sort_by,
         "user_favourites": user_favourites,
         "favourites": favourites,
+        "api_key": settings.GOOGLE_MAPS_API_KEY,
+        # Send a list of dictionaris with the Google Place IDs,
+        # for getting photos from Google.
+        "places_list_of_dicts": list(
+            places.values(
+                "id",
+                "google_place_id",
+            )
+        ),
     }
 
     return render(request, "list_view.html", context)
@@ -123,6 +132,7 @@ def place_detail_view(request, pk):
         "form": CommentForm(),
         "user_favourites": user_favourites,
         "user_has_favourited": user_has_favourited,
+        "api_key": settings.GOOGLE_MAPS_API_KEY,
     }
 
     return render(request, "place_detail.html", context)

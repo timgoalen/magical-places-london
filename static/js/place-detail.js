@@ -1,6 +1,8 @@
 const backBtn = document.getElementById("back-btn");
 const magicalPlacesUrl = "https://magical-places-london-7d2df0d61638.herokuapp.com/";
 
+const placeDetailPhoto = document.getElementById("place-detail-photo");
+
 /**
  * Create back-button functionality for detail_view.html.
  * - if a user's previous window.history is an external site, send them back to the home page.
@@ -32,3 +34,38 @@ function goBack() {
 }
 
 backBtn.addEventListener("click", goBack);
+
+// ADD COMMENT:
+
+function getNewPhotoLink() {
+    var map;
+    let googlePhotoUrl;
+
+    map = new google.maps.Map(
+        document.getElementById('map'), {});
+
+    var request = {
+        placeId: GOOGLE_PLACE_ID,
+        fields: ['photos',]
+    };
+
+    function callback(place, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            googlePhotoUrl = place.photos[0].getUrl({
+                maxHeight: 800
+            });
+            placeDetailPhoto.src = googlePhotoUrl;
+
+        }
+    }
+
+    var service = new google.maps.places.PlacesService(map);
+    service.getDetails(request, callback);
+
+    return newPhotoUrl;
+}
+
+window.addEventListener('load', function() {
+    // Your function to be executed on page load
+    getNewPhotoLink();
+  });

@@ -1,6 +1,6 @@
 /* jshint esversion: 8 */
 
-// Initialize and add the map.
+// Initialize the map.
 let map;
 
 // Set london bounds to restrict map size.
@@ -18,9 +18,12 @@ const LONDON = {
 };
 
 // Get JSON data from the json_script tag in the home.html template.
-let jsonData = JSON.parse(document.getElementById("places-json-data").textContent);
+const jsonData = JSON.parse(document.getElementById("places-json-data").textContent);
 
-// Create an new array of objects from the JSON data: our main "locations" data.
+// Iniltialise an array to hold URLs from Google Places library.
+const photoUrlsArray = [];
+
+// Create an new array of objects from the JSON data: the main "locations" data.
 const places = jsonData.map(function (place) {
     const title = place.place_name;
     const position = {
@@ -28,14 +31,14 @@ const places = jsonData.map(function (place) {
         lng: place.longitude
     };
     const id = place.id;
-    const photoUrl = place.photo_url;
+    const googlePlaceId = place.google_place_id;
     const commentsCount = place.comments_count;
 
     return {
         title: title,
         position: position,
         id: id,
-        photoUrl: photoUrl,
+        googlePlaceId: googlePlaceId,
         commentsCount: commentsCount,
     };
 });
@@ -48,6 +51,9 @@ async function initMap() {
         Map,
         InfoWindow
     } = await google.maps.importLibrary("maps");
+    const {
+        Places
+    } = await google.maps.importLibrary("places");
     const {
         AdvancedMarkerElement,
         PinElement
@@ -80,54 +86,112 @@ async function initMap() {
         maxWidth: 180
     });
 
-    // Create markers from 'places' array.
-    places.forEach(({
-        position,
-        title,
+    // WIP: GETTING PHOTOS...
+    const getPhotoPromises = places.map(({
         id,
-        photoUrl,
-        commentsCount,
-    }, ) => {
-        const customPin = new PinElement({
-            background: "#BF553B",
-            scale: 0.9,
-            borderColor: "#fff",
-            glyphColor: "#fff",
-        });
-        const detailUrl = `/place/${id}/`;
-        const htmlH2 = `<h2 class="map-view-place-title"><a href="${detailUrl}">${title}</a></h2>`;
-        const htmlPhoto = `<a href="${detailUrl}"><img src="${photoUrl}" alt="${title} Photo" class="map-place-photo"></a>`;
-        let commentsMessage = "Comments";
-        if (commentsCount == 1) {
-            commentsMessage = "Comment";
-        }
-        const htmlCommentsCount = `<a href="${detailUrl}" class="comments-count-text">${commentsCount} ${commentsMessage}</a>`;
-        const titleHtml = htmlPhoto + htmlH2 + htmlCommentsCount;
-        const marker = new AdvancedMarkerElement({
-            position,
-            map,
-            title: titleHtml,
-            content: customPin.element,
-        });
+        googlePlaceId
+    }) => {
+        return new Promise((resolve, reject) => {
+            const request = {
+                placeId: googlePlaceId,
+                fields: ['photos']
+            };
 
-        // Add a click listener for each marker, and set up the info window.
-        marker.addListener("click", ({
-            domEvent,
-            latLng
-        }) => {
-            const {
-                target
-            } = domEvent;
+            function callback(place, status) {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    const googlePhotoUrl = place.photos[0].getUrl({
+                        maxHeight: 180
+                    });
+                    photoUrlsArray.push({
+                        url: googlePhotoUrl,
+                        id: id
+                    });
+                    resolve();
+                } else {
+                    reject(new Error(`Error fetching photo for place with id ${id}`));
+                }
+            }
 
-            infoWindow.close();
-            infoWindow.setContent(marker.title);
-            infoWindow.open(marker.map, marker);
-        });
-
-        map.addListener("click", function () {
-            if (infoWindow) infoWindow.close();
+            const service = new google.maps.places.PlacesService(map);
+            service.getDetails(request, callback);
         });
     });
+
+    // Wait for all photo fetching promises to resolve.
+    Promise.all(getPhotoPromises)
+        .then(() => {
+            // All photos have been fetched, and photoUrlsArray is populated.
+            console.log({
+                photoUrlsArray
+            });
+
+            // Now photoUrlsArray is available to get photo URLs for markers.
+            // Create markers from the 'places' array.
+            places.forEach(({
+                position,
+                title,
+                id,
+                googlePlaceId,
+                commentsCount,
+            }, ) => {
+                // Set pin.
+                const customPin = new PinElement({
+                    background: "#BF553B",
+                    scale: 0.9,
+                    borderColor: "#fff",
+                    glyphColor: "#fff",
+                });
+                // Set content.
+                const detailUrl = `/place/${id}/`;
+                const htmlH2 = `<h2 class="map-view-place-title"><a href="${detailUrl}">${title}</a></h2>`;
+
+                // WIP: get url from 'photoUrlsArray'.
+                const targetId = id;
+                const targetObject = photoUrlsArray.find(obj => obj.id === targetId);
+                const photoUrlForMarker = targetObject.url;
+                console.log({
+                    photoUrlForMarker
+                });
+
+                const htmlPhoto = `<a href="${detailUrl}"><img src="${photoUrlForMarker}" alt="${title} Photo" class="map-place-photo"></a>`;
+
+                let commentsMessage = "Comments";
+                if (commentsCount == 1) {
+                    commentsMessage = "Comment";
+                }
+                const htmlCommentsCount = `<a href="${detailUrl}" class="comments-count-text">${commentsCount} ${commentsMessage}</a>`;
+
+                const titleHtml = htmlPhoto + htmlH2 + htmlCommentsCount;
+
+                const marker = new AdvancedMarkerElement({
+                    position,
+                    map,
+                    title: titleHtml,
+                    content: customPin.element,
+                });
+
+                // Add a click listener for each marker, and set up the info window.
+                marker.addListener("click", ({
+                    domEvent,
+                    latLng
+                }) => {
+                    const {
+                        target
+                    } = domEvent;
+
+                    infoWindow.close();
+                    infoWindow.setContent(marker.title);
+                    infoWindow.open(marker.map, marker);
+                });
+
+                map.addListener("click", function () {
+                    if (infoWindow) infoWindow.close();
+                });
+            });
+        })
+        .catch(error => {
+            console.error(error);
+        });
 }
 
 // Call function on window load.
