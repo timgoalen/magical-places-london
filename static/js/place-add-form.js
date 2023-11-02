@@ -43,7 +43,7 @@ function initAutocomplete() {
         if (place.photos && place.photos.length > 0) {
             // Get the URL of the first photo in the array.
             const photoUrl = place.photos[0].getUrl({
-                maxHeight: 800
+                maxHeight: 750, maxWidth: 750,
             });
 
             // Set the src attribute of the img element in the place card.

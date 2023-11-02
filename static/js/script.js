@@ -100,7 +100,7 @@ async function initMap() {
             function callback(place, status) {
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
                     const googlePhotoUrl = place.photos[0].getUrl({
-                        maxHeight: 180
+                        maxHeight: 150, maxWidth: 150,
                     });
                     photoUrlsArray.push({
                         url: googlePhotoUrl,

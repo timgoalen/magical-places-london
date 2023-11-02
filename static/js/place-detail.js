@@ -52,7 +52,7 @@ function getNewPhotoLink() {
     function callback(place, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
             googlePhotoUrl = place.photos[0].getUrl({
-                maxHeight: 800
+                maxHeight: 650, maxWidth: 650,
             });
             placeDetailPhoto.src = googlePhotoUrl;
 
