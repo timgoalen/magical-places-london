@@ -93,7 +93,6 @@
         <div class="place-container">
             <a href="{% url 'place_detail' place.pk %}">
                 <div class="img-container">
-                    <!-- <img src="{{ place.photo_url }}" alt="Photo of {{ place.place_name }}" class="place-photo" style="width: 100%; height: 100%;"> -->
                     <img src="{% static 'images/placeholder-image.jpg' %}"
                         alt="Photo of {{ place.place_name }}" class="place-photo" id="img-for-place-{{ place.pk }}">
                 </div>
@@ -133,6 +132,11 @@
     </article>
     <br>
     {% endif %}
+
+    <!-- Loading spinner -->
+    <div id="spinner-container">
+        <!-- <div id="spinner"></div> -->
+    </div>
 
     <!-- USED FOR API _ DO I NEED??**** -->
     <div id="map"></div>

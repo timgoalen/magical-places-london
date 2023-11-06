@@ -7,7 +7,7 @@ const placeDetailPhoto = document.getElementById("place-detail-photo");
  * Create back-button functionality for detail_view.html.
  * - if a user's previous window.history is an external site, send them back to the home page.
  * - if a user's referrer page is a 'comment' CRUD page, send them back to 'list_view.html'.
- * - els send them back to the previous visited page.
+ * - else send them back to the previous visited page.
  */
 function goBack() {
     if (window.history.length > 1) {
@@ -37,6 +37,7 @@ backBtn.addEventListener("click", goBack);
 
 // ADD COMMENT:
 
+
 function getNewPhotoLink() {
     var map;
     let googlePhotoUrl;
@@ -61,11 +62,10 @@ function getNewPhotoLink() {
 
     var service = new google.maps.places.PlacesService(map);
     service.getDetails(request, callback);
-
-    return newPhotoUrl;
 }
 
 window.addEventListener('load', function() {
     // Your function to be executed on page load
     getNewPhotoLink();
+    placeDetailPhoto.classList.add("show-photo");
   });

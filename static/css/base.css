@@ -208,6 +208,57 @@ h1 {
     border: none;
 }
 
+#spinner-container {
+    position: absolute;
+    background-color: white;
+    top: 18dvh;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    pointer-events: none;
+    /* opacity: 1; */
+}
+
+#spinner {
+    margin-top: 6rem;
+    height: 75px;
+    width: 75px;
+    border-top: 4px dashed var(--blue);
+    border-left: 4px dashed var(--green);
+    border-right: 4px dashed var(--red);
+    border-bottom: 4px dashed var(--yellow);
+    border-radius: 50%;
+    animation: spin 0.75s ease-in-out infinite;
+    -webkit-animation: spin 0.75s ease-in-out infinite;
+}
+
+.hide-spinner {
+    transition: opacity 0.4s;
+    opacity: 0;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 /* PLACE DETAIL PAGE */
 
 .detail-image-container {
@@ -218,6 +269,12 @@ h1 {
     width: 100vw;
     height: 100vw;
     object-fit: cover;
+    opacity: 0;
+}
+
+.show-photo {
+    transition: opacity 0.8s;
+    opacity: 1;
 }
 
 .detail-view-btn {

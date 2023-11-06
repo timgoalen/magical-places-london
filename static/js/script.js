@@ -100,7 +100,7 @@ async function initMap() {
             function callback(place, status) {
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
                     const googlePhotoUrl = place.photos[0].getUrl({
-                        maxHeight: 150, maxWidth: 150,
+                        maxHeight: 200, maxWidth: 200,
                     });
                     photoUrlsArray.push({
                         url: googlePhotoUrl,
@@ -121,9 +121,6 @@ async function initMap() {
     Promise.all(getPhotoPromises)
         .then(() => {
             // All photos have been fetched, and photoUrlsArray is populated.
-            console.log({
-                photoUrlsArray
-            });
 
             // Now photoUrlsArray is available to get photo URLs for markers.
             // Create markers from the 'places' array.
@@ -149,9 +146,6 @@ async function initMap() {
                 const targetId = id;
                 const targetObject = photoUrlsArray.find(obj => obj.id === targetId);
                 const photoUrlForMarker = targetObject.url;
-                console.log({
-                    photoUrlForMarker
-                });
 
                 const htmlPhoto = `<a href="${detailUrl}"><img src="${photoUrlForMarker}" alt="${title} Photo" class="map-place-photo"></a>`;
 
