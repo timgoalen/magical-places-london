@@ -44,7 +44,7 @@
 
                 <!-- 'BACK' BUTTON -->
 
-                <a href="#" class="detail-view-btn detail-view-btn--back" id="back-btn" aria-label="Back button">
+                <a href="{% url 'home' %}" class="detail-view-btn detail-view-btn--back" id="back-btn" aria-label="Back button">
                     <i class="fa-solid fa-chevron-left"></i>
                 </a>
 
@@ -137,11 +137,7 @@
             {% endif %}
             <br>
         </div>
-
-        <!-- USED FOR API _ DO I NEED??**** -->
-        <div id="map"></div>
     </main>
-
 
     <!-- Script for back button -->
     <script src="{% static 'js/place-detail.js' %}"></script>

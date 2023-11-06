@@ -56,7 +56,7 @@ function getNewPhotoLink(id) {
     return new Promise((resolve, reject) => {
         var map;
 
-        map = new google.maps.Map(document.getElementById("map"), {});
+        map = new google.maps.Map(document.createElement("div"));
 
         var request = {
             placeId: id,
