@@ -396,7 +396,7 @@ h1 {
     border: none;
     margin-right: 2%;
     color: white;
-    width: 4.5rem;
+    min-width: 4.5rem;
 }
 
 .submit-btn {
@@ -405,9 +405,7 @@ h1 {
 
 .cancel-btn {
     background-color: var(--red);
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
+    text-align: center;
 }
 
 .log-in-request {
