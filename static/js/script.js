@@ -94,19 +94,30 @@ async function initMap() {
         return new Promise((resolve, reject) => {
             const request = {
                 placeId: googlePlaceId,
-                fields: ['photos']
+                fields: ["photos"]
             };
 
             function callback(place, status) {
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
-                    const googlePhotoUrl = place.photos[0].getUrl({
-                        maxHeight: 200, maxWidth: 200,
-                    });
-                    photoUrlsArray.push({
-                        url: googlePhotoUrl,
-                        id: id
-                    });
-                    resolve();
+                    if (place.photos) {
+                        const googlePhotoUrl = place.photos[0].getUrl({
+                            maxHeight: 200,
+                            maxWidth: 200,
+                        });
+                        photoUrlsArray.push({
+                            url: googlePhotoUrl,
+                            id: id
+                        });
+                        resolve();
+                    } else {
+                        const googlePhotoUrl = "no photo found";
+                        photoUrlsArray.push({
+                            url: googlePhotoUrl,
+                            id: id
+                        });
+                        resolve();
+                    }
+                    
                 } else {
                     reject(new Error(`Error fetching photo for place with id ${id}`));
                 }
@@ -155,7 +166,12 @@ async function initMap() {
                 }
                 const htmlCommentsCount = `<a href="${detailUrl}" class="comments-count-text">${commentsCount} ${commentsMessage}</a>`;
 
-                const titleHtml = htmlPhoto + htmlH2 + htmlCommentsCount;
+                let titleHtml = "";
+                if (photoUrlForMarker == "no photo found") {
+                    titleHtml = htmlH2 + htmlCommentsCount;
+                } else {
+                    titleHtml = htmlPhoto + htmlH2 + htmlCommentsCount;
+                }
 
                 const marker = new AdvancedMarkerElement({
                     position,

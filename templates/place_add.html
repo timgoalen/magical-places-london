@@ -23,7 +23,7 @@
     <div id="place-add-form">
         <!-- Photo -->
         <div class="add-form-img-container">
-            <img src="#" alt="" id="photo">
+            <img src="{% static 'images/no-google-photo-placeholder.png' %}" alt="Placeholder image" id="photo">
         </div>
         <!-- Form (hidden) -->
         <form method="post">{% csrf_token %}

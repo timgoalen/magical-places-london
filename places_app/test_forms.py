@@ -13,7 +13,7 @@ class TestAddPlaceForm(TestCase):
     def test_fields_are_explicit_in_place_form_meta_class(self):
         form = AddPlaceForm
         self.assertEqual(form.Meta.fields, [
-            "place_name", "latitude", "longitude", "address", "photo_url"])
+            "place_name", "latitude", "longitude", "address", "google_place_id"])
 
 
 class TestCommentForm(TestCase):

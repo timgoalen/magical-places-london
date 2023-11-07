@@ -65,11 +65,17 @@ function getNewPhotoLink(id) {
 
         function callback(place, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
-                const googlePhotoUrl = place.photos[0].getUrl({
-                    maxHeight: 550,
-                    maxWidth: 550,
-                });
-                resolve(googlePhotoUrl);
+                if (place.photos) {
+                    const googlePhotoUrl = place.photos[0].getUrl({
+                        maxHeight: 550,
+                        maxWidth: 550,
+                    });
+                    resolve(googlePhotoUrl);
+                } else {
+                    // Handle when no Google photo exists
+                    const googlePhotoUrl = "no photo found";
+                    resolve(googlePhotoUrl);
+                }
             } else {
                 reject(new Error("Error fetching place details"));
             }
@@ -88,7 +94,11 @@ window.addEventListener("load", async function () {
             const placePhoto = await getNewPhotoLink(googlePlaceId);
             const imageElement = document.getElementById(`img-for-place-${place.id}`);
             if (imageElement) {
-                imageElement.src = placePhoto;
+                if (placePhoto == "no photo found") {
+                    console.log("No Google photo exists for this place.");
+                } else {
+                    imageElement.src = placePhoto;
+                }
             } else {
                 console.log("This place isn't in the user's favourites")
             }

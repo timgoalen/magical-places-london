@@ -39,7 +39,7 @@
                 <!-- IMAGE -->
 
                 <div class="detail-image-container">
-                    <img src="{% static 'images/placeholder-image.jpg' %}" alt="Photo of {{ place.place_name }}" class="place-detail-photo" id="place-detail-photo">
+                    <img src="{% static 'images/no-google-photo-placeholder.png' %}" alt="Photo of {{ place.place_name }}" class="place-detail-photo" id="place-detail-photo">
                 </div>
 
                 <!-- 'BACK' BUTTON -->
@@ -141,8 +141,6 @@
 
     <!-- Script for back button -->
     <script src="{% static 'js/place-detail.js' %}"></script>
-    <!-- Script to get Google Photo -->
-    <script src="{% static 'js/get-google-place-photo.js' %}"></script>
     <!-- Modal script for Django Messages -->
     <script src="{% static 'js/messages.js' %}"></script>
 

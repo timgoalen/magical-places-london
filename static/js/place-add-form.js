@@ -52,11 +52,6 @@ function initAutocomplete() {
 
             // Set the alt title.
             imgElement.alt = place.name + " Photo";
-
-            // Automatically fill out the photo field of the hidden form.
-            // photoUrlField.value = photoUrl;
-
-            // TODO: set a backup image if there aren't any from google.
         }
 
         // Show the place card once the user has clicked on a place.

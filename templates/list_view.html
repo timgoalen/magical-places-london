@@ -33,7 +33,7 @@
 
 <!-- PLACE DETAIL CARDS -->
 
-<main>
+<main class="list-view-main">
     {% if sort_selection == "my-favourites" %}
 
     {% if user.is_authenticated %}
@@ -44,7 +44,7 @@
         <div class="place-container">
             <a href="{% url 'place_detail' favourite_place.pk %}">
                 <div class="img-container">
-                    <img src="{% static 'images/placeholder-image.jpg' %}" alt="Photo of {{ favourite_place.place_name }}"
+                    <img src="{% static 'images/no-google-photo-placeholder.png' %}" alt="Photo of {{ favourite_place.place_name }}"
                         class="place-photo" id="img-for-place-{{ favourite_place.pk }}">
                 </div>
                 <h2 class="place-title">{{ favourite_place.place_name }}</h2>
@@ -93,7 +93,7 @@
         <div class="place-container">
             <a href="{% url 'place_detail' place.pk %}">
                 <div class="img-container">
-                    <img src="{% static 'images/placeholder-image.jpg' %}"
+                    <img src="{% static 'images/no-google-photo-placeholder.png' %}"
                         alt="Photo of {{ place.place_name }}" class="place-photo" id="img-for-place-{{ place.pk }}">
                 </div>
                 <h2 class="place-title">{{ place.place_name }}</h2>

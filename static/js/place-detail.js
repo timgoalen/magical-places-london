@@ -13,11 +13,18 @@ function getNewPhotoLink() {
 
     function callback(place, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
-            googlePhotoUrl = place.photos[0].getUrl({
-                maxHeight: 650,
-                maxWidth: 650,
-            });
-            placeDetailPhoto.src = googlePhotoUrl;
+            if (place.photos) {
+                googlePhotoUrl = place.photos[0].getUrl({
+                    maxHeight: 650,
+                    maxWidth: 650,
+                });
+                placeDetailPhoto.src = googlePhotoUrl;
+                // Take away the overlay that hides the photo changing
+                placeDetailPhoto.classList.add("show-photo");
+            } else {
+                console.log("No Google photo exists for this place.");
+                placeDetailPhoto.classList.add("show-photo");
+            }
         }
     }
 
@@ -27,5 +34,4 @@ function getNewPhotoLink() {
 
 window.addEventListener("load", () => {
     getNewPhotoLink();
-    placeDetailPhoto.classList.add("show-photo");
 });

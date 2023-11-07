@@ -19,7 +19,7 @@ class TestViews(TestCase):
             latitude=51.50195171806682,
             longitude=-0.1417183386330674,
             address="Test Address 1",
-            photo_url="www.test-photo1.com",
+            google_place_id="1",
             contributer=self.user,
         )
 
@@ -28,7 +28,7 @@ class TestViews(TestCase):
             latitude=51.50295171806682,
             longitude=-0.1427183386330674,
             address="Test Address 2",
-            photo_url="www.test-photo2.com",
+            google_place_id="2",
             contributer=self.user,
         )
 

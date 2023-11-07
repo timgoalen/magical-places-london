@@ -18,7 +18,7 @@ class TestModels(TestCase):
             latitude=51.50195171806682,
             longitude=-0.1417183386330674,
             address="Test Address",
-            photo_url="www.test-photo.com",
+            google_place_id="1",
             contributer=self.user,
         )
 
