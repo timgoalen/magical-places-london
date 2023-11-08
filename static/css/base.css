@@ -222,45 +222,11 @@ h1 {
     display: grid;
     justify-content: center;
     pointer-events: none;
-    /* opacity: 1; */
-}
-
-#spinner {
-    margin-top: 6rem;
-    height: 75px;
-    width: 75px;
-    border-top: 4px dashed var(--blue);
-    border-left: 4px dashed var(--green);
-    border-right: 4px dashed var(--red);
-    border-bottom: 4px dashed var(--yellow);
-    border-radius: 50%;
-    animation: spin 0.75s ease-in-out infinite;
-    -webkit-animation: spin 0.75s ease-in-out infinite;
 }
 
 .hide-spinner {
     transition: opacity 0.4s;
     opacity: 0;
-}
-
-@-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
-
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
 }
 
 /* PLACE DETAIL PAGE */
@@ -501,7 +467,7 @@ textarea {
     margin: 2%;
 }
 
-/* To hide the form error list (validation is done in the View) */
+/* Hides the form error list (validation is done in the View): */
 #place-add-form ul {
     display: none;
 }
@@ -791,7 +757,6 @@ footer {
         display: flex;
         flex-direction: column;
         background: radial-gradient(circle, rgb(186 228 220) 0%, rgba(123, 183, 174, 1) 100%);
-        /* position: relative; */
     }
 
     .place-detail-photo {
@@ -815,10 +780,6 @@ footer {
         padding: 0 0 2% 0;
         text-align: center;
     }
-
-    /* .detail-view-place-title {
-        margin: 1% 0;
-    } */
 
     .comments-text {
         padding: 2% 0;

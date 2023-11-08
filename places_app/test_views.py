@@ -61,13 +61,15 @@ class TestViews(TestCase):
 
     def test_get_comment_update_page(self):
         self.client.login(username="test-user", password="secret")
-        response = self.client.get(reverse("comment_edit", args=[self.comment.pk]))
+        response = self.client.get(reverse("comment_edit",
+                                           args=[self.comment.pk]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "comment_edit.html", "base.html")
 
     def test_get_comment_delete_page(self):
         self.client.login(username="test-user", password="secret")
-        response = self.client.get(reverse("comment_delete", args=[self.comment.pk]))
+        response = self.client.get(reverse("comment_delete",
+                                           args=[self.comment.pk]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "comment_delete.html", "base.html")
 
@@ -80,7 +82,8 @@ class TestViews(TestCase):
                 "comment": "Test comment",
             },
         )
-        self.assertRedirects(response, reverse("place_detail", args=[self.place1.pk]))
+        self.assertRedirects(response, reverse("place_detail",
+                                               args=[self.place1.pk]))
 
     def test_can_delete_comment(self):
         self.client.login(username="test-user", password="secret")
@@ -97,19 +100,30 @@ class TestViews(TestCase):
 
     def test_can_favourite_a_place_logged_in(self):
         self.client.login(username="test-user", password="secret")
-        response = self.client.post(reverse("favourite_a_place", args=[self.place1.pk]), data={"place_id": self.place1.id})
+        response = self.client.post(reverse(
+                                           "favourite_a_place",
+                                           args=[self.place1.pk]
+                                            ), data={
+                                                    "place_id": self.place1.id}
+                                    )
         self.assertIsInstance(response, HttpResponseRedirect)
-        self.assertTrue(Favourite.objects.filter(place=self.place1, user=self.user).exists())
+        self.assertTrue(Favourite.objects.filter(place=self.place1,
+                                                 user=self.user).exists())
 
     def test_can_unfavourite_a_place_logged_in(self):
         self.client.login(username="test-user", password="secret")
         Favourite.objects.create(place=self.place1, user=self.user)
-        response = self.client.post(reverse("favourite_a_place", args=[self.place1.pk]), data={"place_id": self.place1.id})
+        response = self.client.post(reverse("favourite_a_place",
+                                            args=[self.place1.pk]),
+                                    data={"place_id": self.place1.id})
         self.assertIsInstance(response, HttpResponseRedirect)
-        self.assertFalse(Favourite.objects.filter(place=self.place1, user=self.user).exists())
+        self.assertFalse(Favourite.objects.filter(place=self.place1,
+                                                  user=self.user).exists())
 
     def test_attempting_favouriting_a_place_not_logged_in(self):
-        response = self.client.post(reverse("favourite_a_place", args=[self.place1.pk]), data={"place_id": self.place1.id})
+        response = self.client.post(reverse("favourite_a_place",
+                                    args=[self.place1.pk]),
+                                    data={"place_id": self.place1.id})
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, "/accounts/login/?next=/favourites/1")
 

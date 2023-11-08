@@ -37,11 +37,13 @@ class TestModels(TestCase):
         self.assertEqual(self.place.__str__(), self.place.place_name)
 
     def test_comment_string_method_returns_correct_string(self):
-        expected_string = f"Comment {self.comment.comment} by {self.comment.author}"
+        string = f"Comment {self.comment.comment} by {self.comment.author}"
+        expected_string = string
         self.assertEqual(self.comment.__str__(), expected_string)
 
     def test_favourite_string_method_returns_correct_string(self):
-        expected_string = f"{self.user.username} favourited {self.place.place_name}"
+        string = f"{self.user.username} favourited {self.place.place_name}"
+        expected_string = string
         self.assertEqual(self.favourite.__str__(), expected_string)
 
     def test_get_place_absolute_url(self):

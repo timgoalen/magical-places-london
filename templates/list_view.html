@@ -3,7 +3,6 @@
 
 {% block head %}
 <!-- Google Maps API script -->
-<!-- used to have 'defer' here.. -->
 <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=places&callback=Function.prototype">
 </script>
 <script src="{% static 'js/list-view.js' %}" defer></script>
@@ -89,7 +88,6 @@
     {% else %}
     <article class="detail-view-container">
         {% for place in places %}
-        <!-- <div class="place-container" id="{{ place.pk }}"> -->
         <div class="place-container">
             <a href="{% url 'place_detail' place.pk %}">
                 <div class="img-container">
@@ -133,9 +131,8 @@
     <br>
     {% endif %}
 
-    <!-- Loading spinner -->
+    <!-- Loading spinner (used to hide image fetching) -->
     <div id="spinner-container">
-        <!-- <div id="spinner"></div> -->
     </div>
 </main>
 
