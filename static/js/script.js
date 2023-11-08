@@ -20,30 +20,29 @@ const LONDON = {
 // Get JSON data from the json_script tag in the home.html template.
 const jsonData = JSON.parse(document.getElementById("places-json-data").textContent);
 
-// Iniltialise an array to hold URLs from Google Places library.
+// Create an new array of objects from the JSON data: the main 'locations' data.
+const places = jsonData.map(({
+    place_name,
+    latitude,
+    longitude,
+    id,
+    google_place_id,
+    comments_count
+}) => ({
+    title: place_name,
+    position: {
+        lat: latitude,
+        lng: longitude
+    },
+    id,
+    googlePlaceId: google_place_id,
+    commentsCount: comments_count,
+}));
+
+// Iniltialise an array to hold the URLs from Google Places requests.
 const photoUrlsArray = [];
 
-// Create an new array of objects from the JSON data: the main "locations" data.
-const places = jsonData.map(function (place) {
-    const title = place.place_name;
-    const position = {
-        lat: place.latitude,
-        lng: place.longitude
-    };
-    const id = place.id;
-    const googlePlaceId = place.google_place_id;
-    const commentsCount = place.comments_count;
-
-    return {
-        title: title,
-        position: position,
-        id: id,
-        googlePlaceId: googlePlaceId,
-        commentsCount: commentsCount,
-    };
-});
-
-// MAIN 'CREATE MAP' FUNCTION:
+// -- MAIN 'CREATE MAP' FUNCTION --
 
 async function initMap() {
     // Request needed libraries.
@@ -86,7 +85,8 @@ async function initMap() {
         maxWidth: 180
     });
 
-    // WIP: GETTING PHOTOS...
+    // -- GET PHOTO URLs WITH GOOGLE PLACES REQUESTS --
+
     const getPhotoPromises = places.map(({
         id,
         googlePlaceId
@@ -112,17 +112,19 @@ async function initMap() {
                     } else {
                         const googlePhotoUrl = "no photo found";
                         photoUrlsArray.push({
+                            // Adds a value of 'null' to the array if no photo is found.
                             url: googlePhotoUrl,
                             id: id
                         });
                         resolve();
                     }
-                    
+
                 } else {
                     reject(new Error(`Error fetching photo for place with id ${id}`));
                 }
             }
 
+            // Send the request to Google.
             const service = new google.maps.places.PlacesService(map);
             service.getDetails(request, callback);
         });
@@ -131,15 +133,12 @@ async function initMap() {
     // Wait for all photo fetching promises to resolve.
     Promise.all(getPhotoPromises)
         .then(() => {
-            // All photos have been fetched, and photoUrlsArray is populated.
-
-            // Now photoUrlsArray is available to get photo URLs for markers.
-            // Create markers from the 'places' array.
+            // Now 'photoUrlsArray' has been populated, 
+            // create markers from the 'places' array.
             places.forEach(({
                 position,
                 title,
                 id,
-                googlePlaceId,
                 commentsCount,
             }, ) => {
                 // Set pin.
@@ -153,7 +152,7 @@ async function initMap() {
                 const detailUrl = `/place/${id}/`;
                 const htmlH2 = `<h2 class="map-view-place-title"><a href="${detailUrl}">${title}</a></h2>`;
 
-                // WIP: get url from 'photoUrlsArray'.
+                // Find the correct URL from the 'photoUrlsArray'.
                 const targetId = id;
                 const targetObject = photoUrlsArray.find(obj => obj.id === targetId);
                 const photoUrlForMarker = targetObject.url;
@@ -181,14 +180,7 @@ async function initMap() {
                 });
 
                 // Add a click listener for each marker, and set up the info window.
-                marker.addListener("click", ({
-                    domEvent,
-                    latLng
-                }) => {
-                    const {
-                        target
-                    } = domEvent;
-
+                marker.addListener("click", () => {
                     infoWindow.close();
                     infoWindow.setContent(marker.title);
                     infoWindow.open(marker.map, marker);

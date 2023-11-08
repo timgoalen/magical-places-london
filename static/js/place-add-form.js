@@ -65,5 +65,5 @@ function initAutocomplete() {
     });
 }
 
-// Call function on window load.
+// Call the function on window load.
 window.addEventListener("load", initAutocomplete);

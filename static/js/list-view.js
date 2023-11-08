@@ -1,9 +1,10 @@
+/* jshint esversion: 8 */
+
 const listSortOptions = Array.from(document.getElementsByClassName("list-sort-item"));
 const footer = document.getElementById("list-view-footer");
 const spinnerContainer = document.getElementById("spinner-container");
 
 // Show list-sort chosen option in UI.
-
 function updateSortOptionUi(element) {
     element.classList.remove("inactive-option");
     element.classList.add("active-option");
@@ -21,7 +22,6 @@ if (USER_SORT_SELECTION === "default") {
 }
 
 // Hide footer on down-scroll, reveal on up-scroll.
-
 let prevScrollPosition = 0;
 
 function collapseFooter() {
@@ -34,11 +34,9 @@ function collapseFooter() {
     prevScrollPosition = scrollPosition;
 }
 
-window.addEventListener("scroll", collapseFooter);
+// -- GET PHOTOS FROM GOOGLE PLACES ON PAGE LOAD --
 
-// PHOTOS WIP...
-
-// Get JSON data from the json_script tag in the home.html template.
+// Get JSON data from the json_script tag in the 'list-view.html' template.
 let jsonData = JSON.parse(document.getElementById("places-json-data").textContent);
 
 // Create an new array of objects from the JSON data to get the Google Place IDs.
@@ -52,13 +50,14 @@ const places = jsonData.map(function (place) {
     };
 });
 
+// Get an up-to-ddate URL of the Google photo by passing the Google 'place_id'.
 function getNewPhotoLink(id) {
     return new Promise((resolve, reject) => {
-        var map;
+        let map;
 
         map = new google.maps.Map(document.createElement("div"));
 
-        var request = {
+        const request = {
             placeId: id,
             fields: ["photos"]
         };
@@ -72,7 +71,7 @@ function getNewPhotoLink(id) {
                     });
                     resolve(googlePhotoUrl);
                 } else {
-                    // Handle when no Google photo exists
+                    // Handle when no Google photo exists.
                     const googlePhotoUrl = "no photo found";
                     resolve(googlePhotoUrl);
                 }
@@ -80,13 +79,13 @@ function getNewPhotoLink(id) {
                 reject(new Error("Error fetching place details"));
             }
         }
-
+        // Send the request to Google.
         var service = new google.maps.places.PlacesService(map);
         service.getDetails(request, callback);
     });
 }
 
-
+// On page load, get a new photo URL and add it to the img.src.
 window.addEventListener("load", async function () {
     for (const place of places) {
         try {
@@ -95,18 +94,21 @@ window.addEventListener("load", async function () {
             const imageElement = document.getElementById(`img-for-place-${place.id}`);
             if (imageElement) {
                 if (placePhoto == "no photo found") {
-                    console.log("No Google photo exists for this place.");
+                    console.log(`No Google photo exists for the place with this id: ${googlePlaceId}.`);
                 } else {
                     imageElement.src = placePhoto;
                 }
             } else {
-                console.log("This place isn't in the user's favourites")
+                console.log("This place isn't in the user's favourites");
             }
         } catch (error) {
             console.error(error);
         }
     }
-
-    // spinnerContainer.style.display = "none";
+    // Once finished, hide the div that covers the loading.
     spinnerContainer.classList.add("hide-spinner");
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    window.addEventListener("scroll", collapseFooter);
 });
