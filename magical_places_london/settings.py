@@ -32,11 +32,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "8000-timgoalen-magicalplaces-xikc2aho5al.ws-eu104.gitpod.io",
-    "8000-timgoalen-magicalplaces-w9g3ekltz8x.ws-eu104.gitpod.io",
-    "8000-timgoalen-magicalplaces-xikc2aho5al.ws-eu105.gitpod.io",
     "magical-places-london-7d2df0d61638.herokuapp.com",
-    '8000-timgoalen-magicalplaces-xikc2aho5al.ws-eu106.gitpod.io',
 ]
 
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY")

@@ -106,7 +106,9 @@ window.addEventListener("load", async function () {
         }
     }
     // Once finished, hide the div that covers the loading.
-    spinnerContainer.classList.add("hide-spinner");
+    setTimeout(() => {
+        spinnerContainer.classList.add("hide-spinner");
+      }, 300);
 });
 
 document.addEventListener("DOMContentLoaded", () => {

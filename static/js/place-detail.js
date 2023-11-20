@@ -19,12 +19,14 @@ function getNewPhotoLink() {
                     maxWidth: 650,
                 });
                 placeDetailPhoto.src = googlePhotoUrl;
-                // Take away the overlay that hides the photo changing
-                placeDetailPhoto.classList.add("show-photo");
             } else {
                 console.log("No Google photo exists for this place.");
                 placeDetailPhoto.classList.add("show-photo");
             }
+            // Show the photo once the Google image is fetched and inserted.
+            setTimeout(() => {
+                placeDetailPhoto.classList.add("show-photo");
+              }, 300);
         }
     }
 
