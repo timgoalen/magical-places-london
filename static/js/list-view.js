@@ -50,7 +50,7 @@ const places = jsonData.map(function (place) {
     };
 });
 
-// Get an up-to-ddate URL of the Google photo by passing the Google 'place_id'.
+// Get an up-to-date URL of the Google photo by passing the Google 'place_id'.
 function getNewPhotoLink(id) {
     return new Promise((resolve, reject) => {
         let map;

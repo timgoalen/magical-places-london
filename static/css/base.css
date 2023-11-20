@@ -438,8 +438,7 @@ textarea {
 
 #search-input {
     width: 90%;
-    padding-left: 4px;
-    padding-bottom: 2px;
+    padding: 2px 4px 4px 6px;
     border: 1px solid var(--blue);
     border-radius: 10px;
     font-weight: 300;
