@@ -388,6 +388,7 @@ h1 {
     height: 83vh;
     display: grid;
     place-items: center;
+    padding: 0 2%;
 }
 
 .comment-crud-container {
@@ -729,6 +730,12 @@ footer {
 }
 
 /* MEDIA QUERIES */
+
+@media screen and (max-width: 375px) {
+    .signup-page {
+        margin: 15% auto;
+    }
+}
 
 @media screen and (min-width: 550px) {
     .list-sort-options {
