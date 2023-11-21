@@ -389,7 +389,169 @@ Early testing with the WAVE tool flagged up insufficient contrast in some of the
 
 ### User Stories Testing
 
-All user stories were tested to confirm that they meet their Acceptance Criteria. See the user stories on the [Kanban Board](https://github.com/users/timgoalen/projects/3) for details of their criteria.
+All user stories were tested to confirm that they meet their Acceptance Criteria. The following have all PASSED.
+
+(View the EPICS, User Stories, Acceptance Criteria and Tasks on the GitHub [Kanban Board](https://github.com/users/timgoalen/projects/3)).
+
+---
+
+EPIC: USER ACCOUNT
+
+---
+
+As a **user** I can **sign up and log in** to the site to **leave comments and add places**.
+
+- Acceptance Criteria - PASSED:
+    - Users can create an account with a Sign Up page
+    - Users can log in with a Log In page
+    - Users can log out with a Log Out Page
+
+---
+
+EPIC: NAVIGATION
+
+---
+
+As a **user** I can **view all places on a map** to easily **see which places are nearby**.
+
+- Acceptance Criteria - PASSED:
+    - Map page
+    - Saved places to show up as pins on the map
+    - Saved places to have photo and title in map popup info box
+
+---
+
+As a **user** I can **view a list of the places** to see **titles**, **pictures** and how many **comments** have been left.
+
+- Acceptance Criteria - PASSED:
+    - List view page
+    - Photo is displayed
+    - Title is displayed
+    - Comment count is displayed
+
+---
+
+As a **user** I can **sort the list of places by date**, to **see which places have been recently created**.
+
+- Acceptance Criteria - PASSED:
+    - User can sort place list by date (newest first)
+    - Sort-by-date is the default option
+
+---
+
+As a **user** I can **sort the list of places alphabetically**, to easily **find a place by its name**.
+
+- Acceptance Criteria - PASSED:
+    - User can sort the place list alphabetically (A-Z)
+
+---
+
+EPIC: COMMENTS
+
+---
+
+As a **user** I can **leave a comment on a place**, to **share my experience with other users**.
+
+- Acceptance Criteria - PASSED:
+    - Once signed in, a user can leave a comment on a place.
+    - User receives successful feedback message
+    - Comment form is in the detail view
+
+---
+
+As a **user** I can **read my and other people's comments**, to be **inspired to visit a place**.
+
+- Acceptance Criteria - PASSED:
+    - Comments are displayed in the detail page
+    - Comment form submission redirects to detail page, so it can be read
+
+---
+
+As a **user** I can **edit my comments**, to **correct or add information**.
+
+- Acceptance Criteria - PASSED:
+    - User can edit their own comments (not others)
+
+---
+
+As a **user** I can **delete my comments**, to allow me to **change my mind**.
+
+- Acceptance Criteria - PASSED:
+    - User can delete ONLY their own comments
+
+---
+
+EPIC: FAVOURITES
+
+---
+
+As a **user** I can **favourite and unfavourite a place**, to **keep a record of places to visit in the future**.
+
+- Acceptance Criteria - PASSED:
+    - User can click an icon to toggle the 'favourite' status of a place.
+    - 'Favourite' status is shown in the icon display.
+
+---
+
+As a **user** I can **view a list of my favourite places**, to easily **see which places I plan to visit**.
+
+- Acceptance Criteria - PASSED:
+    - User can select 'Favourites' in the list page to view all of their favourites
+
+---
+
+EPIC: ADD A PLACE
+
+---
+
+As a **user** I can easily **add a place** by typing its name, to **share my recommendation with other users**.
+
+- Acceptance Criteria - PASSED:
+    - Search bar with autocomplete
+    - Selected place is shown with name, address and photo
+    - User has the option to Save or Cancel
+
+---
+
+EPIC: ADMIN
+
+---
+
+As a site **developer** I can **view a list of all data: places, comments and favourites**, so I can **moderate content**.
+
+- Acceptance Criteria - PASSED:
+    - Django admin panel with Places, Comments and Favourites
+
+---
+
+As a **developer** I can **create, read, update and delete (CRUD) places**, to **create the initial content for the site, and moderate the Places added by users**.
+
+- Acceptance Criteria - PASSED:
+    - Places can be updated & deleted in Django Admin panel
+
+---
+
+EPIC: TESTING
+
+---
+
+As a **developer** I can **create a suite of tests**, to easily **be able to find out if site updates create issues in the codebase**.
+
+- Acceptance Criteria - PASSED:
+    - Django unit tests with 90%+ coverage
+
+---
+
+EPIC: DEPLOYMENT
+
+---
+
+As a **developer** I can **deploy to a hosting service**, so that **the site is available to the public**.
+
+- Acceptance Criteria - PASSED:
+    - Functioning deployment to Heroku
+
+---
 
 ### Manual Testing
 
